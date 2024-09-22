@@ -1,0 +1,110 @@
+# Translation of Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release) in German
+# This file is distributed under the same license as the Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2023-03-13 20:53:06+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.0-alpha.4\n"
+"Language: de\n"
+"Project-Id-Version: Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release)\n"
+
+#: public/includes/shortcodes.php:202
+msgid "From"
+msgstr "Von"
+
+#: public/includes/shortcodes.php:220
+msgid "Bicycling"
+msgstr "Fahrrad"
+
+#: public/includes/shortcodes.php:218
+msgid "Driving"
+msgstr "Auto"
+
+#: public/includes/shortcodes.php:214
+msgid "Transportation method"
+msgstr "Transportvariante"
+
+#: public/includes/shortcodes.php:219
+msgid "Walking"
+msgstr "Zu Fuß"
+
+#: public/includes/shortcodes.php:207
+msgid "To"
+msgstr "Zu"
+
+#: public/includes/shortcodes.php:225
+msgid "Get Directions"
+msgstr "Routen erhalten"
+
+#: public/includes/shortcodes.php:228
+msgid "Loading"
+msgstr "Wird geladen"
+
+#: admin/includes/wpgmap_create.php:104
+msgid "Enable Direction in Map"
+msgstr "Routen in der Karte aktivieren"
+
+#: admin/includes/wpgmap_create.php:61 admin/includes/wpgmap_edit.php:91
+msgid "Width (%)"
+msgstr "Breite (%)"
+
+#: admin/includes/wpgmap_create.php:53 admin/includes/wpgmap_edit.php:80
+msgid "Zoom"
+msgstr "Zoom"
+
+#: admin/includes/wpgmap_create.php:77 admin/includes/wpgmap_edit.php:109
+msgid "Map Type"
+msgstr "Kartentyp"
+
+#: admin/includes/wpgmap_settings.php:74 includes/Traits/ActionLinks.php:29
+#: includes/Traits/Menu.php:90 includes/Traits/Menu.php:91
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: admin/includes/wpgmap_create.php:69 admin/includes/wpgmap_edit.php:100
+msgid "Height (px)"
+msgstr "Höhe (px)"
+
+#: admin/includes/markers-settings.php:112
+msgid "Latitude,Longitude"
+msgstr "Breitengrad, Längengrad"
+
+#: admin/includes/wpgmap_list.php:11 includes/Traits/Menu.php:34
+#: includes/Traits/Menu.php:35
+msgid "All Maps"
+msgstr "Alle Karten"
+
+#: includes/Traits/Menu.php:49
+msgid "Add new Map"
+msgstr "Neue Karte hinzufügen"
+
+#: includes/Traits/Menu.php:50
+msgid "Add New"
+msgstr "Hinzufügen"
+
+#: admin/includes/wpgmap_create.php:33 admin/includes/wpgmap_edit.php:53
+msgid "Map Title"
+msgstr "Kartentitel"
+
+#: admin/includes/wpgmap_create.php:40 admin/includes/wpgmap_edit.php:62
+msgid "Show as map title"
+msgstr "Als Kartentitel anzeigen"
+
+#: admin/includes/wpgmap_settings.php:120
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: admin/includes/wgm_messages_viewer.php:37
+msgid "Map Deleted Successfully."
+msgstr "Die Karte wurde erfolgreich gelöscht."
+
+#: admin/includes/wpgmap_create.php:89 admin/includes/wpgmap_edit.php:129
+msgid "Heading Custom Class"
+msgstr "Individuelle Klasse für die Überschrift"
+
+#: admin/includes/wpgmap_settings.php:7
+msgid "Settings updated successfully."
+msgstr "Die Einstellungen wurden erfolgreich aktualisiert."

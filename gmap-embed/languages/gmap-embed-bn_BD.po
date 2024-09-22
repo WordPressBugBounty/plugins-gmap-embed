@@ -1,0 +1,183 @@
+# Translation of Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release) in Bengali (Bangladesh)
+# This file is distributed under the same license as the Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-03-15 14:19:57+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.0-alpha.3\n"
+"Language: bn_BD\n"
+"Project-Id-Version: Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release)\n"
+
+#: includes/Traits/Settings.php:47
+msgid "Add your custom JS code if needed."
+msgstr "প্রয়োজনে আপনার কাস্টম JS কোড যুক্ত করুন।"
+
+#: includes/Traits/Settings.php:33
+msgid "Add your custom CSS code if needed."
+msgstr "প্রয়োজনে আপনার কাস্টম CSS কোড যুক্ত করুন।"
+
+#: includes/Traits/Settings.php:256
+msgid "Custom JS:"
+msgstr "কাস্টম JS:"
+
+#: includes/Traits/Settings.php:248
+msgid "Custom CSS:"
+msgstr "কাস্টম CSS:"
+
+#: includes/Traits/Settings.php:241
+msgid "Custom Scripts<hr/>"
+msgstr "কাস্টম স্ক্রিপ্টস<hr/>"
+
+#: includes/Traits/Settings.php:217
+msgid "Map Language and Regional Settings<hr/>"
+msgstr "মানচিত্রের ভাষা এবং আঞ্চলিক সেটিংস<hr/>"
+
+#: includes/Traits/Settings.php:204
+msgid "Chose your regional area"
+msgstr "আপনার অঞ্চল নির্বাচন করুন"
+
+#: includes/Traits/Settings.php:177
+msgid "Chose your desired map language"
+msgstr "আপনার পছন্দমত গুগল ম্যাপ ভাষা নির্বাচন করুন"
+
+#: admin/includes/wpgmap_settings.php:146
+msgid "After payment you will get an email with license key"
+msgstr "পেমেন্টের পরে আপনি লাইসেন্স কী সহ একটি ইমেল পাবেন"
+
+#: admin/includes/wpgmap_setup_wizard.php:69 includes/Traits/Settings.php:224
+msgid "Map Language:"
+msgstr "মাপের ভাষা"
+
+#: includes/Traits/Settings.php:232
+msgid "Map Region:"
+msgstr "মাপ অঞ্চল"
+
+#: admin/includes/wgm_messages_viewer.php:28
+msgid "Map has been created Successfully. <a href=\""
+msgstr "ম্যাপ সফলভাবে তৈরি হয়েছে. <a href=\""
+
+#: includes/Traits/ActionLinks.php:25
+msgid "Rate Us"
+msgstr "আপনার মতামত দিন"
+
+#: includes/Traits/InitActions.php:72
+msgid "Google Maps"
+msgstr "গুগল ম্যাপ সমূহ"
+
+#: includes/Traits/InitActions.php:73
+msgid "Map"
+msgstr "ম্যাপ"
+
+#: admin/includes/wpgmap_support.php:4 includes/Traits/ActionLinks.php:26
+#: includes/Traits/Menu.php:77 includes/Traits/Menu.php:78
+msgid "Support"
+msgstr "সাপোর্ট ফোরাম"
+
+#: admin/includes/wpgmap_settings.php:161
+msgid "GET LICENSE KEY"
+msgstr "GET LICENSE KEY"
+
+#: admin/includes/wpgmap_settings.php:138
+msgid "License Key: "
+msgstr "License Key: "
+
+#: admin/includes/wpgmap_settings.php:113
+msgid "The API key may take up to 5 minutes to take effect"
+msgstr "API Key কার্যকর হতে ৫ মিনিট সময় নিতে পারে"
+
+#: public/includes/shortcodes.php:228
+msgid "Loading"
+msgstr "লোড হচ্ছে"
+
+#: public/includes/shortcodes.php:225
+msgid "Get Directions"
+msgstr "দিকনির্দেশনা নিন"
+
+#: public/includes/shortcodes.php:220
+msgid "Bicycling"
+msgstr "সাইকেলে চলা"
+
+#: public/includes/shortcodes.php:219
+msgid "Walking"
+msgstr "হাঁটুনি"
+
+#: public/includes/shortcodes.php:218
+msgid "Driving"
+msgstr "ড্রাইভিং"
+
+#: public/includes/shortcodes.php:214
+msgid "Transportation method"
+msgstr "পরিবহন পদ্ধতি"
+
+#: public/includes/shortcodes.php:207
+msgid "To"
+msgstr "পর্যন্ত"
+
+#: public/includes/shortcodes.php:202
+msgid "From"
+msgstr "শুরু"
+
+#: admin/includes/wpgmap_create.php:104
+msgid "Enable Direction in Map"
+msgstr "মাপে  দিকনির্দেশ সক্রিয় করুন"
+
+#: includes/Traits/Menu.php:50
+msgid "Add New"
+msgstr "নতুন আরেকটি"
+
+#: includes/Traits/Menu.php:49
+msgid "Add new Map"
+msgstr "নতুন ম্যাপ যোগ করুন"
+
+#: admin/includes/wpgmap_list.php:11 includes/Traits/Menu.php:34
+#: includes/Traits/Menu.php:35
+msgid "All Maps"
+msgstr "সকল ম্যাপ"
+
+#: admin/includes/wpgmap_create.php:89 admin/includes/wpgmap_edit.php:129
+msgid "Heading Custom Class"
+msgstr "শিরোনাম কাস্টম ক্লাস"
+
+#: admin/includes/wpgmap_create.php:69 admin/includes/wpgmap_edit.php:100
+msgid "Height (px)"
+msgstr "উচ্চতা(%)"
+
+#: admin/includes/wpgmap_create.php:33 admin/includes/wpgmap_edit.php:53
+msgid "Map Title"
+msgstr "ম্যাপ শিরোনাম"
+
+#: admin/includes/wpgmap_create.php:77 admin/includes/wpgmap_edit.php:109
+msgid "Map Type"
+msgstr "ম্যাপের ধরণ"
+
+#: admin/includes/wgm_messages_viewer.php:37
+msgid "Map Deleted Successfully."
+msgstr "সফলভাবে ম্যাপ তৈরি হয়েছে"
+
+#: admin/includes/wpgmap_settings.php:74 includes/Traits/ActionLinks.php:29
+#: includes/Traits/Menu.php:90 includes/Traits/Menu.php:91
+msgid "Settings"
+msgstr "সেটিংস"
+
+#: admin/includes/wpgmap_create.php:40 admin/includes/wpgmap_edit.php:62
+msgid "Show as map title"
+msgstr "শিরোনাম হিসাবে দেখান"
+
+#: admin/includes/wpgmap_settings.php:120
+msgid "Update"
+msgstr "হালনাগাদ করুন"
+
+#: admin/includes/wpgmap_create.php:61 admin/includes/wpgmap_edit.php:91
+msgid "Width (%)"
+msgstr "প্রস্থ(%)"
+
+#: admin/includes/wpgmap_create.php:53 admin/includes/wpgmap_edit.php:80
+msgid "Zoom"
+msgstr "জুম্"
+
+#: admin/includes/wpgmap_settings.php:105
+msgid "Enter API Key: "
+msgstr "এ. পি. আই কি প্রধান করুন"

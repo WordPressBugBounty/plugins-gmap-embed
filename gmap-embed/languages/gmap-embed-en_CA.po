@@ -1,0 +1,512 @@
+# Translation of Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release) in English (Canada)
+# This file is distributed under the same license as the Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2022-03-01 23:29:05+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.0-alpha.3\n"
+"Language: en_CA\n"
+"Project-Id-Version: Plugins - Maps Plugin using Google Maps for WordPress &#8211; WP Google Map - Stable (latest release)\n"
+
+#: admin/includes/wpgmap_create.php:137 admin/includes/wpgmap_edit.php:174
+msgid "Map Theme JSON"
+msgstr "Map Theme JSON"
+
+#: admin/includes/wpgmap_create.php:114 admin/includes/wpgmap_edit.php:152
+msgid "Map Theme Presets"
+msgstr "Map Theme Presets"
+
+#: includes/Traits/Menu.php:101
+msgid "<span style=\"color:yellow\"><img draggable=\"false\" role=\"img\" class=\"emoji\" alt=\"⭐\" src=\""
+msgstr "<span style=\"color:yellow\"><img draggable=\"false\" role=\"img\" class=\"emoji\" alt=\"⭐\" src=\""
+
+#: includes/Traits/Menu.php:101
+msgid "<img draggable=\"false\" role=\"img\" class=\"emoji\" alt=\"⭐\" src=\""
+msgstr "<img draggable=\"false\" role=\"img\" class=\"emoji\" alt=\"⭐\" src=\""
+
+#: admin/includes/markers-settings.php:143
+msgid "Open marker description by default"
+msgstr "Open marker description by default"
+
+#: admin/includes/wpgmap_settings.php:153
+msgid "Validate"
+msgstr "Validate"
+
+#: includes/Traits/Notice.php:33
+msgid "You must generate your own <b>API Key</b> to use Google Map, Please go to <a href=\"%1$s\" style=\"font-weight: bold;text-decoration: none;\">WP Google Map</a><i class=\"dashicons  dashicons-arrow-right-alt2\"></i><a href=\"%2$s\" style=\"text-decoration: none;font-weight: bold;\">Quick Setup</a> to get your API key. <a href=\"%3$s\" target=\"_blank\" style=\"text-decoration: none;font-weight: bold;\"><i class=\"dashicons  dashicons-external\"></i>Video Tutorial</a>, <i class=\"dashicons  dashicons-external\"></i><a href=\"%4$s\" target=\"_blank\" style=\"text-decoration: none;font-weight: bold;\">Documentation</a>"
+msgstr "You must generate your own <b>API Key</b> to use Google Map, Please go to <a href=\"%1$s\" style=\"font-weight: bold;text-decoration: none;\">WP Google Map</a><i class=\"dashicons  dashicons-arrow-right-alt2\"></i><a href=\"%2$s\" style=\"text-decoration: none;font-weight: bold;\">Quick Setup</a> to get your API key. <a href=\"%3$s\" target=\"_blank\" style=\"text-decoration: none;font-weight: bold;\"><i class=\"dashicons  dashicons-external\"></i>Video Tutorial</a>, <i class=\"dashicons  dashicons-external\"></i><a href=\"%4$s\" target=\"_blank\" style=\"text-decoration: none;font-weight: bold;\">Documentation</a>"
+
+#: includes/Traits/AssetHandler.php:32
+msgid " Click here to see Help Manual on how to get API key"
+msgstr " Click here to see Help Manual on how to get API key"
+
+#: admin/includes/wpgmap_setup_wizard.php:57
+msgid "See help manual"
+msgstr "See help manual"
+
+#: admin/includes/wpgmap_setup_wizard.php:21
+msgid "MAP LANGUAGE & REGION"
+msgstr "MAP LANGUAGE & REGION"
+
+#: admin/includes/wpgmap_setup_wizard.php:15
+msgid "CREATE YOUR API KEY"
+msgstr "CREATE YOUR API KEY"
+
+#: includes/Traits/AssetHandler.php:31
+msgid "Help Manual"
+msgstr "Help Manual"
+
+#: admin/includes/wpgmap_create.php:13 admin/includes/wpgmap_edit.php:27
+#: admin/includes/wpgmap_list.php:23 admin/includes/wpgmap_settings.php:79
+#: admin/includes/wpgmap_support.php:11
+msgid "LIVE Chat"
+msgstr "LIVE Chat"
+
+#: includes/Traits/Settings.php:305
+msgid "Prevent Map API loading for other plugin and themes:"
+msgstr "Prevent Map API loading for other plugin and themes:"
+
+#: includes/Traits/Settings.php:297
+msgid "Load Map API:"
+msgstr "Load Map API:"
+
+#: includes/Traits/Settings.php:277
+msgid "Map Control Options:"
+msgstr "Map Control Options:"
+
+#: includes/Traits/MarkerCRUD.php:92
+msgid "Please upgrade to premium version to create unlimited markers"
+msgstr "Please upgrade to premium version to create unlimited markers"
+
+#: includes/Traits/MarkerCRUD.php:74 includes/Traits/MarkerCRUD.php:166
+msgid "Please input Latitude and Longitude"
+msgstr "Please input Latitude and Longitude"
+
+#: includes/Traits/MapCRUD.php:52
+msgid "Edit"
+msgstr "Edit"
+
+#: includes/Traits/AssetHandler.php:54
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to use <b>this feature</b>."
+msgstr "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to use <b>this feature</b>."
+
+#: includes/Traits/AssetHandler.php:53
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to create <b>Unlimited Markers</b>."
+msgstr "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to create <b>Unlimited Markers</b>."
+
+#: includes/Traits/AssetHandler.php:52
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to create <b>Unlimited Maps</b>."
+msgstr "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to create <b>Unlimited Maps</b>."
+
+#: includes/Traits/AssetHandler.php:51
+msgid "Opps..."
+msgstr "Opps..."
+
+#: includes/Traits/AssetHandler.php:48
+msgid "No marker created yet."
+msgstr "No marker created yet."
+
+#: includes/Traits/AssetHandler.php:47
+msgid "No map created yet, please click on Add New to create your map."
+msgstr "No map created yet, please click on Add New to create your map."
+
+#: admin/includes/wpgmap_edit.php:205
+msgid "Update Map"
+msgstr "Update Map"
+
+#: admin/includes/wpgmap_edit.php:144
+msgid "Enable Direction option in Map"
+msgstr "Enable Direction option in Map"
+
+#: admin/includes/wpgmap_edit.php:20 admin/includes/wpgmap_list.php:18
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> Create Unlimited Maps</b>."
+msgstr "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> Create Unlimited Maps</b>."
+
+#: admin/includes/wpgmap_edit.php:14
+msgid "Edit Map"
+msgstr "Edit Map"
+
+#: admin/includes/wpgmap_create.php:167
+msgid "Save Map"
+msgstr "Save Map"
+
+#: admin/includes/wpgmap_create.php:99 admin/includes/wpgmap_edit.php:139
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> Enable Direction Option on Map</b>."
+msgstr "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> Enable Direction Option on Map</b>."
+
+#: admin/includes/wgm_messages_viewer.php:31
+msgid "API key updated Successfully, Please click on <a href=\""
+msgstr "API key updated Successfully, Please click on <a href=\""
+
+#: admin/includes/markers-settings.php:134
+msgid "Open link in new window"
+msgstr "Open link in new window"
+
+#: admin/includes/markers-settings.php:121
+msgid "Has Marker Link?"
+msgstr "Has Marker Link?"
+
+#: admin/includes/markers-settings.php:103
+msgid "Address"
+msgstr "Address"
+
+#: admin/includes/markers-settings.php:95
+msgid "Upload Icon"
+msgstr "Upload Icon"
+
+#: admin/includes/markers-settings.php:92
+msgid "Choose Icon"
+msgstr "Choose Icon"
+
+#: admin/includes/markers-settings.php:91
+msgid "Choose marker icon"
+msgstr "Choose marker icon"
+
+#: admin/includes/markers-settings.php:74
+msgid "Marker Icon"
+msgstr "Marker Icon"
+
+#: admin/includes/markers-settings.php:56
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to add <b> Images in marker InfoWindow </b>."
+msgstr "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to add <b> Images in marker InfoWindow </b>."
+
+#: admin/includes/markers-settings.php:54
+msgid "Description"
+msgstr "Description"
+
+#: admin/includes/markers-settings.php:45
+msgid "Marker Title"
+msgstr "Marker Title"
+
+#: admin/includes/wpgmap_setup_wizard.php:125
+msgid "Finish"
+msgstr "Finish"
+
+#: admin/includes/wpgmap_setup_wizard.php:122
+msgid "Next"
+msgstr "Next"
+
+#: admin/includes/wpgmap_setup_wizard.php:120
+msgid "Previous"
+msgstr "Previous"
+
+#: admin/includes/wpgmap_setup_wizard.php:109
+msgid "Choose your regional area"
+msgstr "Choose your regional area"
+
+#: admin/includes/wpgmap_setup_wizard.php:92
+msgid "Regional Area:"
+msgstr "Regional Area:"
+
+#: admin/includes/wpgmap_setup_wizard.php:86
+msgid "Choose your desired map language"
+msgstr "Choose your desired map language"
+
+#: admin/includes/wpgmap_setup_wizard.php:66
+msgid "You can customize your Google Map title & contents by setting up Language and Regional setup"
+msgstr "You can customize your Google Map title & contents by setting up Language and Regional setup"
+
+#: admin/includes/wpgmap_setup_wizard.php:65
+msgid "Language and Regional Setup"
+msgstr "Language and Regional Setup"
+
+#: admin/includes/wpgmap_setup_wizard.php:35
+msgid "Enter API key"
+msgstr "Enter API key"
+
+#: admin/includes/wpgmap_setup_wizard.php:32
+msgid "Let's create API key from Google cloud platform, <b>it's required by Google to use Google Map</b>"
+msgstr "Let's create API key from Google cloud platform, <b>it's required by Google to use Google Map</b>"
+
+#: admin/includes/wpgmap_setup_wizard.php:31
+msgid "Create API Key from Google"
+msgstr "Create API Key from Google"
+
+#: admin/includes/wpgmap_setup_wizard.php:7
+msgid "Quick Setup Wizard"
+msgstr "Quick Setup Wizard"
+
+#: admin/includes/wpgmap_create.php:162 admin/includes/wpgmap_edit.php:200
+msgid "Search by Address, Zip Code, (Latitude,Longitude)"
+msgstr "Search by Address, Postal Code, (Latitude,Longitude)"
+
+#: includes/Traits/Menu.php:64 includes/Traits/Menu.php:65
+msgid "Quick Setup"
+msgstr "Quick Setup"
+
+#: includes/Traits/AssetHandler.php:43
+msgid "We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise."
+msgstr "We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise."
+
+#: includes/Traits/AssetHandler.php:42
+msgid "What we collect?"
+msgstr "What we collect?"
+
+#: includes/Traits/AssetHandler.php:36
+msgid "Get API Key"
+msgstr "Get API Key"
+
+#: admin/includes/wpgmap_setup_wizard.php:52
+#: includes/Traits/AssetHandler.php:34
+msgid "Video Tutorial"
+msgstr "Video Tutorial"
+
+#: admin/includes/wpgmap_create.php:14 admin/includes/wpgmap_edit.php:28
+#: admin/includes/wpgmap_list.php:24 admin/includes/wpgmap_settings.php:80
+#: admin/includes/wpgmap_support.php:12
+msgid "Documentation"
+msgstr "Documentation"
+
+#: includes/Traits/AssetHandler.php:26
+msgid "Something went wrong, please reload and try again"
+msgstr "Something went wrong, please reload and try again"
+
+#: includes/Traits/AssetHandler.php:25
+msgid "Successfully installed."
+msgstr "Successfully installed."
+
+#: includes/Traits/AssetHandler.php:24
+msgid "Invalid license key"
+msgstr "Invalid licence key"
+
+#: includes/Traits/AssetHandler.php:23
+msgid "Please select a regional area"
+msgstr "Please select a regional area"
+
+#: includes/Traits/AssetHandler.php:22
+msgid "Please select a language"
+msgstr "Please select a language"
+
+#: includes/Traits/AssetHandler.php:21
+msgid "Please enter a valid API key"
+msgstr "Please enter a valid API key"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+msgid "WP Google Map"
+msgstr "WP Google Map"
+
+#: includes/Traits/Notice.php:131
+msgid ""
+"<span style='color:green;'>We hope you're enjoying of using <b style=\"color:#007cba\">WP Google Map</b> plugin.\n"
+"Could you please give us a BIG favour and give it a 5-star rating on WordPress to help us spread the word and boost our motivation!</span>\n"
+msgstr ""
+"<span style='color:green;'>We hope you're enjoying of using <b style=\"color:#007cba\">WP Google Map</b> plugin.\n"
+"Could you please give us a BIG favour and give it a 5-star rating on WordPress to help us spread the word and boost our motivation!</span>\n"
+
+#: admin/includes/wpgmap_create.php:8
+msgid "Add New Map"
+msgstr "Add New Map"
+
+#: admin/includes/wpgmap_support.php:4 includes/Traits/ActionLinks.php:26
+#: includes/Traits/Menu.php:77 includes/Traits/Menu.php:78
+msgid "Support"
+msgstr "Support"
+
+#: includes/Traits/ActionLinks.php:25
+msgid "Rate Us"
+msgstr "Rate Us"
+
+#: includes/Traits/Settings.php:204
+msgid "Chose your regional area"
+msgstr "Chose your regional area"
+
+#: includes/Traits/Settings.php:177
+msgid "Chose your desired map language"
+msgstr "Chose your desired map language"
+
+#: includes/Traits/Settings.php:47
+msgid "Add your custom JS code if needed."
+msgstr "Add your custom JS code if needed."
+
+#: includes/Traits/Settings.php:33
+msgid "Add your custom CSS code if needed."
+msgstr "Add your custom CSS code if needed."
+
+#: includes/Traits/Settings.php:256
+msgid "Custom JS:"
+msgstr "Custom JS:"
+
+#: includes/Traits/Settings.php:248
+msgid "Custom CSS:"
+msgstr "Custom CSS:"
+
+#: includes/Traits/Settings.php:241
+msgid "Custom Scripts<hr/>"
+msgstr "Custom scripts<hr/>"
+
+#: includes/Traits/Settings.php:232
+msgid "Map Region:"
+msgstr "Map region:"
+
+#: admin/includes/wpgmap_setup_wizard.php:69 includes/Traits/Settings.php:224
+msgid "Map Language:"
+msgstr "Map language:"
+
+#: includes/Traits/Settings.php:217
+msgid "Map Language and Regional Settings<hr/>"
+msgstr "Map language and regional settings<hr/>"
+
+#: includes/Traits/InitActions.php:73
+msgid "Map"
+msgstr "Map"
+
+#: includes/Traits/InitActions.php:72
+msgid "Google Maps"
+msgstr "Google Maps"
+
+#: admin/includes/wgm_messages_viewer.php:28
+msgid "Map has been created Successfully. <a href=\""
+msgstr "Map has been created successfully. <a href=\""
+
+#: public/includes/shortcodes.php:221
+msgid "Transit"
+msgstr "Transit"
+
+#: admin/includes/wpgmap_create.php:45 admin/includes/wpgmap_edit.php:68
+msgid "Latitude, Longitude(Approx)"
+msgstr ""
+"Latitude, longitude(approx)\n"
+"references"
+
+#: admin/includes/wpgmap_settings.php:161
+msgid "GET LICENSE KEY"
+msgstr "GET LICENCE KEY"
+
+#: admin/includes/wpgmap_settings.php:146
+msgid "After payment you will get an email with license key"
+msgstr "After payment you will get an email with licence key"
+
+#: admin/includes/wpgmap_settings.php:138
+msgid "License Key: "
+msgstr "Licence Key: "
+
+#: admin/includes/wpgmap_settings.php:126
+#: admin/includes/wpgmap_setup_wizard.php:46
+msgid "GET API KEY"
+msgstr "Get api key"
+
+#: admin/includes/wpgmap_settings.php:94
+msgid "API Key and License Information"
+msgstr "API Key and Licence Information"
+
+#. Author URI of the plugin
+msgid "https://www.wpgooglemap.com?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash"
+msgstr "https://www.wpgooglemap.com?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash"
+
+#. Description of the plugin
+msgid "WP Google Map plugin allows creating Google Map with marker or location with a responsive interface. Marker supports text, images, links, videos, and custom icons. Simply, Just put the shortcode on the page, post, or widget to display the map anywhere."
+msgstr "WP Google Map plugin allows creating Google Map with marker or location with a responsive interface. Marker supports text, images, links, videos, and custom icons. Simply, Just put the shortcode on the page, post, or widget to display the map anywhere."
+
+#. Plugin URI of the plugin
+msgid "https://www.wpgooglemap.com?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash"
+msgstr "https://www.wpgooglemap.com?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash"
+
+#: admin/includes/wpgmap_settings.php:113
+msgid "The API key may take up to 5 minutes to take effect"
+msgstr "The api key may take up to EhEhEhEhEh minutes to take effect"
+
+#: public/includes/shortcodes.php:228
+msgid "Loading"
+msgstr "Loading"
+
+#: public/includes/shortcodes.php:225
+msgid "Get Directions"
+msgstr "Get Directions"
+
+#: public/includes/shortcodes.php:220
+msgid "Bicycling"
+msgstr "Bicycling"
+
+#: public/includes/shortcodes.php:219
+msgid "Walking"
+msgstr "Walking"
+
+#: public/includes/shortcodes.php:218
+msgid "Driving"
+msgstr "Driving"
+
+#: public/includes/shortcodes.php:214
+msgid "Transportation method"
+msgstr "Transportation method"
+
+#: public/includes/shortcodes.php:207
+msgid "To"
+msgstr "To"
+
+#: public/includes/shortcodes.php:202
+msgid "From"
+msgstr "From"
+
+#: admin/includes/wpgmap_create.php:104
+msgid "Enable Direction in Map"
+msgstr "Enable direction in map"
+
+#: includes/Traits/Menu.php:50
+msgid "Add New"
+msgstr "Add New"
+
+#: includes/Traits/Menu.php:49
+msgid "Add new Map"
+msgstr "Add new map"
+
+#: admin/includes/wpgmap_settings.php:105
+msgid "Enter API Key: "
+msgstr "Enter API Key: "
+
+#: admin/includes/wpgmap_settings.php:120
+msgid "Update"
+msgstr "Update"
+
+#: admin/includes/wpgmap_create.php:77 admin/includes/wpgmap_edit.php:109
+msgid "Map Type"
+msgstr "Map type"
+
+#: admin/includes/wpgmap_create.php:69 admin/includes/wpgmap_edit.php:100
+msgid "Height (px)"
+msgstr "Height (px)"
+
+#: admin/includes/wpgmap_create.php:61 admin/includes/wpgmap_edit.php:91
+msgid "Width (%)"
+msgstr "Width (%)"
+
+#: admin/includes/wpgmap_create.php:53 admin/includes/wpgmap_edit.php:80
+msgid "Zoom"
+msgstr "Zoom"
+
+#: admin/includes/wpgmap_create.php:89 admin/includes/wpgmap_edit.php:129
+msgid "Heading Custom Class"
+msgstr "Heading custom class"
+
+#: admin/includes/markers-settings.php:112
+msgid "Latitude,Longitude"
+msgstr "Latitude,Longitude"
+
+#: admin/includes/wpgmap_create.php:40 admin/includes/wpgmap_edit.php:62
+msgid "Show as map title"
+msgstr "Show as map title"
+
+#: admin/includes/wpgmap_create.php:33 admin/includes/wpgmap_edit.php:53
+msgid "Map Title"
+msgstr "Map Title"
+
+#: admin/includes/wpgmap_settings.php:7
+msgid "Settings updated successfully."
+msgstr "Settings updated successfully."
+
+#: admin/includes/wgm_messages_viewer.php:37
+msgid "Map Deleted Successfully."
+msgstr "Map deleted successfully."
+
+#: admin/includes/wpgmap_settings.php:74 includes/Traits/ActionLinks.php:29
+#: includes/Traits/Menu.php:90 includes/Traits/Menu.php:91
+msgid "Settings"
+msgstr "Settings"
+
+#: admin/includes/wpgmap_list.php:11 includes/Traits/Menu.php:34
+#: includes/Traits/Menu.php:35
+msgid "All Maps"
+msgstr "All maps"
