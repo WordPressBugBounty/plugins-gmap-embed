@@ -7,7 +7,8 @@ namespace Appsero;
  *
  * This class is necessary to set project data
  */
-class Client {
+class Client
+{
 
     /**
      * The client version
@@ -106,7 +107,8 @@ class Client {
      * @param string $name readable name of the plugin
      * @param string $file main plugin file path
      */
-    public function __construct( $hash, $name, $file ) {
+    public function __construct($hash, $name, $file)
+    {
         $this->hash = $hash;
         $this->name = $name;
         $this->file = $file;
@@ -119,17 +121,18 @@ class Client {
      *
      * @return Appsero\Insights
      */
-    public function insights() {
-        if ( ! class_exists( __NAMESPACE__ . '\Insights' ) ) {
+    public function insights()
+    {
+        if (!class_exists(__NAMESPACE__ . '\Insights')) {
             require_once __DIR__ . '/Insights.php';
         }
 
         // if already instantiated, return the cached one
-        if ( $this->insights ) {
+        if ($this->insights) {
             return $this->insights;
         }
 
-        $this->insights = new Insights( $this );
+        $this->insights = new Insights($this);
 
         return $this->insights;
     }
@@ -139,17 +142,18 @@ class Client {
      *
      * @return Appsero\Updater
      */
-    public function updater() {
-        if ( ! class_exists( __NAMESPACE__ . '\Updater' ) ) {
+    public function updater()
+    {
+        if (!class_exists(__NAMESPACE__ . '\Updater')) {
             require_once __DIR__ . '/Updater.php';
         }
 
         // if already instantiated, return the cached one
-        if ( $this->updater ) {
+        if ($this->updater) {
             return $this->updater;
         }
 
-        $this->updater = new Updater( $this );
+        $this->updater = new Updater($this);
 
         return $this->updater;
     }
@@ -159,17 +163,18 @@ class Client {
      *
      * @return Appsero\License
      */
-    public function license() {
-        if ( ! class_exists( __NAMESPACE__ . '\License' ) ) {
+    public function license()
+    {
+        if (!class_exists(__NAMESPACE__ . '\License')) {
             require_once __DIR__ . '/License.php';
         }
 
         // if already instantiated, return the cached one
-        if ( $this->license ) {
+        if ($this->license) {
             return $this->license;
         }
 
-        $this->license = new License( $this );
+        $this->license = new License($this);
 
         return $this->license;
     }
@@ -179,10 +184,11 @@ class Client {
      *
      * @return string
      */
-    public function endpoint() {
-        $endpoint = apply_filters( 'appsero_endpoint', 'https://api.appsero.com' );
+    public function endpoint()
+    {
+        $endpoint = apply_filters('appsero_endpoint', 'https://api.appsero.com');
 
-        return trailingslashit( $endpoint );
+        return trailingslashit($endpoint);
     }
 
     /**
@@ -190,27 +196,28 @@ class Client {
      *
      * @return void
      */
-    protected function set_basename_and_slug() {
-        if ( strpos( $this->file, WP_CONTENT_DIR . '/themes/' ) === false ) {
-            $this->basename = plugin_basename( $this->file );
+    protected function set_basename_and_slug()
+    {
+        if (strpos($this->file, WP_CONTENT_DIR . '/themes/') === false) {
+            $this->basename = plugin_basename($this->file);
 
-            list( $this->slug, $mainfile ) = explode( '/', $this->basename );
+            list($this->slug, $mainfile) = explode('/', $this->basename);
 
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-            $plugin_data = get_plugin_data( $this->file );
+            $plugin_data = get_plugin_data($this->file, false, false);
 
             $this->project_version = $plugin_data['Version'];
-            $this->type            = 'plugin';
+            $this->type = 'plugin';
         } else {
-            $this->basename = str_replace( WP_CONTENT_DIR . '/themes/', '', $this->file );
+            $this->basename = str_replace(WP_CONTENT_DIR . '/themes/', '', $this->file);
 
-            list( $this->slug, $mainfile ) = explode( '/', $this->basename );
+            list($this->slug, $mainfile) = explode('/', $this->basename);
 
-            $theme = wp_get_theme( $this->slug );
+            $theme = wp_get_theme($this->slug);
 
             $this->project_version = $theme->version;
-            $this->type            = 'theme';
+            $this->type = 'theme';
         }
 
         $this->textdomain = $this->slug;
@@ -224,25 +231,26 @@ class Client {
      *
      * @return array|WP_Error array of results including HTTP headers or WP_Error if the request failed
      */
-    public function send_request( $params, $route, $blocking = false ) {
+    public function send_request($params, $route, $blocking = false)
+    {
         $url = $this->endpoint() . $route;
 
         $headers = [
-            'user-agent' => 'Appsero/' . md5( esc_url( home_url() ) ) . ';',
-            'Accept'     => 'application/json',
+            'user-agent' => 'Appsero/' . md5(esc_url(home_url())) . ';',
+            'Accept' => 'application/json',
         ];
 
         $response = wp_remote_post(
             $url,
             [
-                'method'      => 'POST',
-                'timeout'     => 30,
+                'method' => 'POST',
+                'timeout' => 30,
                 'redirection' => 5,
                 'httpversion' => '1.0',
-                'blocking'    => $blocking,
-                'headers'     => $headers,
-                'body'        => array_merge( $params, [ 'client' => $this->version ] ),
-                'cookies'     => [],
+                'blocking' => $blocking,
+                'headers' => $headers,
+                'body' => array_merge($params, ['client' => $this->version]),
+                'cookies' => [],
             ]
         );
 
@@ -257,30 +265,31 @@ class Client {
      *
      * @return array|WP_Error array of results including HTTP headers or WP_Error if the request failed
      */
-    public function send_request_firsttime( $params, $route, $blocking = false ) {     
+    public function send_request_firsttime($params, $route, $blocking = false)
+    {
         $endpoint = esc_url("https://wpgooglemap.com/fcrm_wh/insights.php/?route=$route");
         $body = [
-            'name'  => $params['first_name'].$params['last_name'],
+            'name' => $params['first_name'] . $params['last_name'],
             'email' => $params['admin_email'],
-            'website'=>$params['url']
+            'website' => $params['url']
         ];
 
-        $body = wp_json_encode( $params );
+        $body = wp_json_encode($params);
 
         $options = [
-            'body'        => $body,
-            'headers'     => [
+            'body' => $body,
+            'headers' => [
                 'Content-Type' => 'application/json',
             ],
-            'timeout'     => 30,
+            'timeout' => 30,
             'redirection' => 5,
-            'blocking'    => $blocking,
+            'blocking' => $blocking,
             'httpversion' => '1.0',
-            'sslverify'   => false,
+            'sslverify' => false,
             'data_format' => 'body',
         ];
 
-        $response = wp_remote_post( $endpoint, $options );
+        $response = wp_remote_post($endpoint, $options);
         return $response;
     }
 
@@ -289,32 +298,36 @@ class Client {
      *
      * @return bool
      */
-    public function is_local_server() {
-        $is_local = isset( $_SERVER['REMOTE_ADDR'] ) && in_array( $_SERVER['REMOTE_ADDR'], [ '127.0.0.1', '::1' ], true );
+    public function is_local_server()
+    {
+        $is_local = isset($_SERVER['REMOTE_ADDR']) && in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'], true);
 
-        return apply_filters( 'appsero_is_local', $is_local );
+        return apply_filters('appsero_is_local', $is_local);
     }
 
     /**
      * Translate function _e()
      */
     // phpcs:ignore
-    public function _etrans( $text ) {
-        call_user_func( '_e', $text, $this->textdomain );
+    public function _etrans($text)
+    {
+        call_user_func('_e', $text, $this->textdomain);
     }
 
     /**
      * Translate function __()
      */
     // phpcs:ignore
-    public function __trans( $text ) {
-        return call_user_func( '__', $text, $this->textdomain );
+    public function __trans($text)
+    {
+        return call_user_func('__', $text, $this->textdomain);
     }
 
     /**
      * Set project textdomain
      */
-    public function set_textdomain( $textdomain ) {
+    public function set_textdomain($textdomain)
+    {
         $this->textdomain = $textdomain;
     }
 }

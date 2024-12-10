@@ -3,9 +3,9 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA
 Tags: Google Maps, map, Maps, map markers, store locator
 Requires at least: 2.9
-Tested up to: 6.6
-Version: 1.9.2
-Stable tag: 1.9.2
+Tested up to: 6.7
+Version: 1.9.3
+Stable tag: 1.9.3
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -201,6 +201,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 9. Advanced Settings
 
 == Changelog ==
+
+= 1.9.3 =
+* Early load of textdomain compatibility issue fixed.
 
 = 1.9.2 =
 * Settings added for minimum set for Map plugin use.
