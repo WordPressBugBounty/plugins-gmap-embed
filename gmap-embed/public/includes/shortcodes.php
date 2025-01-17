@@ -42,7 +42,7 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                 jQuery(document).ready(function ($) {
                     var wgm_map = new google.maps.Map(document.getElementById("srm_gmp_embed_<?php echo esc_html($count); ?>"), {
                         center: new google.maps.LatLng(<?php echo esc_html($wpgmap_center_lat_lng); ?>),
-                        zoom:<?php echo esc_html($wpgmap_map_zoom); ?>,
+                        zoom: <?php echo esc_html($wpgmap_map_zoom); ?>,
                         mapTypeId: google.maps.MapTypeId.<?php echo esc_html($wpgmap_map_type); ?>,
                         scrollwheel: <?php echo esc_html(get_option('_wgm_disable_mouse_wheel_zoom')) === 'Y' ? 'false' : 'true'; ?>,
                         zoomControl: <?php echo esc_html(get_option('_wgm_disable_zoom_control')) === 'Y' ? 'false' : 'true'; ?>,
@@ -55,48 +55,48 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                     });
                     var wgm_theme_json = '<?php echo wp_kses_data($wgm_theme_json); ?>';
                     if (wgm_theme_json.length > 0) {
-                        wgm_map.setOptions({styles: JSON.parse(wgm_theme_json)});
+                        wgm_map.setOptions({ styles: JSON.parse(wgm_theme_json) });
                     }
                     // To view directions form and data
-                    <?php if ( $wpgmap_enable_direction && _wgm_is_premium() ) { ?>
-                    var wgm_directionsDisplay_<?php echo esc_html($count); ?> = new google.maps.DirectionsRenderer();
-                    wgm_directionsDisplay_<?php echo esc_html($count); ?>.setMap(wgm_map);
-                    wgm_directionsDisplay_<?php echo esc_html($count); ?>.setPanel(document.getElementById("wp_gmap_directions_<?php echo esc_html($count); ?>"));
+                    <?php if ($wpgmap_enable_direction && _wgm_is_premium()) { ?>
+                        var wgm_directionsDisplay_<?php echo esc_html($count); ?> = new google.maps.DirectionsRenderer();
+                        wgm_directionsDisplay_<?php echo esc_html($count); ?>.setMap(wgm_map);
+                        wgm_directionsDisplay_<?php echo esc_html($count); ?>.setPanel(document.getElementById("wp_gmap_directions_<?php echo esc_html($count); ?>"));
 
-                    var wgm_get_direction_btn_<?php echo esc_html($count); ?> = document.getElementById('wp_gmap_submit_<?php echo esc_html($count); ?>');
-                    wgm_get_direction_btn_<?php echo esc_html($count); ?>.addEventListener('click', function () {
-                        var wgm_selectedMode_<?php echo esc_html($count); ?> = document.getElementById("srm_gmap_mode_<?php echo esc_html($count); ?>").value,
-                            wgm_dirction_start_<?php echo esc_html($count); ?> = document.getElementById("srm_gmap_from_<?php echo esc_html($count); ?>").value,
-                            wgm_direction_end_<?php echo esc_html($count); ?> = document.getElementById("srm_gmap_to_<?php echo esc_html($count); ?>").value;
+                        var wgm_get_direction_btn_<?php echo esc_html($count); ?> = document.getElementById('wp_gmap_submit_<?php echo esc_html($count); ?>');
+                        wgm_get_direction_btn_<?php echo esc_html($count); ?>.addEventListener('click', function () {
+                            var wgm_selectedMode_<?php echo esc_html($count); ?> = document.getElementById("srm_gmap_mode_<?php echo esc_html($count); ?>").value,
+                                wgm_dirction_start_<?php echo esc_html($count); ?> = document.getElementById("srm_gmap_from_<?php echo esc_html($count); ?>").value,
+                                wgm_direction_end_<?php echo esc_html($count); ?> = document.getElementById("srm_gmap_to_<?php echo esc_html($count); ?>").value;
 
-                        if (wgm_dirction_start_<?php echo esc_html($count); ?> === '' || wgm_direction_end_<?php echo esc_html($count); ?> === '') {
-                            // cannot calculate route
-                            document.getElementById("wp_gmap_results_<?php echo esc_html($count); ?>").style.display = 'none';
-                            return false;
-                        } else {
+                            if (wgm_dirction_start_<?php echo esc_html($count); ?> === '' || wgm_direction_end_<?php echo esc_html($count); ?> === '') {
+                                // cannot calculate route
+                                document.getElementById("wp_gmap_results_<?php echo esc_html($count); ?>").style.display = 'none';
+                                return false;
+                            } else {
 
 
-                            document.getElementById('wp_gmap_loading_<?php echo esc_html($count); ?>').style.display = 'block';
+                                document.getElementById('wp_gmap_loading_<?php echo esc_html($count); ?>').style.display = 'block';
 
-                            var wgm_direction_request_<?php echo esc_html($count); ?> = {
-                                origin: wgm_dirction_start_<?php echo esc_html($count); ?>,
-                                destination: wgm_direction_end_<?php echo esc_html($count); ?>,
-                                travelMode: google.maps.DirectionsTravelMode[wgm_selectedMode_<?php echo esc_html($count); ?>],
-                                unitSystem: <?php echo esc_html(get_option('_wgm_distance_unit','km'))=='km'?'google.maps.UnitSystem.METRIC':'google.maps.UnitSystem.IMPERIAL' ?>
-                            };
-                            var wgm_directionsService_<?php echo esc_html($count); ?> = new google.maps.DirectionsService();
-                            wgm_directionsService_<?php echo esc_html($count); ?>.route(wgm_direction_request_<?php echo esc_html($count); ?>, function (response, status) {
-                                document.getElementById('wp_gmap_loading_<?php echo esc_html($count); ?>').style.display = 'none';
-                                if (status === google.maps.DirectionsStatus.OK) {
-                                    wgm_directionsDisplay_<?php echo esc_html($count); ?>.setDirections(response);
-                                    document.getElementById("wp_gmap_results_<?php echo esc_html($count); ?>").style.display = 'block';
-                                } else {
-                                    document.getElementById("wp_gmap_results_<?php echo esc_html($count); ?>").style.display = 'none';
-                                }
-                            });
+                                var wgm_direction_request_<?php echo esc_html($count); ?> = {
+                                    origin: wgm_dirction_start_<?php echo esc_html($count); ?>,
+                                    destination: wgm_direction_end_<?php echo esc_html($count); ?>,
+                                    travelMode: google.maps.DirectionsTravelMode[wgm_selectedMode_<?php echo esc_html($count); ?>],
+                                    unitSystem: <?php echo esc_html(get_option('_wgm_distance_unit', 'km')) == 'km' ? 'google.maps.UnitSystem.METRIC' : 'google.maps.UnitSystem.IMPERIAL' ?>
+                                };
+                                var wgm_directionsService_<?php echo esc_html($count); ?> = new google.maps.DirectionsService();
+                                wgm_directionsService_<?php echo esc_html($count); ?>.route(wgm_direction_request_<?php echo esc_html($count); ?>, function (response, status) {
+                                    document.getElementById('wp_gmap_loading_<?php echo esc_html($count); ?>').style.display = 'none';
+                                    if (status === google.maps.DirectionsStatus.OK) {
+                                        wgm_directionsDisplay_<?php echo esc_html($count); ?>.setDirections(response);
+                                        document.getElementById("wp_gmap_results_<?php echo esc_html($count); ?>").style.display = 'block';
+                                    } else {
+                                        document.getElementById("wp_gmap_results_<?php echo esc_html($count); ?>").style.display = 'none';
+                                    }
+                                });
 
-                        }
-                    });
+                            }
+                        });
                     <?php } ?>
                     var wgm_data_<?php echo esc_html($count); ?> = {
                         'action': 'wpgmapembed_p_get_markers_by_map_id',
@@ -109,7 +109,7 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                     jQuery.post(wgm_ajaxurl_<?php echo esc_html($count); ?>, wgm_data_<?php echo esc_html($count); ?>, function (response) {
                         response = JSON.parse(response);
                         if (response.markers.length === 1) {
-                            var wgm_marker_to_<?php echo esc_html($count); ?> = response.markers[0].marker_desc.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                            var wgm_marker_to_<?php echo esc_html($count); ?> = response.markers[0].marker_desc;//.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
                             jQuery('#srm_gmap_to_<?php echo esc_html($count); ?>').val(wgm_marker_to_<?php echo esc_html($count); ?>.replace(/(<([^>]+)>)/gi, ""));
                         }
                         var wgm_default_marker_icon_<?php echo esc_html($count); ?> = 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png';
@@ -129,7 +129,7 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                                 var wgm_marker_name_<?php echo esc_html($count); ?> = (wgm_marker.marker_name !== null) ? ('<span class="info_content_title" style="font-size:18px;font-weight: bold;font-family: Arial;">'
                                     + wgm_marker.marker_name +
                                     '</span><br/>') : '';
-                                wgm_marker.marker_desc = wgm_marker.marker_desc.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
+                                //wgm_marker.marker_desc = wgm_marker.marker_desc.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
                                 custom_marker_infowindow = new google.maps.InfoWindow({
                                     content: wgm_marker_name_<?php echo esc_html($count); ?> + wgm_marker.marker_desc
                                 });
@@ -164,7 +164,7 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
             </script>
 
             <div id="srm_gmp_embed_<?php echo esc_html($count); ?>"
-                 style="width:<?php echo esc_attr($wpgmap_map_width) . ' !important'; ?>;height:<?php echo esc_attr($wpgmap_map_height); ?>  !important; ">
+                style="width:<?php echo esc_attr($wpgmap_map_width) . ' !important'; ?>;height:<?php echo esc_attr($wpgmap_map_height); ?>  !important; ">
             </div>
             <?php
 
@@ -199,22 +199,19 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                 <div class="wp_gmap_direction_box">
                     <div class="ui-bar-c ui-corner-all ui-shadow">
                         <div data-role="fieldcontain" class="fieldcontain">
-                            <label for="srm_gmap_from_<?php echo esc_html($count); ?>"><?php esc_html_e('From', 'gmap-embed'); ?></label>
-                            <input type="text" id="srm_gmap_from_<?php echo esc_html($count); ?>" value=""
-                                   style="width: 100%;"/>
+                            <label
+                                for="srm_gmap_from_<?php echo esc_html($count); ?>"><?php esc_html_e('From', 'gmap-embed'); ?></label>
+                            <input type="text" id="srm_gmap_from_<?php echo esc_html($count); ?>" value="" style="width: 100%;" />
                         </div>
                         <div data-role="fieldcontain" class="fieldcontain">
                             <label for="srm_gmap_to_<?php echo esc_html($count); ?>"><?php esc_html_e('To', 'gmap-embed'); ?></label>
-                            <input type="text" id="srm_gmap_to_<?php echo esc_html($count); ?>"
-                                   value=""
-                                   style="width: 100%"/>
+                            <input type="text" id="srm_gmap_to_<?php echo esc_html($count); ?>" value="" style="width: 100%" />
                         </div>
                         <div data-role="fieldcontain" class="fieldcontain">
                             <label for="srm_gmap_mode_<?php echo esc_html($count); ?>"
-                                   class="select"><?php esc_html_e('Transportation method', 'gmap-embed'); ?>:</label>
+                                class="select"><?php esc_html_e('Transportation method', 'gmap-embed'); ?>:</label>
                             <select name="select_choice_<?php echo esc_html($count); ?>"
-                                    id="srm_gmap_mode_<?php echo esc_html($count); ?>"
-                                    style="padding: 5px;width: 100%;">
+                                id="srm_gmap_mode_<?php echo esc_html($count); ?>" style="padding: 5px;width: 100%;">
                                 <option value="DRIVING"><?php esc_html_e('Driving', 'gmap-embed'); ?></option>
                                 <option value="WALKING"><?php esc_html_e('Walking', 'gmap-embed'); ?></option>
                                 <option value="BICYCLING"><?php esc_html_e('Bicycling', 'gmap-embed'); ?></option>
@@ -222,22 +219,22 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                             </select>
                         </div>
                         <button type="button" data-icon="search" data-role="button" href="#" style="padding:8px;"
-                                id="wp_gmap_submit_<?php echo esc_html($count); ?>"><?php esc_html_e('Get Directions', 'gmap-embed'); ?>
+                            id="wp_gmap_submit_<?php echo esc_html($count); ?>"><?php esc_html_e('Get Directions', 'gmap-embed'); ?>
                         </button>
                         <span id="wp_gmap_loading_<?php echo esc_html($count); ?>"
-                              style="display: none;"><?php esc_html_e('Loading', 'gmap-embed'); ?>...</span>
+                            style="display: none;"><?php esc_html_e('Loading', 'gmap-embed'); ?>...</span>
                     </div>
 
                     <!-- Directions will be listed here-->
                     <div id="wp_gmap_results_<?php echo esc_html($count); ?>"
-                         style="display:none;max-height: 300px;overflow-y: scroll;">
+                        style="display:none;max-height: 300px;overflow-y: scroll;">
                         <div id="wp_gmap_directions_<?php echo esc_html($count); ?>"></div>
                     </div>
 
                 </div>
 
                 <?php
-                if (esc_html(get_option('_wgm_enable_direction_form_auto_complete'))=='Y') { ?>
+                if (esc_html(get_option('_wgm_enable_direction_form_auto_complete')) == 'Y') { ?>
                     <script type="text/javascript">
                         jQuery(document).ready(function ($) {
                             new google.maps.places.Autocomplete(

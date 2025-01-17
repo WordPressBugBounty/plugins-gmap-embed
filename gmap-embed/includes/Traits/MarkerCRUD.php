@@ -21,20 +21,20 @@ trait MarkerCRUD
 	public function get_marker_default_values()
 	{
 		return array(
-			'map_id'               => 0,
-			'marker_name'          => null,
-			'marker_desc'          => null,
-			'icon'                 => null,
-			'address'              => null,
-			'lat_lng'              => null,
-			'have_marker_link'     => 0,
-			'marker_link'          => null,
-			'marker_link_new_tab'  => 0,
+			'map_id' => 0,
+			'marker_name' => null,
+			'marker_desc' => null,
+			'icon' => null,
+			'address' => null,
+			'lat_lng' => null,
+			'have_marker_link' => 0,
+			'marker_link' => null,
+			'marker_link_new_tab' => 0,
 			'show_desc_by_default' => 0,
-			'created_at'           => current_time('mysql'),
-			'created_by'           => get_current_user_id(),
-			'updated_at'           => current_time('mysql'),
-			'updated_by'           => get_current_user_id(),
+			'created_at' => current_time('mysql'),
+			'created_by' => get_current_user_id(),
+			'updated_at' => current_time('mysql'),
+			'updated_by' => get_current_user_id(),
 		);
 	}
 
@@ -46,7 +46,7 @@ trait MarkerCRUD
 		if (!current_user_can($this->capability)) {
 			$return_array = array(
 				'responseCode' => 0,
-				'message'      => 'Unauthorized access tried.',
+				'message' => 'Unauthorized access tried.',
 			);
 			echo wp_json_encode($return_array);
 			wp_die();
@@ -59,18 +59,18 @@ trait MarkerCRUD
 		global $wpdb;
 
 		$map_id = intval(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_map_id'])));
-		$error  = '';
+		$error = '';
 		// Getting ajax fields value
 		$map_marker_data = array(
-			'map_id'               => $map_id,
-			'marker_name'          => strlen(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name']))) === 0 ? null : sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name'])),
-			'marker_desc'          => wp_kses_post(wp_unslash($_POST['map_markers_data']['wpgmap_marker_desc'])),
-			'icon'                 => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_icon'])),
-			'address'              => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_address'])),
-			'lat_lng'              => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_lat_lng'])),
-			'have_marker_link'     => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_have_marker_link'])),
-			'marker_link'          => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link'])),
-			'marker_link_new_tab'  => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link_new_tab'])),
+			'map_id' => $map_id,
+			'marker_name' => strlen(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name']))) === 0 ? null : sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name'])),
+			'marker_desc' => wp_kses_post(wp_unslash($_POST['map_markers_data']['wpgmap_marker_desc'])),
+			'icon' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_icon'])),
+			'address' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_address'])),
+			'lat_lng' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_lat_lng'])),
+			'have_marker_link' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_have_marker_link'])),
+			'marker_link' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link'])),
+			'marker_link_new_tab' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link_new_tab'])),
 			'show_desc_by_default' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_infowindow_show'])),
 		);
 		if ($map_marker_data['lat_lng'] === '') {
@@ -80,7 +80,7 @@ trait MarkerCRUD
 			echo wp_json_encode(
 				array(
 					'responseCode' => 0,
-					'message'      => $error,
+					'message' => $error,
 				)
 			);
 			wp_die();
@@ -92,14 +92,14 @@ trait MarkerCRUD
 				echo wp_json_encode(
 					array(
 						'responseCode' => 0,
-						'message'      => __('Please upgrade to premium version to create unlimited markers', 'gmap-embed'),
+						'message' => __('Please upgrade to premium version to create unlimited markers', 'gmap-embed'),
 					)
 				);
 				wp_die();
 			}
 		}
 
-		$defaults            = $this->get_marker_default_values();
+		$defaults = $this->get_marker_default_values();
 		$wp_gmap_marker_data = wp_parse_args($map_marker_data, $defaults);
 		$wpdb->insert(
 			$wpdb->prefix . 'wgm_markers',
@@ -122,9 +122,9 @@ trait MarkerCRUD
 			)
 		);
 
-		$return_array            = array(
+		$return_array = array(
 			'responseCode' => 1,
-			'marker_id'    => intval($wpdb->insert_id),
+			'marker_id' => intval($wpdb->insert_id),
 		);
 		$return_array['message'] = 'Marker Saved Successfully.';
 		echo wp_json_encode($return_array);
@@ -140,7 +140,7 @@ trait MarkerCRUD
 		if (!current_user_can($this->capability)) {
 			$return_array = array(
 				'responseCode' => 0,
-				'message'      => 'Unauthorized access tried.',
+				'message' => 'Unauthorized access tried.',
 			);
 			echo wp_json_encode($return_array);
 			wp_die();
@@ -150,20 +150,20 @@ trait MarkerCRUD
 		}
 
 		global $wpdb;
-		$error     = '';
+		$error = '';
 		$marker_id = intval(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_id'])));
-		$map_id    = intval(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_map_id'])));
+		$map_id = intval(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_map_id'])));
 		// Getting ajax fields value
 		$map_marker_data = array(
-			'map_id'               => $map_id,
-			'marker_name'          => strlen(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name']))) === 0 ? null : sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name'])),
-			'marker_desc'          => wp_kses_post(wp_unslash($_POST['map_markers_data']['wpgmap_marker_desc'])),
-			'icon'                 => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_icon'])),
-			'address'              => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_address'])),
-			'lat_lng'              => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_lat_lng'])),
-			'have_marker_link'     => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_have_marker_link'])),
-			'marker_link'          => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link'])),
-			'marker_link_new_tab'  => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link_new_tab'])),
+			'map_id' => $map_id,
+			'marker_name' => strlen(sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name']))) === 0 ? null : sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_name'])),
+			'marker_desc' => wp_kses_post(wp_unslash($_POST['map_markers_data']['wpgmap_marker_desc'])),
+			'icon' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_icon'])),
+			'address' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_address'])),
+			'lat_lng' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_lat_lng'])),
+			'have_marker_link' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_have_marker_link'])),
+			'marker_link' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link'])),
+			'marker_link_new_tab' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_link_new_tab'])),
 			'show_desc_by_default' => sanitize_text_field(wp_unslash($_POST['map_markers_data']['wpgmap_marker_infowindow_show'])),
 		);
 		if ($map_marker_data['lat_lng'] === '') {
@@ -173,13 +173,13 @@ trait MarkerCRUD
 			echo wp_json_encode(
 				array(
 					'responseCode' => 0,
-					'message'      => $error,
+					'message' => $error,
 				)
 			);
 			wp_die();
 		}
 
-		$defaults            = $this->get_marker_default_values();
+		$defaults = $this->get_marker_default_values();
 		$wp_gmap_marker_data = wp_parse_args($map_marker_data, $defaults);
 
 		$wpdb->update(
@@ -205,9 +205,9 @@ trait MarkerCRUD
 			array('%d')
 		);
 
-		$return_array            = array(
+		$return_array = array(
 			'responseCode' => 1,
-			'marker_id'    => intval($marker_id),
+			'marker_id' => intval($marker_id),
 		);
 		$return_array['message'] = 'Updated Successfully.';
 		echo wp_json_encode($return_array);
@@ -222,7 +222,7 @@ trait MarkerCRUD
 		if (!current_user_can($this->capability)) {
 			$return_array = array(
 				'responseCode' => 0,
-				'message'      => 'Unauthorized access tried.',
+				'message' => 'Unauthorized access tried.',
 			);
 			echo wp_json_encode($return_array);
 			wp_die();
@@ -244,7 +244,7 @@ trait MarkerCRUD
 		if (!current_user_can($this->capability)) {
 			$return_array = array(
 				'responseCode' => 0,
-				'message'      => 'Unauthorized access tried.',
+				'message' => 'Unauthorized access tried.',
 			);
 			echo wp_json_encode($return_array);
 			wp_die();
@@ -254,19 +254,19 @@ trait MarkerCRUD
 		}
 
 		global $wpdb;
-		$error    = '';
+		$error = '';
 		$icon_url = sanitize_text_field($_POST['data']['icon_url']);
 		// Getting ajax fields value
 		$map_icon_data = array(
-			'type'      => 'uploaded_marker_icon',
-			'title'     => '',
-			'desc'      => '',
+			'type' => 'uploaded_marker_icon',
+			'title' => '',
+			'desc' => '',
 			'file_name' => esc_url($icon_url),
 		);
 
 		$is_marker_icon_already_exist = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->prefix}wgm_icons WHERE file_name='%s'", esc_url($icon_url)));
 		if ($is_marker_icon_already_exist == 0) {
-			$defaults            = array(
+			$defaults = array(
 				'file_name' => '',
 			);
 			$wp_gmap_marker_icon = wp_parse_args($map_icon_data, $defaults);
@@ -282,9 +282,9 @@ trait MarkerCRUD
 			);
 		}
 
-		$return_array            = array(
+		$return_array = array(
 			'responseCode' => 1,
-			'icon_url'     => esc_url($icon_url),
+			'icon_url' => esc_url($icon_url),
 		);
 		$return_array['message'] = 'Updated Successfully.';
 		echo wp_json_encode($return_array);
@@ -315,7 +315,7 @@ trait MarkerCRUD
 			echo wp_json_encode(
 				array(
 					'responseCode' => 0,
-					'message'      => 'Unauthorized access tried.',
+					'message' => 'Unauthorized access tried.',
 				)
 			);
 			wp_die();
@@ -325,18 +325,18 @@ trait MarkerCRUD
 		}
 
 		global $wpdb;
-		$map_id               = intval(sanitize_text_field(wp_unslash($_POST['data']['map_id'])));
+		$map_id = intval(sanitize_text_field(wp_unslash($_POST['data']['map_id'])));
 		$filtered_map_markers = array();
-		$map_markers          = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE map_id='%d'", intval($map_id)));
+		$map_markers = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE map_id='%d'", intval($map_id)));
 		if (count($map_markers) > 0) {
 			foreach ($map_markers as $key => $map_marker) {
-				$map_marker->marker_desc      = wp_unslash(html_entity_decode($map_marker->marker_desc));
+				$map_marker->marker_desc = wp_unslash($map_marker->marker_desc);
 				$filtered_map_markers[$key] = $map_marker;
 			}
 		}
-		$return_array            = array(
+		$return_array = array(
 			'responseCode' => 1,
-			'markers'      => $filtered_map_markers,
+			'markers' => $filtered_map_markers,
 		);
 		$return_array['message'] = 'Markers fetched successfully.';
 		echo wp_json_encode($return_array);
@@ -353,18 +353,18 @@ trait MarkerCRUD
 		}
 
 		global $wpdb;
-		$map_id               = intval(sanitize_text_field(wp_unslash($_POST['data']['map_id'])));
+		$map_id = intval(sanitize_text_field(wp_unslash($_POST['data']['map_id'])));
 		$filtered_map_markers = array();
-		$map_markers          = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE map_id='%d'", intval($map_id)));
+		$map_markers = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE map_id='%d'", intval($map_id)));
 		if (count($map_markers) > 0) {
 			foreach ($map_markers as $key => $map_marker) {
-				$map_marker->marker_desc      = wp_unslash(html_entity_decode($map_marker->marker_desc));
+				$map_marker->marker_desc = wp_kses_post(wp_unslash($map_marker->marker_desc));
 				$filtered_map_markers[$key] = $map_marker;
 			}
 		}
-		$return_array            = array(
+		$return_array = array(
 			'responseCode' => 1,
-			'markers'      => $filtered_map_markers,
+			'markers' => $filtered_map_markers,
 		);
 		$return_array['message'] = 'Markers fetched successfully.';
 		echo wp_json_encode($return_array);
@@ -380,7 +380,7 @@ trait MarkerCRUD
 			echo wp_json_encode(
 				array(
 					'responseCode' => 0,
-					'message'      => 'Unauthorized access tried.',
+					'message' => 'Unauthorized access tried.',
 				)
 			);
 			wp_die();
@@ -390,21 +390,21 @@ trait MarkerCRUD
 		}
 		$return_json = array();
 		global $wpdb;
-		$map_id         = intval(sanitize_text_field(wp_unslash($_GET['map_id'])));
+		$map_id = intval(sanitize_text_field(wp_unslash($_GET['map_id'])));
 		$wpgmap_markers = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE map_id='%d'", intval($map_id)));
 		if (count($wpgmap_markers) > 0) {
 			foreach ($wpgmap_markers as $marker_key => $wpgmap_marker) {
-				$action        = '<a href="" class="wpgmap_marker_edit button button-small"
+				$action = '<a href="" class="wpgmap_marker_edit button button-small"
                            map_marker_id="' . esc_attr($wpgmap_marker->id) . '"><i class="fas fa-edit"></i></a>
                         <a href="" class="wpgmap_marker_view button button-small"
                            map_marker_id="' . esc_attr($wpgmap_marker->id) . '"><i class="fas fa-eye"></i></a>
                         <a href="" class="wpgmap_marker_trash button button-small"
                            map_marker_id="' . esc_attr($wpgmap_marker->id) . '"><i class="fas fa-trash"></i></a>';
-				$row           = array(
-					'id'          => intval(esc_html($wpgmap_marker->id)),
+				$row = array(
+					'id' => intval(esc_html($wpgmap_marker->id)),
 					'marker_name' => esc_html($wpgmap_marker->marker_name),
-					'icon'        => '<img src="' . esc_url($wpgmap_marker->icon) . '" width="20">',
-					'action'      => $action,
+					'icon' => '<img src="' . esc_url($wpgmap_marker->icon) . '" width="20">',
+					'action' => $action,
 				);
 				$return_json[] = $row;
 			}
@@ -422,7 +422,7 @@ trait MarkerCRUD
 		if (!current_user_can($this->capability)) {
 			$return_array = array(
 				'responseCode' => 0,
-				'message'      => 'Unauthorized access tried.',
+				'message' => 'Unauthorized access tried.',
 			);
 			echo wp_json_encode($return_array);
 			wp_die();
@@ -452,7 +452,7 @@ trait MarkerCRUD
 		if (!current_user_can($this->capability)) {
 			$return_array = array(
 				'responseCode' => 0,
-				'message'      => 'Unauthorized access tried.',
+				'message' => 'Unauthorized access tried.',
 			);
 			echo wp_json_encode($return_array);
 			wp_die();
@@ -461,9 +461,9 @@ trait MarkerCRUD
 			die('Busted!');
 		}
 		global $wpdb;
-		$marker_id           = intval(sanitize_text_field(wp_unslash($_POST['data']['marker_id'])));
-		$result              = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE id='%d'", intval($marker_id)), OBJECT);
-		$result->marker_desc = wp_unslash(html_entity_decode($result->marker_desc));
+		$marker_id = intval(sanitize_text_field(wp_unslash($_POST['data']['marker_id'])));
+		$result = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE id='%d'", intval($marker_id)), OBJECT);
+		$result->marker_desc = wp_unslash($result->marker_desc);
 		echo wp_json_encode($result);
 		wp_die();
 	}

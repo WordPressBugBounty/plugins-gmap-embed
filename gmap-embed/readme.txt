@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Google Maps, map, Maps, map markers, store locator
 Requires at least: 2.9
 Tested up to: 6.7
-Version: 1.9.3
-Stable tag: 1.9.3
+Version: 1.9.4
+Stable tag: 1.9.4
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -201,6 +201,9 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 9. Advanced Settings
 
 == Changelog ==
+
+= 1.9.4 =
+* Scheduled Security enhancement.
 
 = 1.9.3 =
 * Early load of textdomain compatibility issue fixed.

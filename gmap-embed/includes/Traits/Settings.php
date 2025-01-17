@@ -27,7 +27,7 @@ trait Settings
      */
     public function gmap_embed_s_custom_css_markup()
     { ?>
-        <textarea rows="10" cols="100" name="wpgmap_s_custom_css" id="wpgmap_custom_css"><?php echo esc_html(get_option('wpgmap_s_custom_css')); ?></textarea>
+        <textarea rows="10" cols="100" name="wpgmap_s_custom_css" id="wpgmap_custom_css"><?php echo esc_textarea(get_option('wpgmap_s_custom_css')); ?></textarea>
         <p class="description" id="tagline-description" style="font-style: italic;">
             <?php esc_html_e('Add your custom CSS code if needed.', 'gmap-embed'); ?>
         </p>
@@ -40,7 +40,7 @@ trait Settings
     public function wpgmap_s_custom_js_markup()
     {
     ?>
-        <textarea rows="10" cols="100" name="wpgmap_s_custom_js" id="wpgmap_custom_js"><?php echo esc_html(get_option('wpgmap_s_custom_js')); ?></textarea>
+        <textarea rows="10" cols="100" name="wpgmap_s_custom_js" id="wpgmap_custom_js"><?php echo esc_textarea(get_option('wpgmap_s_custom_js')); ?></textarea>
         <p class="description" id="tagline-description" style="font-style: italic;">
             <?php esc_html_e('Add your custom JS code if needed.', 'gmap-embed'); ?>
         </p>

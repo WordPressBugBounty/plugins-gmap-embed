@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: https://www.wpgooglemap.com?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash
-  Version: 1.9.3
+  Version: 1.9.4
  */
 
 use WGMSRM\Classes\Database;
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('WGM_PLUGIN_VERSION', '1.9.3');
+define('WGM_PLUGIN_VERSION', '1.9.4');
 define('WGM_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define('WGM_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
 define('WGM_ICONS_DIR', WGM_PLUGIN_PATH . 'admin/assets/images/markers/icons/');

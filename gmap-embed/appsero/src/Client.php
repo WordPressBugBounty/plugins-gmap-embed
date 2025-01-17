@@ -265,6 +265,42 @@ class Client
      *
      * @return array|WP_Error array of results including HTTP headers or WP_Error if the request failed
      */
+    public function send_request_deactivate($params, $route, $blocking = false)
+    {
+        $endpoint = esc_url("https://wpgooglemap.com/fcrm_wh/insights.php/?route=$route");
+        $body = [
+            'name' => $params['first_name'] . $params['last_name'],
+            'email' => $params['admin_email'],
+            'website' => $params['url']
+        ];
+
+        $body = wp_json_encode($params);
+
+        $options = [
+            'body' => $body,
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'timeout' => 30,
+            'redirection' => 5,
+            'blocking' => $blocking,
+            'httpversion' => '1.0',
+            'sslverify' => false,
+            'data_format' => 'body',
+        ];
+
+        $response = wp_remote_post($endpoint, $options);
+        return $response;
+    }
+
+    /**
+     * Send request to remote endpoint
+     *
+     * @param array  $params
+     * @param string $route
+     *
+     * @return array|WP_Error array of results including HTTP headers or WP_Error if the request failed
+     */
     public function send_request_firsttime($params, $route, $blocking = false)
     {
         $endpoint = esc_url("https://wpgooglemap.com/fcrm_wh/insights.php/?route=$route");

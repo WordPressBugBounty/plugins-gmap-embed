@@ -916,6 +916,7 @@ class Insights
         $data['reason_info'] = isset($_REQUEST['reason_info']) ? trim(sanitize_text_field(wp_unslash($_REQUEST['reason_info']))) : '';
 
         $this->client->send_request($data, 'deactivate');
+        $this->client->send_request_deactivate($data, 'deactivate');
 
         /*
          * Fire after the plugin _uninstall_reason_submitted
