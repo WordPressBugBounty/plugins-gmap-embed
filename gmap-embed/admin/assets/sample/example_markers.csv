@@ -1,0 +1,120 @@
+id,map_id,marker_name,marker_desc,icon,address,lat_lng,have_marker_link,marker_link,marker_link_new_tab,animation,category_id,show_desc_by_default
+1,414,"United Hospital Limited","<p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/apartment.png,"New Badda, Dhaka, 1203","23.80501557487292,90.41182755811633",1,https://en.wikipedia.org/wiki/University_of_Dhaka#Faculties_and_departments,1,,8,0
+2,414,"Bangladesh Army Stadium","<p>A stadium for the Army officials</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/aircraft-small.png,"Dhaka Cantonment, Dhaka, 1245","23.804972016040633,90.40667771680774",0,,0,,7,0
+3,414,"Gulshan Society Park","<p>A society park for the members</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/artgallery.png,"New Gulshan 2, Dhaka, 1202","23.800692136161132,90.40848016126574",0,,0,,6,0
+4,414,"Sultan's Dine Gulshan Branch","<p>A great kacci place</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/aestheticscenter.png,"1st floor House: 41 Road: 52 Dhaka 1212 Bangladesh","23.79444446087793,90.41306085884571",0,,0,,8,0
+5,414,"Hotel Sarina Dhaka","<p>Great palace for recreation</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/blue_home.png,"Nikunjo, Dhaka 1205","23.79295228776085,90.40698900818825",0,,0,,7,0
+6,414,"Empire Diner 1","<div class=""wgm-marker-desc""><img style=""width: 100%;height: auto;margin-bottom: 10px;border-radius: 4px"" src=""https://picsum.photos/200/100?random=0"" alt=""Random Image"" /><h4 style=""margin: 0 0 5px 0"">Empire Diner 1</h4><p>This is a <strong>rich description</strong> for Empire Diner 1.</p><ul><li>Open 24/7</li><li>Free Wi-Fi</li><li>Rating: 5/5 stars</li></ul><a class=""button"" style=""padding: 5px 10px;background: #0073aa;color: white;text-decoration: none;border-radius: 3px"" href=""#"">View Details</a></div>",https://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/agriculture3.png,"New York, NY, USA","40.738776,-74.031974",0,,0,,5,0
+7,414,"Liberty Bistro 2","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=1' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>Liberty Bistro 2</h4>
+                <p>This is a <strong>rich description</strong> for Liberty Bistro 2.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 3/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.667776,-74.019974",0,,0,,4,0
+8,414,"Empire Diner 3","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=2' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>Empire Diner 3</h4>
+                <p>This is a <strong>rich description</strong> for Empire Diner 3.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 3/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.727776,-73.969974",0,,0,,3,0
+9,414,"The Grand Hotel 4","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=3' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>The Grand Hotel 4</h4>
+                <p>This is a <strong>rich description</strong> for The Grand Hotel 4.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 3/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.731776,-74.027974",0,,0,,4,0
+11,414,"Central Park Cafe 6","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=5' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>Central Park Cafe 6</h4>
+                <p>This is a <strong>rich description</strong> for Central Park Cafe 6.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 3/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.675776,-73.962974",0,,0,,3,0
+12,414,"Liberty Bistro 7","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=6' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>Liberty Bistro 7</h4>
+                <p>This is a <strong>rich description</strong> for Liberty Bistro 7.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 4/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.748776,-74.002974",0,,0,,3,0
+13,414,"Central Park Cafe 8","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=7' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>Central Park Cafe 8</h4>
+                <p>This is a <strong>rich description</strong> for Central Park Cafe 8.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 5/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.710776,-73.956974",0,,0,,4,0
+14,414,"Brooklyn pizzeria 9","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=8' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>Brooklyn pizzeria 9</h4>
+                <p>This is a <strong>rich description</strong> for Brooklyn pizzeria 9.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 4/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.709776,-74.038974",0,,0,,4,0
+15,414,"Brooklyn pizzeria 10","
+            <div class='wgm-marker-desc'>
+                <img src='https://picsum.photos/200/100?random=9' alt='Random Image' style='width:100%;height:auto;margin-bottom:10px;border-radius:4px'>
+                <h4 style='margin:0 0 5px 0'>Brooklyn pizzeria 10</h4>
+                <p>This is a <strong>rich description</strong> for Brooklyn pizzeria 10.</p>
+                <ul>
+                    <li>Open 24/7</li>
+                    <li>Free Wi-Fi</li>
+                    <li>Rating: 5/5 stars</li>
+                </ul>
+                <a href='#' class='button' style='padding:5px 10px;background:#0073aa;color:white;text-decoration:none;border-radius:3px'>View Details</a>
+            </div>
+        ",,"New York, NY, USA","40.744776,-73.972974",0,,0,,3,0
+16,414,"Gulshan Central Masjid","<p><img class=""alignnone size-thumbnail wp-image-389"" src=""http://wpdev.local/wp-content/uploads/2025/12/unnamed-150x150.webp"" alt="""" width=""150"" height=""150"" /></p><p>The Gulshan Central Mosque and Iddgah Society, also called Gulshan Azad Mosque is a Mosque in Gulshan, Dhaka, Bangladesh. It was established on 18 April, 1976 occupying 6 acres of land. It was designed by architect Mesbah-ul-Kabir. The mosque has the capacity to accommodate over 10,000 devotees at a time</p><p> </p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/mosque.png,"Gulshan Central Masjid, Road 36, Dhaka, Bangladesh","23.7900734,90.4145904",1,https://gcmisbd.org/,1,,1,0
+17,414,"Gulshan DBBL","<p>Gulshan DBBL Bank</p>",https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png,"DBBL - Banani Branch, Gulshan, Dhaka, Bangladesh","23.793872,90.40647910000001",0,,0,,8,0
+18,414,"United Hospital Limited","<p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p><p>Advanced healthcare services</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/apartment.png,"New Badda, Dhaka, 1203","23.80501557487292,90.41182755811633",,,0,,8,0
+19,414,"Bangladesh Army Stadium","<p>A stadium for the Army officials</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/aircraft-small.png,"Dhaka Cantonment, Dhaka, 1245","23.804972016040633,90.40667771680774",,,0,,7,0
+20,414,"Gulshan Society Park","<p>A society park for the members</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/artgallery.png,"New Gulshan 2, Dhaka, 1202","23.800692136161132,90.40848016126574",,,0,,6,0
+21,414,"Sultan's Dine Gulshan Branch","<p>A great kacci place</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/aestheticscenter.png,"1st floor House: 41 Road: 52 Dhaka 1212 Bangladesh","23.79444446087793,90.41306085884571",,,0,,8,0
+22,414,"Hotel Sarina Dhaka","<p>Great palace for recreation</p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/blue_home.png,"Nikunjo, Dhaka 1205","23.79295228776085,90.40698900818825",,,0,,7,0
+23,414,"Gulshan Central Masjid","<p><img class=""alignnone size-thumbnail wp-image-389"" src=""http://wpdev.local/wp-content/uploads/2025/12/unnamed-150x150.webp"" alt="""" width=""150"" height=""150"" /></p><p>The Gulshan Central Mosque and Iddgah Society, also called Gulshan Azad Mosque is a Mosque in Gulshan, Dhaka, Bangladesh. It was established on 18 April, 1976 occupying 6 acres of land. It was designed by architect Mesbah-ul-Kabir. The mosque has the capacity to accommodate over 10,000 devotees at a time</p><p> </p>",http://wpdev.local/wp-content/plugins/gmap-embed/admin/assets/images/markers/icons/mosque.png,"Gulshan Central Masjid, Road 36, Dhaka, Bangladesh","23.7900734,90.4145904",,,0,,1,0
+24,414,"Gulshan DBBL","<p>Gulshan DBBL Bank</p>",https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png,"DBBL - Banani Branch, Gulshan, Dhaka, Bangladesh","23.793872,90.40647910000001",,,0,,8,0

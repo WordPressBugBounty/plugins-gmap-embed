@@ -1,0 +1,131 @@
+/**
+ * WP GMap Design System
+ * 
+ * Centralized CSS variables and utility classes to ensure consistency 
+ * across admin and frontend interfaces.
+ */
+
+:root {
+  /* Colors */
+  --wgm-primary: #32c896;
+  --wgm-primary-dark: #238b68;
+  --wgm-secondary: #4285f4;
+  --wgm-bg-light: #f8f9fa;
+  --wgm-bg-dark: #2b323c;
+  --wgm-border-color: #e0e0e0;
+  --wgm-border-light: #f1f1f1;
+  --wgm-text-primary: #333333;
+  --wgm-text-secondary: #516378;
+  --wgm-text-muted: #777777;
+  --wgm-white: #ffffff;
+  --wgm-error: #dc3545;
+
+  /* Spacing Scale */
+  --wgm-space-xs: 4px;
+  --wgm-space-sm: 8px;
+  --wgm-space-md: 16px;
+  --wgm-space-lg: 24px;
+  --wgm-space-xl: 32px;
+
+  /* Border Radius */
+  --wgm-radius-sm: 4px;
+  --wgm-radius-md: 8px;
+  --wgm-radius-lg: 12px;
+  --wgm-radius-round: 50%;
+
+  /* Typography */
+  --wgm-font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Arial, sans-serif;
+  --wgm-font-size-xs: 11px;
+  --wgm-font-size-sm: 13px;
+  --wgm-font-size-md: 14px;
+  --wgm-font-size-lg: 18px;
+  --wgm-font-weight-bold: 700;
+
+  /* Shadows */
+  --wgm-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --wgm-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* Transitions */
+  --wgm-transition-fast: 0.2s ease;
+}
+
+/* Base Utility Classes */
+
+.wgm-flex {
+  display: flex;
+}
+.wgm-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wgm-flex-wrap {
+  flex-wrap: wrap;
+}
+.wgm-items-center {
+  align-items: center;
+}
+.wgm-justify-between {
+  justify-content: space-between;
+}
+
+.wgm-d-block {
+  display: block;
+}
+.wgm-d-inline-block {
+  display: inline-block;
+}
+.wgm-d-none {
+  display: none;
+}
+
+/* Margin Utilities */
+.wgm-mt-xs {
+  margin-top: var(--wgm-space-xs);
+}
+.wgm-mt-sm {
+  margin-top: var(--wgm-space-sm);
+}
+.wgm-mt-md {
+  margin-top: var(--wgm-space-md);
+}
+.wgm-mb-xs {
+  margin-bottom: var(--wgm-space-xs);
+}
+.wgm-mb-sm {
+  margin-bottom: var(--wgm-space-sm);
+}
+.wgm-mb-md {
+  margin-bottom: var(--wgm-space-md);
+}
+
+/* Padding Utilities */
+.wgm-p-xs {
+  padding: var(--wgm-space-xs);
+}
+.wgm-p-sm {
+  padding: var(--wgm-space-sm);
+}
+.wgm-p-md {
+  padding: var(--wgm-space-md);
+}
+
+/* Text Utilities */
+.wgm-text-muted {
+  color: var(--wgm-text-muted);
+}
+.wgm-text-primary {
+  color: var(--wgm-text-primary);
+}
+.wgm-font-bold {
+  font-weight: var(--wgm-font-weight-bold);
+}
+.wgm-text-sm {
+  font-size: var(--wgm-font-size-sm);
+}
+
+/* Visibility */
+.wgm-hidden {
+  display: none !important;
+}

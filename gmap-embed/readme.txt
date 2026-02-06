@@ -3,9 +3,9 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA
 Tags: Google Maps, map, Maps, map markers, store locator
 Requires at least: 2.9
-Tested up to: 6.7
-Version: 1.9.4
-Stable tag: 1.9.4
+Tested up to: 6.9
+Version: 1.9.6
+Stable tag: 1.9.6
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -15,169 +15,119 @@ Google Map plugin for WordPress is very Simple, light-weight and Easy to use Goo
 
 == Description ==
 
-= Google Maps for Wordpress =
-* [Google Maps for Wordpress Help Manual](https://wpgooglemap.com/documentation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_heading_list)
-* [How to use Google Maps in Wordpress Website](https://wpgooglemap.com/documentation/wp-google-map-quick-installation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_heading_list)
+WP Google Map is the most powerful and comprehensive solution for integrating Google Maps into your WordPress website. Whether you need a simple location map for your contact page or an advanced store locator with real-time filtering, this plugin provides all the tools you need with a professional and user-friendly interface.
 
-WP Google Map is an awesome plugin to use when adding a custom Google map to your website. It is fully customizable and can be used as shortcode.
+It is fully customizable, responsive, and easy to use with shortcodes and a dedicated map editor.
 
-**[Get WP Google Map pro version](https://wpgooglemap.com/pricing?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_get_pro)**
+**[Get WP Google Map Pro version (Starting from $19 only)](https://wpgooglemap.com/pricing?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=upgrade-to-pro&utm_content=readme-get-pro)**
 
-### DEMOS
+== DEMOS ==
+* [See all Google Map Demos](https://wpgooglemap.com/demos?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=demos&utm_content=readme-demos-list)
 
-* **[See all Google Map Demos](https://wpgooglemap.com/demos?utm_source=wp_repo&utm_medium=admin_link&utm_campaign=readme_demos_list)**
+== VIDEO TUTORIALS ==
+* [Quick Installation Guide](https://www.youtube.com/watch?v=1G2VksP-uX0)
+* [Full Setup and Basics](https://www.youtube.com/watch?v=ErRy5lqTPjY)
 
-### VIDEO TUTORIALS
+== DOCUMENTATION & SUPPORT ==
+* [Complete Help Manual](https://wpgooglemap.com/documentation?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=documentation&utm_content=readme-doc-list)
+* [How to identify and fix Map loading problems?](https://wpgooglemap.com/documentation/how-to-debug-or-identify-the-map-loading-problems-in-admin-panel?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=documentation&utm_content=readme-troubleshoot-list)
 
-* **[Video on Quick Installation](https://www.youtube.com/watch?v=m-jAsxG0zuk)**
-* **[Video on (Installation, Activation, Creating Map, How to use)](https://www.youtube.com/watch?v=9KZOUJ9Gdv8)**
+**Note:** According to [Google Documentation](https://cloud.google.com/maps-platform/pricing), you can use Google Maps for **FREE** up to $200 USD credit each month.
 
-### DOCUMENTATION
+== Features of Lite version (FREE) ==
+* ✅ Basic Map and Marker support
+* ✅ Responsive design for all devices
+* ✅ Draggable markers for precise location picking
+* ✅ Fully Customizable (Custom width/height)
+* ✅ Ability to change zoom level (1-22)
+* ✅ Map Language and Regional Area Settings
+* ✅ Google Map Autocomplete for easy address entry
+* ✅ Advanced Map Control Options (Enable/Disable zoom, pan, map types, etc.)
+* ✅ Custom CSS & JS support for advanced styling
+* ✅ Custom Marker Icons (Upload your own)
+* ✅ Google Map Street View integration
+* ✅ Standard Map Types supported (Roadmap, Terrain, Satellite, and Hybrid)
+* ✅ Shortcode support for Pages, Posts, and Widgets
+* ✅ No coding required! Super easy to use.
 
-* **[Complete Installation Guide](https://wpgooglemap.com/documentation/wp-google-map-quick-installation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_doc_list)**
-* **[How to get your Lifetime License key?](https://wpgooglemap.com/documentation/how-to-get-your-license-key?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_doc_list)**
-* **[How to get your own API key](https://wpgooglemap.com/documentation/how-to-get-google-map-api-key?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_doc_list)**
-* **[Add Google Map in wordpress page](https://wpgooglemap.com/documentation/how-to-add-google-map-in-your-wordpress-pageblock-editor?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_doc_list)**
-* **[Add Google Map in wordpress post](https://wpgooglemap.com/documentation/how-to-add-google-map-in-your-wordpress-post-copy?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_doc_list)**
-* **[Add Google Map in Sidebar as widget](https://wpgooglemap.com/documentation/how-to-add-google-map-in-sidebar-as-widget-new-widget-editor-from-wordpress-5-8?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_doc_list)**
-* **[Customize Map Language and Regional Area Settings](https://wpgooglemap.com/documentation/how-to-customize-map-language-and-regional-area-settings?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_doc_list)**
+== Features of PREMIUM version (PRO) ==
+* ✅ Unlimited Maps - Create as many as you need
+* ✅ Unlimited Markers - No restrictions on marker count
+* ✅ Advanced Store Locator with powerful search options
+* ✅ Marker Listing Themes:
+    * ✅ Basic List
+    * ✅ Basic Table
+    * ✅ Advanced Table
+    * ✅ Carousel
+* ✅ Directions Support:
+    * ✅ Legacy Design (Classic layout)
+    * ✅ Modern Drawer (Sleek side-panel UI)
+* ✅ Real-time Category Filtering for instant results
+* ✅ Advanced Category Filtering (Multiple selection logic)
+* ✅ Import/Export (JSON & CSV) for easy migration and backups
+* ✅ Custom Styled Map Themes (JSON based)
+* ✅ Add multiple maps on the same page
 
-### TROUBLESHOOTING
+== SHORTCODE USAGE ==
+Use as shortcode in Post, Page, and Sidebar:
+`[gmap-embed id="YOUR_MAP_ID"]`
 
-* **[How to identify and fix the Map loading problems?](https://wpgooglemap.com/documentation/how-to-debug-or-identify-the-map-loading-problems-in-admin-panel?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_troubleshoot_list)**
-* **[Do you see “the page can't load the map correctly?](https://wpgooglemap.com/documentation/can-not-load-the-map-correctly?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_troubleshoot_list)**
-* **[How to fix Multiple Google Map API loading??](https://wpgooglemap.com/documentation/how-to-fix-multiple-google-map-api-loading?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_troubleshoot_list)**
-* **[Don’t see "Embed Google Map" button in new Editor?](https://wpgooglemap.com/documentation/dont-see-embed-google-map-button-in-new-editor?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_troubleshoot_list)**
+Use in PHP code:
+`<?php echo do_shortcode('[gmap-embed id="YOUR_MAP_ID"]');?>`
 
-**Note:** According to [Google Documentation](https://cloud.google.com/maps-platform/pricing), You can use Google Map upto **200 USD** for free each month
-
-### TRANSLATIONS
-
-Get a free **License Key** of the WP Google Map Pro version in exchange for translating our plugin!
-
-* **[English (Australia)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_en_au) - (en_AU)**
-* **[English (Canada)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_en_ca) - (en_CA)**
-* **[English (UK)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_en_gb) - (en_GB)**
-* **[English (New Zealand)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_en_nz) - (en_NZ)**
-* **[English (South Africa)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_en_za) - (en_ZA)**
-* **[Bengali (Bangladesh)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_bn_bd) - (bn_BD)**
-* **[Spanish (Spain)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_es_es) - (es_ES)**
-* **[Spanish (Venezuela)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_es_ve) - (es_VE)**
-* **[German](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_es_de) - (de_DE)**
-* **[German (Formal)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_es_de_formal) - (de_DE_formal)**
-* **[Turkish](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_tr_tr) - (tr_TR)**
-* **[French (France)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_fr_fr) - (fr_FR)**
-* **[Danish](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_da_dk) - (da_DK)**
-* **[German (Switzerland)](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_de_ch) - (de_CH)**
-* **[Arabic](https://wpgooglemap.com/translation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_translation_ar) - (ar)**
-
-### SUPPORT AND CONTRIBUTION
-* **[Report an issue](https://wpgooglemap.com/report-issue?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)**
-* **[Support Forum](https://wpgooglemap.com/wp-support-forum?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)**
-* **[Post review Wordpress](https://wpgooglemap.com/wp-review-forum?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)** :)
-* **[Contact Us](https://wpgooglemap.com/contact-us?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)**
-* **[Facebook Page Community](https://wpgooglemap.com/fb-page?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)**
-* **[Facebook Group Community](https://wpgooglemap.com/fb-group?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)**
-* **[Twitter Community](https://wpgooglemap.com/twitter?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)**
-* **[LIVE CHAT](https://wpgooglemap.com/live-chat?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=read_support_cont)**
-
-To have continued the update, please donate for the WP Google Map plugin. **You will get Lifetime License Key by donating minimum 29 USD**
-**[Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA)**
-
-### Features of WP Google Map Plugin-Lite version(FREE):
-
-✅ **User-friendly**
-✅ **Ability to change Map Language and Regional Area!**
-✅ **Fully Customizable**
-✅ **Importing the Shortcode by WP Google Map Button on Classic Editor**
-✅ **Automatic Google Map Location identification with user Consent**
-✅ **Tested with other popular plugins**
-✅ **Super easy to use**
-✅ **Ability to change zoom level(1-22)**
-✅ **Easy to add a widget (By Shortcode)**
-✅ **No coding required!**
-✅ **Drag Map Marker to an desired location**
-✅ **Ability to use a shortcode in the Posts and Pages**
-✅ **Fully responsive maps**
-✅ **Ability to change Latitude, Longitude, Address by Dragging Marker**
-✅ **Supported UTF-8 font encoding**
-✅ **Google Map autocomplete available**
-✅ **Multiple Language supported(Localization)**
-✅ **Can be used in the single page, single post, sidebar, footer, etc.**
-✅ **You can set any width and height as you need**
-✅ **Map full screen functionality**
-
-### Features of WP Google Map Plugin(PREMIUM):
-
-✅ **Ability to create Unlimited Maps**
-✅ **Ability to create Unlimited Map markers**
-✅ **Detailed Direction option support with Map**
-✅ **Image can be added in Marker InfoWindow**
-✅ **Roadmap, Terrain, Satellite and Hybrid types of map supported**
-✅ **Supports Google Map Street View option**
-✅ **You can add multiple maps in any page or post if you need!**
-
-**Please use latest language file**
-
-### USE AS SHORTCODE IN POST, PAGE, AND SIDEBAR.
-        `[gmap-embed id="<Your map ID>"]`
-
-
-### USE AS SHORTCODE IN PHP CODE
-
-		<?php echo do_shortcode('[gmap-embed id="YOUR MAP ID"]');?>
-
-### POSSIBLE USE CASES
-* **Contact page Google Map implementation**
-* **Office location by Google Map**
-* **Point your office location by Pin/Marker**
-* **Business Location by Google Map**
-* **Store location view by Google Map**
-* **Location view by Google Map widget**
+== POSSIBLE USE CASES ==
+* **Store Locator**: Create a high-performance store locator for retail branches with search and radius filters.
+* **Contact Us Page**: Integrate a sleek, responsive map to showcase your office or business headquarters.
+* **Real Estate Listings**: Display properties with detailed markers, custom icons, and listing themes.
+* **Business Directories**: Create a directory of multiple locations with interactive info windows and images.
+* **Travel & Tourism Maps**: Map out tourist destinations, landmarks, and routes with Google Map directions.
+* **Event & Venue Mapping**: Showcase multiple event locations for festivals, conferences, or local meetups.
+* **Service Area Maps**: Highlight your service coverage areas or pickup points with customizable map styles.
 
 Contact us if you have any problems with installation or anything else.
 Email: **milonfci@gmail.com**
-Skype: **milon305021**
 
 == Installation ==
 
-### It's simple:
+Installing WP Google Map is a breeze:
 
-1. [Download](https://wpgooglemap.com/download-wp-google-map?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_install_tab) the WP Google Map Plugin.
-2. Upload the zip folder plugins directory "wp-content/plugins"
-3. Activate the WP Google Map Plugin from the Admin panel.
-4. Add the WP Google Map widget to your sidebar using Shortcode.
-5. Add the WP Google Map in posts/pages using the shortcode.
-6. Here you can see [Complete Installation Guide](https://wpgooglemap.com/documentation/wp-google-map-quick-installation?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_install_tab)
+1. **Upload**: Upload the `gmap-embed` folder to the `/wp-content/plugins/` directory, or install it directly via the WordPress admin search.
+2. **Activate**: Activate the plugin through the 'Plugins' menu in WordPress.
+3. **API Key**: Go to the plugin settings page and enter your Google Maps API Key (you'll find links to tutorials if you don't have one).
+4. **Create Map**: Click on 'Add New' under the 'WP Google Map' menu to create your first map.
+5. **Shortcode**: Copy the generated shortcode and paste it into any Post, Page, or Sidebar Widget.
+
+For a detailed walkthrough, see our **[Complete Installation Guide](https://wpgooglemap.com/documentation/wp-google-map-quick-installation?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=documentation&utm_content=readme-install-tab)**.
 
 == Upgrade Notice ==
 
-Upgrade WP Google Map Plugin from [here](https://wpgooglemap.com/download-wp-google-map?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_upgrade_notice) to get updated features.
+Upgrade WP Google Map Plugin from [here](https://wpgooglemap.com/download-wp-google-map?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=upgrade-to-pro&utm_content=readme-upgrade-notice) to get updated features.
 
 == Frequently Asked Questions ==
 
-Our WP Google Map plugin is user-friendly, but you can read some frequently asked questions that might help you here.
+= How do I get my own Google Map API key? =
+You can get an API key from the Google Cloud Console. Follow our **[detailed guide here](https://wpgooglemap.com/documentation/how-to-get-google-map-api-key?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=documentation&utm_content=readme-faq)** or watch our **[video tutorial](https://youtu.be/ErRy5lqTPjY?t=23)**.
 
-= How do I get your own Google Map API key? =
-See the [Video](https://youtu.be/9KZOUJ9Gdv8?t=23) ,hope you will get idea.
+= How can I create a new Map? =
+Go to **WP Google Map** -> **Add New** in your WordPress dashboard. Set your title, location, and markers, then save.
 
-= How to Troubleshoot or Debug Map Loading Issue? =
-See the [Documentation](https://wpgooglemap.com/docs-category/troubleshooting?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_faq), hope you will find best solution.
+= How do I add a map to my page? =
+Simply copy the shortcode (e.g., `[gmap-embed id="123"]`) from the map list page and paste it into your page's content.
 
-= How can I create a new Google Map? =
-After installing the plugin, Click on WP Google Map in the left sidebar. Then click on  **Add New** . [See Video Tutorial](https://youtu.be/9KZOUJ9Gdv8?t=141)
+= Can I use multiple markers on one map? =
+Yes! The Premium version allows you to add unlimited markers per map. The Lite version supports one marker per map.
 
-= How do I enable Directions on my Google Map? =
-You will see an option named "**Enable Direction in Map**" under each map other setting. Also, you can set the option in creating a new map page. [See Documentation](https://wpgooglemap.com/documentation/how-to-enable-the-direction-option-in-google-map?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_faq)
+= How do I enable the Store Locator? =
+The Store Locator is a Premium feature. Once you upgrade, you'll see a 'Store Locator' tab in the map editor where you can enable and customize it.
 
-= How do I change Map theme? =
-It's Easy! Go to **WP Google Map**=-> **Map Edit Page** . Now please [See the documentation](https://wpgooglemap.com/documentation/how-to-change-the-map-theme?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_faq)
+= How do I display a Marker List below the map? =
+Marker Listing is a Premium feature that allows you to show a list of all markers in various themes like Basic List, Basic Table, Advanced Table, or Carousel. You can enable it in the 'Marker Listing' tab within the map editor.
 
-= How do I add a Google Map to my Page/Post? =
-It's Easy! Go to **Posts**=-> **Add New** . Now please [See the documentation](https://wpgooglemap.com/documentation/how-to-add-google-map-in-your-wordpress-pageblock-editor?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_faq)
+= How do I export or import map data? =
+Import/Export is a Premium feature that allows you to backup your maps and markers or migrate them to another site. You can find these options under the 'Export' and 'Import' tabs in the WP Google Map settings page.
 
-= How do I add a Google Map as a widget? =
-Go to **Appearance** =-> **Widget** . Now please [See the documentation](https://wpgooglemap.com/documentation/how-to-add-google-map-in-sidebar-as-widget-new-widget-editor-from-wordpress-5-8?utm_source=wp_repo&utm_medium=readme_link&utm_campaign=readme_faq)
+= Does it support responsive design? =
+Absolutely! All maps created with this plugin are 100% responsive and will adapt to any screen size.
 
 ## Privacy Policy
 WP Google Map uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
@@ -190,20 +140,41 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 == Screenshots ==
 
-1. WP Google Map  menu in the left sidebar.
-2. How to create New Map.
-3. How to add markers and saving.
-4. Copy Map shortcode.
-5. How to add shortcode in page, post.
-6. Paste shortcode to view in page or post.
-7. Adding Map shortcode in widget
-8. General Settings
-9. Advanced Settings
+1. **Dashboard**: WP Google Map Quick Setup.
+2. **Map Editor**: Interface for creating and configuring your maps.
+3. **Marker Settings**: Adding and customizing markers with description, image, and icons.
+4. **Marker Listing**: Configuring the Marker Listing Style and related settings.
+5. **Store Locator**: Configuring the Store Locator Style and related settings.
+6. **Category Settings**: Creating and Modifying the Categories.
+7. **Settings**: Export existing Maps & Markers.
+8. **Settings**: Importing bulk Maps & Markers data.
+9. **Shortcode Copy**: Easy copy-to-clipboard for map shortcodes.
+10. **Page Editor**: Serch for shortcode to add the shortcode to a page or post.
+11. **Page Editor**: Adding the shortcode to a page or post.
+12. **Frontend View**: How the map looks to your visitors.
+13. **General Settings**: Plugin-wide configuration options.
 
 == Changelog ==
 
+= 1.9.6 =
+* **Quick Fix** Classic widget shortcode preview issue fixed.
+
+= 1.9.5 =
+* **Feature:** Added "Advanced Store Locator".
+* **Feature:** Added "Category Add/Edit/Tag with Marker UI".
+* **Feature:** Added "Marker Listing" with customized position and layout.
+* **Feature:** Added "Title/Label Search" for marker listing.
+* **Feature:** Added "Soring by Distance and related address fields" for marker listing.
+* **Feature:** Added "Customized Animation" for the Markers.
+* **Feature:** Added "Modern Direction Drawer UI" with sleek side-panel experience.
+* **Feature:** Added "Get Directions" link directly inside Marker InfoWindows.
+* **Feature:** Added Sample download links for CSV/JSON imports.
+* **UI/UX:** Added modern tab-based Settings UI (General, Advance, Export, Import, Marker).
+* **Security:** Enhanced direct file access protection for all core PHP files.
+* **Security:** Scheduled security enhancements.
+
 = 1.9.4 =
-* Scheduled Security enhancement.
+* Scheduled security enhancements.
 
 = 1.9.3 =
 * Early load of textdomain compatibility issue fixed.

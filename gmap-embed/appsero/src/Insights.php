@@ -1,6 +1,8 @@
 <?php
+namespace GmapEmbed\Appsero;
 
-namespace Appsero;
+defined( 'ABSPATH' ) || exit;
+
 
 /**
  * Appsero Insights
@@ -57,7 +59,7 @@ class Insights
             $client = new Client($client, $name, $file);
         }
 
-        if (is_object($client) && is_a($client, 'Appsero\Client')) {
+        if (is_object($client) && is_a($client, 'GmapEmbed\Appsero\Client')) {
             $this->client = $client;
         }
     }
@@ -248,39 +250,39 @@ class Insights
 
         $users = get_users(
             [
-                'role'    => 'administrator',
+                'role' => 'administrator',
                 'orderby' => 'ID',
-                'order'   => 'ASC',
-                'number'  => 1,
-                'paged'   => 1,
+                'order' => 'ASC',
+                'number' => 1,
+                'paged' => 1,
             ]
         );
 
         $admin_user = (is_array($users) && !empty($users)) ? $users[0] : false;
         $first_name = '';
-        $last_name  = '';
+        $last_name = '';
 
         if ($admin_user) {
             $first_name = $admin_user->first_name ? $admin_user->first_name : $admin_user->display_name;
-            $last_name  = $admin_user->last_name;
+            $last_name = $admin_user->last_name;
         }
 
         $data = [
-            'url'              => esc_url(home_url()),
-            'site'             => $this->get_site_name(),
-            'admin_email'      => get_option('admin_email'),
-            'first_name'       => $first_name,
-            'last_name'        => $last_name,
-            'hash'             => $this->client->hash,
-            'server'           => $this->get_server_info(),
-            'wp'               => $this->get_wp_info(),
-            'users'            => $this->get_user_counts(),
-            'active_plugins'   => count($all_plugins['active_plugins']),
+            'url' => esc_url(home_url()),
+            'site' => $this->get_site_name(),
+            'admin_email' => get_option('admin_email'),
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'hash' => $this->client->hash,
+            'server' => $this->get_server_info(),
+            'wp' => $this->get_wp_info(),
+            'users' => $this->get_user_counts(),
+            'active_plugins' => count($all_plugins['active_plugins']),
             'inactive_plugins' => count($all_plugins['inactive_plugins']),
-            'ip_address'       => $this->get_user_ip_address(),
-            'project_version'  => $this->client->project_version,
+            'ip_address' => $this->get_user_ip_address(),
+            'project_version' => $this->client->project_version,
             'tracking_skipped' => false,
-            'is_local'         => $this->is_local_server(),
+            'is_local' => $this->is_local_server(),
         ];
 
         // Add Plugins
@@ -295,8 +297,8 @@ class Insights
                 }
 
                 $plugins_data[$slug] = [
-                    'name'      => isset($plugin['name']) ? $plugin['name'] : '',
-                    'version'   => isset($plugin['version']) ? $plugin['version'] : '',
+                    'name' => isset($plugin['name']) ? $plugin['name'] : '',
+                    'version' => isset($plugin['version']) ? $plugin['version'] : '',
                 ];
             }
 
@@ -323,7 +325,7 @@ class Insights
             $data['tracking_skipped'] = true;
         }
 
-        return apply_filters($this->client->slug . '_tracker_data', $data);
+        return apply_filters('gmap_embed_appsero_tracker_data', $data);
     }
 
     /**
@@ -412,9 +414,9 @@ class Insights
      */
     private function is_local_server()
     {
-        $host       = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : 'localhost';
-        $ip         = isset($_SERVER['SERVER_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['SERVER_ADDR'])) : '127.0.0.1';
-        $is_local   = false;
+        $host = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : 'localhost';
+        $ip = isset($_SERVER['SERVER_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['SERVER_ADDR'])) : '127.0.0.1';
+        $is_local = false;
 
         if (
             in_array($ip, ['127.0.0.1', '::1'], true)
@@ -424,7 +426,7 @@ class Insights
             $is_local = true;
         }
 
-        return apply_filters('appsero_is_local', $is_local);
+        return apply_filters('gmap_embed_appsero_is_local', $is_local);
     }
 
     /**
@@ -501,29 +503,33 @@ class Insights
         //            return;
         //        }
 
-        $optin_url  = wp_nonce_url(add_query_arg($this->client->slug . '_tracker_optin', 'true'), '_wpnonce');
+        $optin_url = wp_nonce_url(add_query_arg($this->client->slug . '_tracker_optin', 'true'), '_wpnonce');
         $optout_url = wp_nonce_url(add_query_arg($this->client->slug . '_tracker_optout', 'true'), '_wpnonce');
 
         if (empty($this->notice)) {
-            $notice = sprintf($this->client->__trans('Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect diagnostic data and usage information.'), $this->client->name);
+            $notice = sprintf(
+                $this->client->__trans('Want to help make <strong>%1$s</strong> even more awesome? Allow %1$s to collect diagnostic data and usage information.'),
+                esc_html($this->client->name)
+            );
         } else {
             $notice = $this->notice;
         }
 
         $policy_url = 'https://appsero.com/privacy-policy/';
 
-        $notice .= ' (<a class="' . $this->client->slug . '-insights-data-we-collect" href="#">' . $this->client->__trans('what we collect') . '</a>)';
-        $notice .= '<p class="description" style="display:none;">' . implode(', ', $this->data_we_collect()) . '. ';
-        $notice .= 'We are using Appsero to collect your data. <a href="' . $policy_url . '" target="_blank">Learn more</a> about how Appsero collects and handle your data.</p>';
+        $notice .= ' (<a class="' . esc_attr($this->client->slug) . '-insights-data-we-collect" href="#">' . esc_html($this->client->__trans('what we collect')) . '</a>)';
+        $notice .= '<p class="description" style="display:none;">' . esc_html(implode(', ', $this->data_we_collect())) . '. ';
+        $notice .= 'We are using Appsero to collect your data. <a href="' . esc_url($policy_url) . '" target="_blank">Learn more</a> about how Appsero collects and handle your data.</p>';
 
         echo '<div class="updated"><p>';
-        echo $notice;
+        echo wp_kses_post($notice);
         echo '</p><p class="submit">';
-        echo '&nbsp;<a href="' . esc_url($optin_url) . '" class="button-primary button-large">' . $this->client->__trans('Allow') . '</a>';
-        echo '&nbsp;<a href="' . esc_url($optout_url) . '" class="button-secondary button-large">' . $this->client->__trans('No thanks') . '</a>';
+        echo '&nbsp;<a href="' . esc_url($optin_url) . '" class="button-primary button-large">' . esc_html($this->client->__trans('Allow')) . '</a>';
+        echo '&nbsp;<a href="' . esc_url($optout_url) . '" class="button-secondary button-large">' . esc_html($this->client->__trans('No thanks')) . '</a>';
         echo '</p></div>';
 
-        echo "<script type='text/javascript'>jQuery('." . $this->client->slug . "-insights-data-we-collect').on('click', function(e) {
+        echo "<script type='text/javascript'>jQuery('." . esc_js($this->client->slug) . "-insights-data-we-collect').parents('.updated').find('p.description').hide();
+        jQuery('." . esc_js($this->client->slug) . "-insights-data-we-collect').on('click', function(e) {
                 e.preventDefault();
                 jQuery(this).parents('.updated').find('p.description').slideToggle('fast');
             });
@@ -583,7 +589,7 @@ class Insights
         /*
          * Fires when the user has opted in tracking.
          */
-        do_action($this->client->slug . '_tracker_optin', $this->get_tracking_data());
+        do_action('gmap_embed_appsero_tracker_optin', $this->get_tracking_data());
     }
 
     /**
@@ -603,7 +609,7 @@ class Insights
         /*
          * Fires when the user has opted out tracking.
          */
-        do_action($this->client->slug . '_tracker_optout');
+        do_action('gmap_embed_appsero_tracker_optout');
     }
 
     /**
@@ -617,6 +623,7 @@ class Insights
     {
         global $wpdb;
 
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return (int) $wpdb->get_var(
             $wpdb->prepare(
                 "SELECT count(ID) FROM $wpdb->posts WHERE post_type = %s and post_status = %s",
@@ -647,11 +654,11 @@ class Insights
 
         $server_data['mysql_version'] = $wpdb->db_version();
 
-        $server_data['php_max_upload_size']  = size_format(wp_max_upload_size());
+        $server_data['php_max_upload_size'] = size_format(wp_max_upload_size());
         $server_data['php_default_timezone'] = date_default_timezone_get();
-        $server_data['php_soap']             = class_exists('SoapClient') ? 'Yes' : 'No';
-        $server_data['php_fsockopen']        = function_exists('fsockopen') ? 'Yes' : 'No';
-        $server_data['php_curl']             = function_exists('curl_init') ? 'Yes' : 'No';
+        $server_data['php_soap'] = class_exists('SoapClient') ? 'Yes' : 'No';
+        $server_data['php_fsockopen'] = function_exists('fsockopen') ? 'Yes' : 'No';
+        $server_data['php_curl'] = function_exists('curl_init') ? 'Yes' : 'No';
 
         return $server_data;
     }
@@ -666,18 +673,18 @@ class Insights
         $wp_data = [];
 
         $wp_data['memory_limit'] = WP_MEMORY_LIMIT;
-        $wp_data['debug_mode']   = (defined('WP_DEBUG') && WP_DEBUG) ? 'Yes' : 'No';
-        $wp_data['locale']       = get_locale();
-        $wp_data['version']      = get_bloginfo('version');
-        $wp_data['multisite']    = is_multisite() ? 'Yes' : 'No';
-        $wp_data['theme_slug']   = get_stylesheet();
+        $wp_data['debug_mode'] = (defined('WP_DEBUG') && WP_DEBUG) ? 'Yes' : 'No';
+        $wp_data['locale'] = get_locale();
+        $wp_data['version'] = get_bloginfo('version');
+        $wp_data['multisite'] = is_multisite() ? 'Yes' : 'No';
+        $wp_data['theme_slug'] = get_stylesheet();
 
         $theme = wp_get_theme($wp_data['theme_slug']);
 
-        $wp_data['theme_name']    = $theme->get('Name');
+        $wp_data['theme_name'] = $theme->get('Name');
         $wp_data['theme_version'] = $theme->get('Version');
-        $wp_data['theme_uri']     = $theme->get('ThemeURI');
-        $wp_data['theme_author']  = $theme->get('Author');
+        $wp_data['theme_uri'] = $theme->get('ThemeURI');
+        $wp_data['theme_author'] = $theme->get('Author');
 
         return $wp_data;
     }
@@ -694,13 +701,13 @@ class Insights
             include ABSPATH . '/wp-admin/includes/plugin.php';
         }
 
-        $plugins             = get_plugins();
+        $plugins = get_plugins();
         $active_plugins_keys = get_option('active_plugins', []);
-        $active_plugins      = [];
+        $active_plugins = [];
 
         foreach ($plugins as $k => $v) {
             // Take care of formatting the data how we want it.
-            $formatted         = [];
+            $formatted = [];
             $formatted['name'] = wp_strip_all_tags($v['Name']);
 
             if (isset($v['Version'])) {
@@ -729,8 +736,8 @@ class Insights
         }
 
         return [
-            'active_plugins'    => $active_plugins,
-            'inactive_plugins'  => $plugins,
+            'active_plugins' => $active_plugins,
+            'inactive_plugins' => $plugins,
         ];
     }
 
@@ -741,8 +748,8 @@ class Insights
      */
     public function get_user_counts()
     {
-        $user_count          = [];
-        $user_count_data     = count_users();
+        $user_count = [];
+        $user_count_data = count_users();
         $user_count['total'] = $user_count_data['total_users'];
 
         // Get user count based on user role
@@ -768,7 +775,7 @@ class Insights
     {
         $schedules['weekly'] = [
             'interval' => DAY_IN_SECONDS * 7,
-            'display'  => 'Once Weekly',
+            'display' => 'Once Weekly',
         ];
 
         return $schedules;
@@ -842,46 +849,46 @@ class Insights
     {
         $reasons = [
             [
-                'id'          => 'could-not-understand',
-                'text'        => $this->client->__trans("Couldn't understand"),
+                'id' => 'could-not-understand',
+                'text' => $this->client->__trans("Couldn't understand"),
                 'placeholder' => $this->client->__trans('Would you like us to assist you?'),
-                'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M11.5 0C17.9 0 23 5.1 23 11.5 23 17.9 17.9 23 11.5 23 10.6 23 9.6 22.9 8.8 22.7L8.8 22.6C9.3 22.5 9.7 22.3 10 21.9 10.3 21.6 10.4 21.3 10.4 20.9 10.8 21 11.1 21 11.5 21 16.7 21 21 16.7 21 11.5 21 6.3 16.7 2 11.5 2 6.3 2 2 6.3 2 11.5 2 13 2.3 14.3 2.9 15.6 2.7 16 2.4 16.3 2.2 16.8L2.1 17.1 2.1 17.3C2 17.5 2 17.7 2 18 0.7 16.1 0 13.9 0 11.5 0 5.1 5.1 0 11.5 0ZM6 13.6C6 13.7 6.1 13.8 6.1 13.9 6.3 14.5 6.2 15.7 6.1 16.4 6.1 16.6 6 16.9 6 17.1 6 17.1 6.1 17.1 6.1 17.1 7.1 16.9 8.2 16 9.3 15.5 9.8 15.2 10.4 15 10.9 15 11.2 15 11.4 15 11.6 15.2 11.9 15.4 12.1 16 11.6 16.4 11.5 16.5 11.3 16.6 11.1 16.7 10.5 17 9.9 17.4 9.3 17.7 9 17.9 9 18.1 9.1 18.5 9.2 18.9 9.3 19.4 9.3 19.8 9.4 20.3 9.3 20.8 9 21.2 8.8 21.5 8.5 21.6 8.1 21.7 7.9 21.8 7.6 21.9 7.3 21.9L6.5 22C6.3 22 6 21.9 5.8 21.9 5 21.8 4.4 21.5 3.9 20.9 3.3 20.4 3.1 19.6 3 18.8L3 18.5C3 18.2 3 17.9 3.1 17.7L3.1 17.6C3.2 17.1 3.5 16.7 3.7 16.3 4 15.9 4.2 15.4 4.3 15 4.4 14.6 4.4 14.5 4.6 14.2 4.6 13.9 4.7 13.7 4.9 13.6 5.2 13.2 5.7 13.2 6 13.6ZM11.7 11.2C13.1 11.2 14.3 11.7 15.2 12.9 15.3 13 15.4 13.1 15.4 13.2 15.4 13.4 15.3 13.8 15.2 13.8 15 13.9 14.9 13.8 14.8 13.7 14.6 13.5 14.4 13.2 14.1 13.1 13.5 12.6 12.8 12.3 12 12.2 10.7 12.1 9.5 12.3 8.4 12.8 8.3 12.8 8.2 12.8 8.1 12.8 7.9 12.8 7.8 12.4 7.8 12.2 7.7 12.1 7.8 11.9 8 11.8 8.4 11.7 8.8 11.5 9.2 11.4 10 11.2 10.9 11.1 11.7 11.2ZM16.3 5.9C17.3 5.9 18 6.6 18 7.6 18 8.5 17.3 9.3 16.3 9.3 15.4 9.3 14.7 8.5 14.7 7.6 14.7 6.6 15.4 5.9 16.3 5.9ZM8.3 5C9.2 5 9.9 5.8 9.9 6.7 9.9 7.7 9.2 8.4 8.2 8.4 7.3 8.4 6.6 7.7 6.6 6.7 6.6 5.8 7.3 5 8.3 5Z"/></g></g></svg>',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M11.5 0C17.9 0 23 5.1 23 11.5 23 17.9 17.9 23 11.5 23 10.6 23 9.6 22.9 8.8 22.7L8.8 22.6C9.3 22.5 9.7 22.3 10 21.9 10.3 21.6 10.4 21.3 10.4 20.9 10.8 21 11.1 21 11.5 21 16.7 21 21 16.7 21 11.5 21 6.3 16.7 2 11.5 2 6.3 2 2 6.3 2 11.5 2 13 2.3 14.3 2.9 15.6 2.7 16 2.4 16.3 2.2 16.8L2.1 17.1 2.1 17.3C2 17.5 2 17.7 2 18 0.7 16.1 0 13.9 0 11.5 0 5.1 5.1 0 11.5 0ZM6 13.6C6 13.7 6.1 13.8 6.1 13.9 6.3 14.5 6.2 15.7 6.1 16.4 6.1 16.6 6 16.9 6 17.1 6 17.1 6.1 17.1 6.1 17.1 7.1 16.9 8.2 16 9.3 15.5 9.8 15.2 10.4 15 10.9 15 11.2 15 11.4 15 11.6 15.2 11.9 15.4 12.1 16 11.6 16.4 11.5 16.5 11.3 16.6 11.1 16.7 10.5 17 9.9 17.4 9.3 17.7 9 17.9 9 18.1 9.1 18.5 9.2 18.9 9.3 19.4 9.3 19.8 9.4 20.3 9.3 20.8 9 21.2 8.8 21.5 8.5 21.6 8.1 21.7 7.9 21.8 7.6 21.9 7.3 21.9L6.5 22C6.3 22 6 21.9 5.8 21.9 5 21.8 4.4 21.5 3.9 20.9 3.3 20.4 3.1 19.6 3 18.8L3 18.5C3 18.2 3 17.9 3.1 17.7L3.1 17.6C3.2 17.1 3.5 16.7 3.7 16.3 4 15.9 4.2 15.4 4.3 15 4.4 14.6 4.4 14.5 4.6 14.2 4.6 13.9 4.7 13.7 4.9 13.6 5.2 13.2 5.7 13.2 6 13.6ZM11.7 11.2C13.1 11.2 14.3 11.7 15.2 12.9 15.3 13 15.4 13.1 15.4 13.2 15.4 13.4 15.3 13.8 15.2 13.8 15 13.9 14.9 13.8 14.8 13.7 14.6 13.5 14.4 13.2 14.1 13.1 13.5 12.6 12.8 12.3 12 12.2 10.7 12.1 9.5 12.3 8.4 12.8 8.3 12.8 8.2 12.8 8.1 12.8 7.9 12.8 7.8 12.4 7.8 12.2 7.7 12.1 7.8 11.9 8 11.8 8.4 11.7 8.8 11.5 9.2 11.4 10 11.2 10.9 11.1 11.7 11.2ZM16.3 5.9C17.3 5.9 18 6.6 18 7.6 18 8.5 17.3 9.3 16.3 9.3 15.4 9.3 14.7 8.5 14.7 7.6 14.7 6.6 15.4 5.9 16.3 5.9ZM8.3 5C9.2 5 9.9 5.8 9.9 6.7 9.9 7.7 9.2 8.4 8.2 8.4 7.3 8.4 6.6 7.7 6.6 6.7 6.6 5.8 7.3 5 8.3 5Z"/></g></g></svg>',
             ],
             [
-                'id'          => 'found-better-plugin',
-                'text'        => $this->client->__trans('Found a better plugin'),
+                'id' => 'found-better-plugin',
+                'text' => $this->client->__trans('Found a better plugin'),
                 'placeholder' => $this->client->__trans('Which plugin?'),
-                'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M17.1 14L22.4 19.3C23.2 20.2 23.2 21.5 22.4 22.4 21.5 23.2 20.2 23.2 19.3 22.4L19.3 22.4 14 17.1C15.3 16.3 16.3 15.3 17.1 14L17.1 14ZM8.6 0C13.4 0 17.3 3.9 17.3 8.6 17.3 13.4 13.4 17.2 8.6 17.2 3.9 17.2 0 13.4 0 8.6 0 3.9 3.9 0 8.6 0ZM8.6 2.2C5.1 2.2 2.2 5.1 2.2 8.6 2.2 12.2 5.1 15.1 8.6 15.1 12.2 15.1 15.1 12.2 15.1 8.6 15.1 5.1 12.2 2.2 8.6 2.2ZM8.6 3.6L8.6 5C6.6 5 5 6.6 5 8.6L5 8.6 3.6 8.6C3.6 5.9 5.9 3.6 8.6 3.6L8.6 3.6Z"/></g></g></svg>',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M17.1 14L22.4 19.3C23.2 20.2 23.2 21.5 22.4 22.4 21.5 23.2 20.2 23.2 19.3 22.4L19.3 22.4 14 17.1C15.3 16.3 16.3 15.3 17.1 14L17.1 14ZM8.6 0C13.4 0 17.3 3.9 17.3 8.6 17.3 13.4 13.4 17.2 8.6 17.2 3.9 17.2 0 13.4 0 8.6 0 3.9 3.9 0 8.6 0ZM8.6 2.2C5.1 2.2 2.2 5.1 2.2 8.6 2.2 12.2 5.1 15.1 8.6 15.1 12.2 15.1 15.1 12.2 15.1 8.6 15.1 5.1 12.2 2.2 8.6 2.2ZM8.6 3.6L8.6 5C6.6 5 5 6.6 5 8.6L5 8.6 3.6 8.6C3.6 5.9 5.9 3.6 8.6 3.6L8.6 3.6Z"/></g></g></svg>',
             ],
             [
-                'id'          => 'not-have-that-feature',
-                'text'        => $this->client->__trans('Missing a specific feature'),
+                'id' => 'not-have-that-feature',
+                'text' => $this->client->__trans('Missing a specific feature'),
                 'placeholder' => $this->client->__trans('Could you tell us more about that feature?'),
-                'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="17" viewBox="0 0 24 17"><g fill="none"><g fill="#3B86FF"><path d="M19.4 0C19.7 0.6 19.8 1.3 19.8 2 19.8 3.2 19.4 4.4 18.5 5.3 17.6 6.2 16.5 6.7 15.2 6.7 15.2 6.7 15.2 6.7 15.2 6.7 14 6.7 12.9 6.2 12 5.3 11.2 4.4 10.7 3.3 10.7 2 10.7 1.3 10.8 0.6 11.1 0L7.6 0 7 0 6.5 0 6.5 5.7C6.3 5.6 5.9 5.3 5.6 5.1 5 4.6 4.3 4.3 3.5 4.3 3.5 4.3 3.5 4.3 3.4 4.3 1.6 4.4 0 5.9 0 7.9 0 8.6 0.2 9.2 0.5 9.7 1.1 10.8 2.2 11.5 3.5 11.5 4.3 11.5 5 11.2 5.6 10.8 6 10.5 6.3 10.3 6.5 10.2L6.5 10.2 6.5 17 6.5 17 7 17 7.6 17 22.5 17C23.3 17 24 16.3 24 15.5L24 0 19.4 0Z"/></g></g></svg>',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="17" viewBox="0 0 24 17"><g fill="none"><g fill="#3B86FF"><path d="M19.4 0C19.7 0.6 19.8 1.3 19.8 2 19.8 3.2 19.4 4.4 18.5 5.3 17.6 6.2 16.5 6.7 15.2 6.7 15.2 6.7 15.2 6.7 15.2 6.7 14 6.7 12.9 6.2 12 5.3 11.2 4.4 10.7 3.3 10.7 2 10.7 1.3 10.8 0.6 11.1 0L7.6 0 7 0 6.5 0 6.5 5.7C6.3 5.6 5.9 5.3 5.6 5.1 5 4.6 4.3 4.3 3.5 4.3 3.5 4.3 3.5 4.3 3.4 4.3 1.6 4.4 0 5.9 0 7.9 0 8.6 0.2 9.2 0.5 9.7 1.1 10.8 2.2 11.5 3.5 11.5 4.3 11.5 5 11.2 5.6 10.8 6 10.5 6.3 10.3 6.5 10.2L6.5 10.2 6.5 17 6.5 17 7 17 7.6 17 22.5 17C23.3 17 24 16.3 24 15.5L24 0 19.4 0Z"/></g></g></svg>',
             ],
             [
-                'id'          => 'is-not-working',
-                'text'        => $this->client->__trans('Not working'),
+                'id' => 'is-not-working',
+                'text' => $this->client->__trans('Not working'),
                 'placeholder' => $this->client->__trans('Could you tell us a bit more whats not working?'),
-                'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M11.5 0C17.9 0 23 5.1 23 11.5 23 17.9 17.9 23 11.5 23 5.1 23 0 17.9 0 11.5 0 5.1 5.1 0 11.5 0ZM11.8 14.4C11.2 14.4 10.7 14.8 10.7 15.4 10.7 16 11.2 16.4 11.8 16.4 12.4 16.4 12.8 16 12.8 15.4 12.8 14.8 12.4 14.4 11.8 14.4ZM12 7C10.1 7 9.1 8.1 9 9.6L10.5 9.6C10.5 8.8 11.1 8.3 11.9 8.3 12.7 8.3 13.2 8.8 13.2 9.5 13.2 10.1 13 10.4 12.2 10.9 11.3 11.4 10.9 12 11 12.9L11 13.4 12.5 13.4 12.5 13C12.5 12.4 12.7 12.1 13.5 11.6 14.4 11.1 14.9 10.4 14.9 9.4 14.9 8 13.7 7 12 7Z"/></g></g></svg>',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M11.5 0C17.9 0 23 5.1 23 11.5 23 17.9 17.9 23 11.5 23 5.1 23 0 17.9 0 11.5 0 5.1 5.1 0 11.5 0ZM11.8 14.4C11.2 14.4 10.7 14.8 10.7 15.4 10.7 16 11.2 16.4 11.8 16.4 12.4 16.4 12.8 16 12.8 15.4 12.8 14.8 12.4 14.4 11.8 14.4ZM12 7C10.1 7 9.1 8.1 9 9.6L10.5 9.6C10.5 8.8 11.1 8.3 11.9 8.3 12.7 8.3 13.2 8.8 13.2 9.5 13.2 10.1 13 10.4 12.2 10.9 11.3 11.4 10.9 12 11 12.9L11 13.4 12.5 13.4 12.5 13C12.5 12.4 12.7 12.1 13.5 11.6 14.4 11.1 14.9 10.4 14.9 9.4 14.9 8 13.7 7 12 7Z"/></g></g></svg>',
             ],
             [
-                'id'          => 'looking-for-other',
-                'text'        => $this->client->__trans('Not what I was looking'),
+                'id' => 'looking-for-other',
+                'text' => $this->client->__trans('Not what I was looking'),
                 'placeholder' => $this->client->__trans('Could you tell us a bit more?'),
-                'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="17" viewBox="0 0 24 17"><g fill="none"><g fill="#3B86FF"><path d="M23.5 9C23.5 9 23.5 8.9 23.5 8.9 23.5 8.9 23.5 8.9 23.5 8.9 23.4 8.6 23.2 8.3 23 8 22.2 6.5 20.6 3.7 19.8 2.6 18.8 1.3 17.7 0 16.1 0 15.7 0 15.3 0.1 14.9 0.2 13.8 0.6 12.6 1.2 12.3 2.7L11.7 2.7C11.4 1.2 10.2 0.6 9.1 0.2 8.7 0.1 8.3 0 7.9 0 6.3 0 5.2 1.3 4.2 2.6 3.4 3.7 1.8 6.5 1 8 0.8 8.3 0.6 8.6 0.5 8.9 0.5 8.9 0.5 8.9 0.5 8.9 0.5 8.9 0.5 9 0.5 9 0.2 9.7 0 10.5 0 11.3 0 14.4 2.5 17 5.5 17 7.3 17 8.8 16.1 9.8 14.8L14.2 14.8C15.2 16.1 16.7 17 18.5 17 21.5 17 24 14.4 24 11.3 24 10.5 23.8 9.7 23.5 9ZM5.5 15C3.6 15 2 13.2 2 11 2 8.8 3.6 7 5.5 7 7.4 7 9 8.8 9 11 9 13.2 7.4 15 5.5 15ZM18.5 15C16.6 15 15 13.2 15 11 15 8.8 16.6 7 18.5 7 20.4 7 22 8.8 22 11 22 13.2 20.4 15 18.5 15Z"/></g></g></svg>',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="17" viewBox="0 0 24 17"><g fill="none"><g fill="#3B86FF"><path d="M23.5 9C23.5 9 23.5 8.9 23.5 8.9 23.5 8.9 23.5 8.9 23.5 8.9 23.4 8.6 23.2 8.3 23 8 22.2 6.5 20.6 3.7 19.8 2.6 18.8 1.3 17.7 0 16.1 0 15.7 0 15.3 0.1 14.9 0.2 13.8 0.6 12.6 1.2 12.3 2.7L11.7 2.7C11.4 1.2 10.2 0.6 9.1 0.2 8.7 0.1 8.3 0 7.9 0 6.3 0 5.2 1.3 4.2 2.6 3.4 3.7 1.8 6.5 1 8 0.8 8.3 0.6 8.6 0.5 8.9 0.5 8.9 0.5 8.9 0.5 8.9 0.5 8.9 0.5 9 0.5 9 0.2 9.7 0 10.5 0 11.3 0 14.4 2.5 17 5.5 17 7.3 17 8.8 16.1 9.8 14.8L14.2 14.8C15.2 16.1 16.7 17 18.5 17 21.5 17 24 14.4 24 11.3 24 10.5 23.8 9.7 23.5 9ZM5.5 15C3.6 15 2 13.2 2 11 2 8.8 3.6 7 5.5 7 7.4 7 9 8.8 9 11 9 13.2 7.4 15 5.5 15ZM18.5 15C16.6 15 15 13.2 15 11 15 8.8 16.6 7 18.5 7 20.4 7 22 8.8 22 11 22 13.2 20.4 15 18.5 15Z"/></g></g></svg>',
             ],
             [
-                'id'          => 'did-not-work-as-expected',
-                'text'        => $this->client->__trans("Didn't work as expected"),
+                'id' => 'did-not-work-as-expected',
+                'text' => $this->client->__trans("Didn't work as expected"),
                 'placeholder' => $this->client->__trans('What did you expect?'),
-                'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M11.5 0C17.9 0 23 5.1 23 11.5 23 17.9 17.9 23 11.5 23 5.1 23 0 17.9 0 11.5 0 5.1 5.1 0 11.5 0ZM11.5 2C6.3 2 2 6.3 2 11.5 2 16.7 6.3 21 11.5 21 16.7 21 21 16.7 21 11.5 21 6.3 16.7 2 11.5 2ZM12.5 12.9L12.7 5 10.2 5 10.5 12.9 12.5 12.9ZM11.5 17.4C12.4 17.4 13 16.8 13 15.9 13 15 12.4 14.4 11.5 14.4 10.6 14.4 10 15 10 15.9 10 16.8 10.6 17.4 11.5 17.4Z"/></g></g></svg>',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><g fill="none"><g fill="#3B86FF"><path d="M11.5 0C17.9 0 23 5.1 23 11.5 23 17.9 17.9 23 11.5 23 5.1 23 0 17.9 0 11.5 0 5.1 5.1 0 11.5 0ZM11.5 2C6.3 2 2 6.3 2 11.5 2 16.7 6.3 21 11.5 21 16.7 21 21 16.7 21 11.5 21 6.3 16.7 2 11.5 2ZM12.5 12.9L12.7 5 10.2 5 10.5 12.9 12.5 12.9ZM11.5 17.4C12.4 17.4 13 16.8 13 15.9 13 15 12.4 14.4 11.5 14.4 10.6 14.4 10 15 10 15.9 10 16.8 10.6 17.4 11.5 17.4Z"/></g></g></svg>',
             ],
             [
-                'id'          => 'other',
-                'text'        => $this->client->__trans('Others'),
+                'id' => 'other',
+                'text' => $this->client->__trans('Others'),
                 'placeholder' => $this->client->__trans('Could you tell us a bit more?'),
-                'icon'        => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 6"><g fill="none"><g fill="#3B86FF"><path d="M3 0C4.7 0 6 1.3 6 3 6 4.7 4.7 6 3 6 1.3 6 0 4.7 0 3 0 1.3 1.3 0 3 0ZM12 0C13.7 0 15 1.3 15 3 15 4.7 13.7 6 12 6 10.3 6 9 4.7 9 3 9 1.3 10.3 0 12 0ZM21 0C22.7 0 24 1.3 24 3 24 4.7 22.7 6 21 6 19.3 6 18 4.7 18 3 18 1.3 19.3 0 21 0Z"/></g></g></svg>',
+                'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 6"><g fill="none"><g fill="#3B86FF"><path d="M3 0C4.7 0 6 1.3 6 3 6 4.7 4.7 6 3 6 1.3 6 0 4.7 0 3 0 1.3 1.3 0 3 0ZM12 0C13.7 0 15 1.3 15 3 15 4.7 13.7 6 12 6 10.3 6 9 4.7 9 3 9 1.3 10.3 0 12 0ZM21 0C22.7 0 24 1.3 24 3 24 4.7 22.7 6 21 6 19.3 6 18 4.7 18 3 18 1.3 19.3 0 21 0Z"/></g></g></svg>',
             ],
         ];
 
@@ -911,8 +918,8 @@ class Insights
             wp_send_json_error('You are not allowed for this task');
         }
 
-        $data                = $this->get_tracking_data();
-        $data['reason_id']   = sanitize_text_field(wp_unslash($_POST['reason_id']));
+        $data = $this->get_tracking_data();
+        $data['reason_id'] = sanitize_text_field(wp_unslash($_POST['reason_id']));
         $data['reason_info'] = isset($_REQUEST['reason_info']) ? trim(sanitize_text_field(wp_unslash($_REQUEST['reason_info']))) : '';
 
         $this->client->send_request($data, 'deactivate');
@@ -921,7 +928,7 @@ class Insights
         /*
          * Fire after the plugin _uninstall_reason_submitted
          */
-        do_action($this->client->slug . '_uninstall_reason_submitted', $data);
+        do_action('gmap_embed_appsero_uninstall_reason_submitted', $data);
 
         wp_send_json_success();
     }
@@ -940,14 +947,15 @@ class Insights
         }
 
         $this->deactivation_modal_styles();
-        $reasons        = $this->get_uninstall_reasons();
-        $custom_reasons = apply_filters('appsero_custom_deactivation_reasons', [], $this->client);
-?>
+        $reasons = $this->get_uninstall_reasons();
+        $custom_reasons = apply_filters('gmap_embed_appsero_custom_deactivation_reasons', [], $this->client);
+        ?>
 
-        <div class="wd-dr-modal" id="<?php echo $this->client->slug; ?>-wd-dr-modal">
+        <div class="wd-dr-modal" id="<?php echo esc_attr($this->client->slug); ?>-wd-dr-modal">
             <div class="wd-dr-modal-wrap">
                 <div class="wd-dr-modal-header">
-                    <h3><?php $this->client->_etrans('Goodbyes are always hard. If you have a moment, please let us know how we can improve.'); ?></h3>
+                    <h3><?php echo esc_html($this->client->_etrans('Goodbyes are always hard. If you have a moment, please let us know how we can improve.')); ?>
+                    </h3>
                 </div>
 
                 <div class="wd-dr-modal-body">
@@ -955,9 +963,9 @@ class Insights
                         <?php foreach ($reasons as $reason) { ?>
                             <li data-placeholder="<?php echo esc_attr($reason['placeholder']); ?>">
                                 <label>
-                                    <input type="radio" name="selected-reason" value="<?php echo $reason['id']; ?>">
-                                    <div class="wd-de-reason-icon"><?php echo $reason['icon']; ?></div>
-                                    <div class="wd-de-reason-text"><?php echo $reason['text']; ?></div>
+                                    <input type="radio" name="selected-reason" value="<?php echo esc_attr($reason['id']); ?>">
+                                    <div class="wd-de-reason-icon"><?php echo wp_kses_post($reason['icon']); // SVG is safe ?></div>
+                                    <div class="wd-de-reason-text"><?php echo esc_html($reason['text']); ?></div>
                                 </label>
                             </li>
                         <?php } ?>
@@ -967,9 +975,9 @@ class Insights
                             <?php foreach ($custom_reasons as $reason) { ?>
                                 <li data-placeholder="<?php echo esc_attr($reason['placeholder']); ?>" data-customreason="true">
                                     <label>
-                                        <input type="radio" name="selected-reason" value="<?php echo $reason['id']; ?>">
-                                        <div class="wd-de-reason-icon"><?php echo $reason['icon']; ?></div>
-                                        <div class="wd-de-reason-text"><?php echo $reason['text']; ?></div>
+                                        <input type="radio" name="selected-reason" value="<?php echo esc_attr($reason['id']); ?>">
+                                        <div class="wd-de-reason-icon"><?php echo wp_kses_post($reason['icon']); // SVG is safe ?></div>
+                                        <div class="wd-de-reason-text"><?php echo esc_html($reason['text']); ?></div>
                                     </label>
                                 </li>
                             <?php } ?>
@@ -979,7 +987,15 @@ class Insights
                     <p class="wd-dr-modal-reasons-bottom">
                         <?php
                         echo sprintf(
-                            $this->client->__trans('We share your data with <a href="%1$s" target="_blank">Appsero</a> to troubleshoot problems &amp; make product improvements. <a href="%2$s" target="_blank">Learn more</a> about how Appsero handles your data.'),
+                            wp_kses(
+                                $this->client->__trans('We share your data with <a href="%1$s" target="_blank">Appsero</a> to troubleshoot problems &amp; make product improvements. <a href="%2$s" target="_blank">Learn more</a> about how Appsero handles your data.'),
+                                array(
+                                    'a' => array(
+                                        'href' => array(),
+                                        'target' => array(),
+                                    ),
+                                )
+                            ),
                             esc_url('https://appsero.com/'),
                             esc_url('https://appsero.com/privacy-policy')
                         );
@@ -988,21 +1004,23 @@ class Insights
                 </div>
 
                 <div class="wd-dr-modal-footer">
-                    <a href="#" class="dont-bother-me wd-dr-button-secondary"><?php $this->client->_etrans('Skip & Deactivate'); ?></a>
-                    <button class="wd-dr-button-secondary wd-dr-cancel-modal"><?php $this->client->_etrans('Cancel'); ?></button>
-                    <button class="wd-dr-submit-modal"><?php $this->client->_etrans('Submit & Deactivate'); ?></button>
+                    <a href="#"
+                        class="dont-bother-me wd-dr-button-secondary"><?php echo esc_html($this->client->_etrans('Skip & Deactivate')); ?></a>
+                    <button
+                        class="wd-dr-button-secondary wd-dr-cancel-modal"><?php echo esc_html($this->client->_etrans('Cancel')); ?></button>
+                    <button
+                        class="wd-dr-submit-modal"><?php echo esc_html($this->client->_etrans('Submit & Deactivate')); ?></button>
                 </div>
             </div>
         </div>
-
         <script type="text/javascript">
-            (function($) {
-                $(function() {
-                    var modal = $('#<?php echo $this->client->slug; ?>-wd-dr-modal');
+            (function ($) {
+                $(function () {
+                    var modal = $('#<?php echo esc_js($this->client->slug); ?>-wd-dr-modal');
                     var deactivateLink = '';
 
                     // Open modal
-                    $('#the-list').on('click', 'a.<?php echo $this->client->slug; ?>-deactivate-link', function(e) {
+                    $('#the-list').on('click', 'a.<?php echo esc_js($this->client->slug); ?>-deactivate-link', function (e) {
                         e.preventDefault();
 
                         modal.addClass('modal-active');
@@ -1011,13 +1029,13 @@ class Insights
                     });
 
                     // Close modal; Cancel
-                    modal.on('click', 'button.wd-dr-cancel-modal', function(e) {
+                    modal.on('click', 'button.wd-dr-cancel-modal', function (e) {
                         e.preventDefault();
                         modal.removeClass('modal-active');
                     });
 
                     // Reason change
-                    modal.on('click', 'input[type="radio"]', function() {
+                    modal.on('click', 'input[type="radio"]', function () {
                         var parent = $(this).parents('li');
                         var isCustomReason = parent.data('customreason');
                         var inputValue = $(this).val();
@@ -1044,7 +1062,7 @@ class Insights
                     });
 
                     // Submit response
-                    modal.on('click', 'button.wd-dr-submit-modal', function(e) {
+                    modal.on('click', 'button.wd-dr-submit-modal', function (e) {
                         e.preventDefault();
 
                         var button = $(this);
@@ -1060,16 +1078,16 @@ class Insights
                             url: ajaxurl,
                             type: 'POST',
                             data: {
-                                nonce: '<?php echo wp_create_nonce('appsero-security-nonce'); ?>',
-                                action: '<?php echo $this->client->slug; ?>_submit-uninstall-reason',
+                                nonce: '<?php echo esc_js(wp_create_nonce('appsero-security-nonce')); ?>',
+                                action: '<?php echo esc_js($this->client->slug); ?>_submit-uninstall-reason',
                                 reason_id: (0 === $radio.length) ? 'none' : $radio.val(),
                                 reason_info: (0 !== $input.length) ? $input.val().trim() : ''
                             },
-                            beforeSend: function() {
+                            beforeSend: function () {
                                 button.addClass('disabled');
                                 button.text('Processing...');
                             },
-                            complete: function() {
+                            complete: function () {
                                 window.location.href = deactivateLink;
                             }
                         });
@@ -1078,7 +1096,7 @@ class Insights
             }(jQuery));
         </script>
 
-    <?php
+        <?php
     }
 
     /**
@@ -1145,7 +1163,7 @@ class Insights
         $skipped = get_option($this->client->slug . '_tracking_skipped');
 
         $data = [
-            'hash'               => $this->client->hash,
+            'hash' => $this->client->hash,
             'previously_skipped' => false,
         ];
 
@@ -1163,7 +1181,7 @@ class Insights
      */
     private function deactivation_modal_styles()
     {
-    ?>
+        ?>
         <style type="text/css">
             .wd-dr-modal {
                 position: fixed;
@@ -1346,6 +1364,6 @@ class Insights
                 margin-left: 4px;
             }
         </style>
-<?php
+        <?php
     }
 }

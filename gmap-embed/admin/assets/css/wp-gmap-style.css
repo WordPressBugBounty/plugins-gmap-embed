@@ -1,722 +1,1205 @@
-/*Media query for responsiveness*/
+/* =========================================
+   1. IMPORTS & BASICS
+   ========================================= */
 @import "wp-gmap-style-media-query.css";
-/*Header section*/
-.gmap_header_section {
-	width: 100%;
-	float: left;
-}
 
-.gmap_header_section_left {
-	width: 78%;
-	float: left;
-}
-
-.gmap_header_section_right {
-	max-width: 21%;
-	float: right;
-	padding-right: 1%;
-}
-
-.gmap_donate_button {
-	float: left;
-	margin-top: 5px;
-}
-
-.gmap_donate_button img {
-	height: 32px;
-	width: 93px;
-}
-
-.gmap_get_pro_version {
-	float: left;
-	padding: 2px 9px;
-	height: auto !important;
-	font-weight: bold;
-	margin: 5px 5px 0 0 !important;
-	color: #238b68 !important;;
-}
-
-/******* Nav Bar ********/
-ul#wp-gmap-nav {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-}
-
-ul#wp-gmap-nav li {
-	display: inline-block;
-	background-color: #32c896;
-	border-bottom: solid 5px #238b68;
-	color: #fff;
-	cursor: pointer;
-}
-
-ul#wp-gmap-nav li:hover, ul#wp-gmap-nav .active {
-	background-color: #238b68;
-}
-
-ul#wp-gmap-nav li a {
-	color: white;
-	text-decoration: none;
-	display: block;
-	padding: 5px 8px;
-	font-weight: bold;
-}
-
-/******* Create/Update Map Tabs ******/
-#wp-gmap-tabs {
-	padding: 1%;
-	float: left;
-	width: 98%;
-}
-
-#wp-gmap-tabs .active {
-	display: block;
-}
-
-.wgm_wpgmap_tab {
-	width: 100%;
-	background-color: #ccc;
-	float: left;
-	height: 30px;
-}
-
-ul.wgm_wpgmap_tab {
-	padding: 0;
-	margin: 0;
-	height: 30px;
-}
-
-.wgm_wpgmap_tab li {
-	display: inline;
-	padding: 6px 6px;
-	float: left;
-	background-color: #ccc;
-	border-right: 1px white solid;
-	cursor: pointer;
-}
-
-.wgm_wpgmap_tab .active,.wgm_wpgmap_tab li:hover {
-	background-color: #24a97f;
-	color: white;
-	/*border-top: 2px solid #17c9a2;*/
+#wp-gmap-edit * {
+  box-sizing: border-box;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
-/******* For Google Map Rendering ******/
-.wp-gmap-preview .wgm_controls {
-	margin-top: 10px;
-	border: 1px solid transparent;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	height: 39px;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+/* Helper Columns */
+.wgm-col-full {
+  width: 100%;
+  height: auto;
+}
+.col-half {
+  flex-basis: 49%;
+  height: auto;
+  display: flex;
+}
+.col-one-third {
+  width: 32%;
+  height: auto;
+}
+.col-one-fourth {
+  width: 25%;
+  height: auto;
+}
+.wgm_mb_15 {
+  margin-bottom: 15px;
 }
 
-.wp-gmap-preview #wgm_pac_input {
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 400px;
+/* =========================================
+   2. HEADER CONNECTION
+   ========================================= */
+.gmap_header_section {
+  width: 100%;
+  float: left;
 }
 
-.wp-gmap-preview #wgm_pac_input:focus {
-	border-color: #4d90fe;
+.gmap_header_section_left {
+  width: 78%;
+  float: left;
 }
 
-.pac-container {
-	font-family: Roboto;
-	z-index: 99999;
+.gmap_header_section_right {
+  max-width: 21%;
+  float: right;
+  padding-right: 1%;
 }
 
-#type-selector {
-	color: #fff;
-	background-color: #4d90fe;
-	padding: 5px 11px 0 11px;
+.gmap_get_pro_version {
+  float: left;
+  padding: 2px 9px;
+  height: auto !important;
+  font-weight: bold;
+  margin: 5px 5px 0 0 !important;
+  color: var(--wgm-primary-dark) !important;
 }
 
-#type-selector label {
-	font-family: Roboto;
-	font-size: 13px;
-	font-weight: 300;
+/* =========================================
+   3. NAVIGATION TABS (MAIN)
+   ========================================= */
+ul#wp-gmap-nav {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-#target {
-	width: 345px;
+ul#wp-gmap-nav li {
+  display: inline-block;
+  background-color: var(--wgm-primary);
+  border-bottom: solid 5px var(--wgm-primary-dark);
+  color: var(--wgm-white);
+  cursor: pointer;
 }
 
-/******* Google Map Settings ******/
-#gmap_container_inner {
-	background-color: white;
-	float: left;
-	width: 100%;
-	border: 1px #e0dddd solid;
-	margin-top: 5px;
+ul#wp-gmap-nav li:hover,
+ul#wp-gmap-nav .active {
+  background-color: var(--wgm-primary-dark);
 }
 
-.popup-content {
-	position: relative;
-	width: 60%;
+ul#wp-gmap-nav li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 5px 8px;
+  font-weight: bold;
 }
 
-/******* Map List ******/
-.wp-gmap-list {
-	padding: 1%;
-	float: left;
-	width: 97%;
-}
-
-.wp-gmap-single {
-	padding: .2% 1%;
-	float: left;
-	width: 97%;
-	border: 1px #ccc solid;
-	margin: 7px 0;
-	background-color: #f3f3f3;
-}
-
-.wp-gmap-single-left {
-	width: 80%;
-	float: left;
-}
-
-.wp-gmap-single-title {
-	font-size: 18px;
-	font-weight: 600;
-	padding: 5px 0;
-}
-
-.wp-gmap-single-action {
-	width: 20%;
-	padding: 13px 0;
-	float: left;
-	text-align: right;
-}
-
-/******* Map Properties ******/
-.wp-gmap-properties-outer {
-	width: 49%;
-	float: left;
-	/*border: 1px #ccc solid;*/
-
-}
-
-.wp-gmap-properties, .wp-gmap-other-properties {
-	width: 100%;
-	background-color: white;
-	float: left;
-}
-
-.gmap_properties {
-	width: 100%;
-	padding: 1%;
-}
-
-.gmap_properties tr {
-	height: 50px;
-}
-
-.gmap_properties tr .regular-text {
-	width: 99%;
-	max-width: 99%;
-}
-
-/******* Preview Map ******/
-.wp-gmap-preview {
-	width: 50%;
-	background-color: #f3f3f3;
-	margin-left: 1%;
-	float: left;
-}
-
-/**********Contact form ***********/
-.srm_gmap_contact_area {
-	width: 50%;
-	float: left;
-	padding: 10px;
-}
-
-.srm_gmap_instructions_outer_area {
-	width: 50%;
-	/*float: left;*/
-	/*margin-left: 2%;*/
-	padding: 10px;
-	margin: 0 auto;
-}
-
-.srm_gmap_instructions {
-	width: 42%;
-	float: left;
-	margin-left: 2%;
-	padding: 10px;
-}
-
-.srm_gmap_instructions ul {
-	padding: 0;
-	margin: 0;
-}
-
-.srm_gmap_instructions ul li {
-	background-color: #f0f0f0;
-	padding: 6px;
-	border: 1px solid #e0e0e0;
-	margin: 5px 0;
-}
-
-.srm_gmap_instructions ul li:before {
-	content: '> ';
-	font-weight: bold;
-}
-
-.srm_gmap_instructions ul li:hover {
-
-}
-
-.srm_gmap_instructions ul li a {
-	text-decoration: none;
-}
-
-.srm_gmap_video_area {
-	width: 95%;
-	float: left;
-	margin-left: 2%;
-	clear: both;
-	text-align: center;
-	padding-top: 35px;
-}
-
-.wp_gmap_contact_field {
-	width: 100% !important;
-	max-width: 100% !important;
-	margin: 1px 0;
-}
-
-/*wp gmap premium notice*/
-.wpgmap_premium_notice_title {
-	color: #0073aa;
-	font-size: 2em;
-	margin: .67em 0;
-	display: block;
-	font-weight: 600;
-	text-align: center;
-}
-
-.wpgmap_premium_notice_button {
-	background-color: #0073aa;
-	color: white;
-	padding: 15px;
-	font-size: 20px;
-	font-weight: bold;
-	text-align: center;
-	text-decoration: none;
-	border-radius: 12px;
-	box-shadow: 0 0 14px grey;
-}
-
-.wpgmap_pro_version_title {
-	color: #0073aa;
-	font-size: 2em;
-	margin: .67em 0;
-	display: block;
-	font-weight: 600;
-	padding-left: 55px;
-}
-
-.wpgmap_features_list {
-	padding-left: 51px;
-}
-
-
-/*Custom CSS for Custom CSS and JS under settings */
-#wpgmap_custom_js, #wpgmap_custom_css {
-	background: #2B323C;
-	color: #fff !important;
-	padding: 20px 25px;
-	border-radius: 5px;
-	max-width: 100%;
-	min-height: 250px;
-}
-
-/* Settings Menu*/
-.wpgmapembed_get_api_key {
-	padding: 10px;
-}
-
-.wpgmap_lng_custom_script_settings {
-	padding: 10px;
-}
-
-.gmap_embed_create_new_link_area {
-	width: 40%;
-	margin: 30px auto;
-}
-
-.gmap_embed_create_new_link_area a {
-	padding: 9px;
-	margin-left: 100px;
-	border-radius: 5px;
-	background-color: #0073aa;
-	color: white;
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 14px;
-}
-
-/*.notice-error, div.settings-error {*/
-/*    border-left-color: #dc3232;*/
-/*}*/
-
-#wgm_all_maps {
-	padding: 5px;
-}
-
-/*for datatable*/
-#wgm_all_maps .dataTables_wrapper .dataTables_length select,
-#wp-gmap-new .dataTables_wrapper .dataTables_length select,
-#wp-gmap-edit .dataTables_wrapper .dataTables_length select {
-	width: 50px !important;
-	padding: 0 0 0 5px !important;
-}
-
-#wgm_all_maps .dataTables_wrapper .dataTables_filter input,
-#wp-gmap-new .dataTables_wrapper .dataTables_filter input,
-#wp-gmap-edit .dataTables_wrapper .dataTables_filter input {
-	padding: 0 0 0 5px !important;
-}
-
-.wgm-pro-label {
-	margin-left: 5px;
-	margin-right: 5px;
-	font-size: 10px;
-	color: #ffffff;
-	text-transform: uppercase;
-	text-align: center;
-	position: relative;
-	top: -6px;
-	line-height: 1;
-	padding: 3px 6px;
-	border-radius: 2px;
-	background-image: -moz-linear-gradient(-122deg, rgb(91 211 160) 0%, rgb(54 214 146) 100%);
-	background-image: -webkit-linear-gradient(
-			-122deg, rgb(91 211 160) 0%, rgb(54 214 146) 100%);
-}
-
-/*Settings**/
+/* Settings Menu (Sidebar style) */
 .wgm-settings-menu {
-	border-left: 1px #e0dddd solid;
+  border-left: 1px #e0dddd solid;
 }
 
 .wgm-settings-menu ul {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .wgm-settings-menu ul li {
-	display: inline-block;
-	margin-bottom: 0;
+  display: inline-block;
+  margin-bottom: 0;
 }
 
 .wgm-settings-menu ul li.active a {
-	background-color: #fff;
-	border-top: 2px solid #17c9a2;
+  background-color: var(--wgm-white);
+  border-top: 2px solid var(--wgm-primary);
 }
 
 .wgm-settings-menu ul li a:focus {
-	box-shadow: none;
+  box-shadow: none;
 }
 
-.wgm-settings-menu ul li a, .wgm-settings-menu ul li span {
-	padding: 15px 20px;
-	background-color: #f8fafb;
-	color: #516378;
-	font-size: 14px;
-	font-weight: 600;
-	text-decoration: none;
-	border-top: 2px solid #f8fafb;
-	display: block;
+.wgm-settings-menu ul li a,
+.wgm-settings-menu ul li span {
+  padding: 15px 20px;
+  background-color: var(--wgm-bg-light);
+  color: var(--wgm-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-top: 2px solid var(--wgm-bg-light);
+  display: block;
 }
 
-
-/* Marker related*/
-.wgm_gmap_marker_list {
-	width: 100%;
-	border: 1px #f1f1f1 solid;
-	background-color: #f3f3f3;
-	float: left;
+/* =========================================
+   4. EDIT MAP TABS (INTERNAL)
+   ========================================= */
+#wp-gmap-tabs {
+  padding: 1%;
+  float: left;
+  width: 98%;
 }
 
-.wgm_gmap_marker_list th {
-	text-align: left;
+#wp-gmap-tabs .active {
+  display: block;
 }
 
-.wgm_gmap_markers {
-	float: left;
-	width: 100%;
+.wgm_wpgmap_tab {
+  width: 100%;
+  background-color: transparent !important;
+  float: left;
+  height: auto !important;
+  border-bottom: 1px solid var(--wgm-border-color);
+  margin-bottom: 25px;
 }
 
-.wgm_gmap_markers table {
-	border: none;
-	padding: 0;
+ul.wgm_wpgmap_tab {
+  padding: 0;
+  margin: 0;
+  height: auto !important;
+  display: flex;
 }
 
-.wgm_marker_cancel {
-	background: #dc3545 !important;
-	border-color: #dc3545 !important;
+.wgm_wpgmap_tab li {
+  display: block !important;
+  padding: 12px 24px !important;
+  float: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  cursor: pointer;
+  color: var(--wgm-text-secondary);
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  margin-bottom: -1px;
 }
 
-.wgm_marker_cancel:hover {
-	background-color: #bb2d3b !important;
-	border-color: #bb2d3b !important;
+.wgm_wpgmap_tab li:hover {
+  color: var(--wgm-primary);
 }
 
-.add_new_marker_form input[type=text] {
-	width: 100%;
+.wgm_wpgmap_tab li.active {
+  color: var(--wgm-primary) !important;
+  border-bottom: 2px solid var(--wgm-primary) !important;
 }
 
-/*==============gmap markers=================*/
-.wgm_gmap_embed_marker_icons {
-	padding: 0 !important;
-	margin: 0 !important;
+/* =========================================
+   5. MAP PROPERTIES & SETTINGS LAYOUT
+   ========================================= */
+.wp-gmap-properties-outer {
+  width: 49%;
+  float: left;
 }
 
-.wgm_gmap_embed_marker_icons li {
-	display: inline;
-	padding: 2px;
-	margin: 5px;
-	border: 1px gray solid;
-	width: 50px;
-	height: 50px;
-	float: left;
-	text-align: center;
-	cursor: pointer;
+.wp-gmap-properties,
+.wp-gmap-other-properties {
+  width: 100%;
+  padding: 20px !important;
+  background-color: var(--wgm-white);
+  float: left;
+  border-radius: 6px;
 }
 
-/** Common*/
-
-
-.wgm_marker_create_hints {
-	height: 59px;
-	background-color: white;
-	width: 97%;
-	box-shadow: 0 0 5px #d0d0d0;
-	margin-top: 10px;
-	padding: 5px 0 5px 5px;
-	display: none;
+.gmap_properties {
+  width: 100%;
+  padding: 0;
+  border-spacing: 0;
 }
 
-.wgm_marker_create_hints ul {
-	line-height: 10px;
-	list-style: decimal;
-	padding-left: 18px;
+.gmap_properties tr td {
+  padding: 8px 0;
 }
 
-.wgm_marker_create_hints ul li b {
-	font-style: italic;
-	color: blue;
+.gmap_properties tr .regular-text {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
-.wgm_admin_support_wrapper {
-	width: 100%;
-	display: flex;
-	margin-top: 5px;
+/* Map List */
+.wp-gmap-list {
+  padding: 1%;
+  float: left;
+  width: 97%;
 }
 
-.wgm_admin_support_wrapper .wgm_admin_block {
-	flex-basis: 100%;
-	margin: 0 .2%;
-	background-color: white;
-	box-shadow: 0 0 5px #e8e8e8;
-	border: 1px solid #ece8e8;
+.wp-gmap-single {
+  padding: 0.2% 1%;
+  float: left;
+  width: 97%;
+  border: 1px var(--wgm-border-color) solid;
+  margin: 7px 0;
+  background-color: var(--wgm-bg-light);
 }
 
-.wgm_admin_block_header {
-	display: flex;
-	align-content: center;
-	align-items: center;
-	padding: 10px 0 0 10px;
+.wp-gmap-single-left {
+  width: 80%;
+  float: left;
 }
 
-.wgm_admin_block_header_icon {
-	height: 40px;
-	width: 40px;
-	background: #f3edff;
-	padding: 10px;
-	box-sizing: border-box;
-	border-radius: 50%;
-	text-align: center;
-	color: #32c896;
-	font-size: 18px;
+.wp-gmap-single-title {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px 0;
 }
 
-.wgm_admin_title {
-	margin: 0.7em 0 1em;
-	padding: 0 0 0 5px;
-	font-size: 18px;
-	font-weight: 600;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	color: #333333;
+.wp-gmap-single-action {
+  width: 20%;
+  padding: 13px 0;
+  float: left;
+  text-align: right;
 }
 
-.wgm_admin_block_content {
-	overflow: hidden;
-	position: relative;
-	padding: 0 15px 12px 15px;
+.wgm-map-list .wgm-map-item label {
+  display: block;
+}
+.wgm-map-list .wgm-map-item input[type="checkbox"] {
+  vertical-align: middle;
 }
 
-.wgm_admin_block_content .wgm_button {
-	font-size: 13px;
-	border-radius: 3px;
-	background-image: -webkit-linear-gradient(
-			-169deg,
-			rgb(104 204 176) 0%,
-			rgb(28 204 139) 100%
-	);
-	background-image: -ms-linear-gradient(
-			-169deg,
-			rgb(104 204 176) 0%,
-			rgb(28 204 139) 100%
-	);
-	-webkit-box-shadow: 0 14px 15px 0 rgba(0, 5, 41, 0.08);
-	box-shadow: 0 14px 15px 0 rgba(0, 5, 41, 0.08);
-	color: #fff;
-	display: inline-block;
-	padding: 8px 8px;
-	text-decoration: none;
-	line-height: 1;
-	transition: all 0.3s;
+/* =========================================
+   6. MAP PREVIEW & CONTROLS
+   ========================================= */
+.wp-gmap-preview {
+  width: 50%;
+  background-color: var(--wgm-bg-light);
+  margin-left: 1%;
+  float: left;
 }
 
-.wgm_admin_support_wrapper p {
-	font-size: 13px;
-	color: #707070;
-	margin: 0 0 20px 0;
-	line-height: 21px;
+.wp-gmap-preview .wgm_controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 39px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.wgm_admin_block_content .wgm_gmap_instructions {
-	padding: 0 0 12px 19px;
+.wp-gmap-preview #wgm_pac_input {
+  background-color: var(--wgm-white);
+  font-family: var(--wgm-font-family);
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
 }
 
-.wgm_admin_block_content .wgm_gmap_instructions ul li a {
-	text-decoration: none;
+.wp-gmap-preview #wgm_pac_input:focus {
+  border-color: var(--wgm-secondary);
 }
 
-.wgm_admin_block_content .wgm_gmap_instructions ul li a i, .wgm_faq_item i {
-	margin-right: 8px;
+.pac-container {
+  font-family: Roboto;
+  z-index: 99999;
 }
 
-.wgm_admin_block_content .wgm_gmap_instructions ul li {
-	background-color: #e0e0e040;
-	padding: 4px 0 4px 6px;
-	border-left: 2px solid #5eccac;
-	margin: 9px 0;
+#type-selector {
+  color: var(--wgm-white);
+  background-color: var(--wgm-secondary);
+  padding: 5px 11px 0 11px;
 }
 
-/*sweetalert2 customize*/
-.swal2-title {
-	line-height: normal;
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
 }
 
-/*Button*/
+#target {
+  width: 345px;
+}
+
+#gmap_container_inner {
+  background-color: var(--wgm-white);
+  float: left;
+  width: 100%;
+  border: 1px var(--wgm-border-color) solid;
+  margin-top: 5px;
+}
+
+.popup-content {
+  position: relative;
+  width: 60%;
+}
+
+/* =========================================
+   7. FORM ELEMENTS (SWITCHES, BUTTONS, INPUTS)
+   ========================================= */
+/* Switches */
+.wgm_switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+}
+
+.wgm_switch input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.wgm_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: all 0.3s ease;
+}
+
+.wgm_slider.round {
+  border-radius: 24px;
+}
+.wgm_slider.round:before {
+  border-radius: 50%;
+}
+
+.wgm_slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.wgm_switch input:checked + .wgm_slider {
+  background-color: #2196f3;
+}
+.wgm_switch input:focus + .wgm_slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+.wgm_switch input:checked + .wgm_slider:before {
+  transform: translateX(18px);
+}
+.wgm_switch input:disabled + .wgm_slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Buttons */
 .button.wgm_btn {
-	background-color: #24a97f;
-	color: #fff;
-	padding: 8px 12px;
-	border: none;
-	box-shadow: none;
-	font-size: 14px;
-	height: auto;
-	text-transform: uppercase;
-	text-shadow: none;
-	letter-spacing: 0.05em;
-	text-align: center;
+  background-color: #24a97f;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  box-shadow: none;
+  font-size: 14px;
+  height: auto;
+  text-transform: uppercase;
+  text-shadow: none;
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .button.wgm_btn:hover,
 .button.wgm_btn:focus {
-	background-color: #0c8a62 !important;
-	color: #fff;
+  background-color: #0c8a62 !important;
+  color: #fff;
 }
 
 .wgm_save_btn_wrap {
-	margin: 30px 0 20px;
+  margin: 30px 0 20px;
 }
 
-.wgm_btn.wgm_license_btn {
-	background-color: #0dc9c3;
-}
-
-.wgm_btn.wgm_license_btn:hover,
-.wgm_btn.wgm_license_btn:focus {
-	background-color: #0c8a62 !important;
-}
-
-.wgm_btn.wgm_demo_btn,
-.wgm_btn.wgm_license_btn,
-.wgm_btn.wgm_review_btn {
-	padding: 10px;
-	display: block;
-	max-width: 250px;
-	margin-bottom: 15px;
-	text-align: center;
-	font-size: 13px;
-}
-
-.wgm_btn, .wgm_lng_custom_script_settings .button-primary {
-	border-radius: 3px;
-	background-image: -moz-linear-gradient(
-			-169deg,
-			#5b9dd9 0%,
-			#007cba 100%
-	);
-	background-image: -webkit-linear-gradient(
-			-169deg,
-			#5b9dd9 0%,
-			#007cba 100%
-	);
-	background-image: -ms-linear-gradient(
-			-169deg,
-			#5b9dd9 0%,
-			#007cba 100%
-	);
-	width: 160px;
-	height: 50px;
-	transition: all 300ms ease-in-out;
+.wgm_btn,
+.wgm_lng_custom_script_settings .button-primary {
+  border-radius: 3px;
+  background-image: -moz-linear-gradient(-169deg, #5b9dd9 0%, #007cba 100%);
+  background-image: -webkit-linear-gradient(-169deg, #5b9dd9 0%, #007cba 100%);
+  background-image: -ms-linear-gradient(-169deg, #5b9dd9 0%, #007cba 100%);
+  width: 160px;
+  height: 50px;
+  transition: all 300ms ease-in-out;
 }
 
 .wgm_btn:hover,
-.wgm_btn:focus, .wgm_lng_custom_script_settings .button-primary:focus, .wgm_lng_custom_script_settings .button-primary:hover {
-	background-color: #0c8a62 !important;
+.wgm_btn:focus {
+  background-color: #0c8a62 !important;
 }
 
-.wgm_mb_15 {
-	margin-bottom: 15px;
-}
-.wgm-col-full {
-	width: 100%;
-	height: auto;
-}
-.col-half {
-	flex-basis: 49%;
-	height: auto;
-	display: flex;
-}
-.col-one-third {
-	width: 32%;
-	height: auto;
+/* Custom CSS/JS Areas */
+#wpgmap_custom_js,
+#wpgmap_custom_css {
+  background: var(--wgm-bg-dark);
+  color: var(--wgm-white) !important;
+  padding: 20px 25px;
+  border-radius: var(--wgm-radius-sm);
+  max-width: 100%;
+  min-height: 250px;
 }
 
-.col-one-fourth {
-	width: 25%;
-	height: auto;
+/* Fieldset Spacing */
+.wgm-fieldset-spacing label,
+.wgm-fieldset-spacing .wgm-label,
+.wgm-fieldset-spacing .wgm-checkbox,
+.wgm-fieldset-spacing .wgm-toggle-row,
+.wgm-fieldset-spacing .wgm-select,
+.wgm-fieldset-spacing .wgm-container-controls {
+  display: block;
+  margin-bottom: 8px;
+}
+.wgm-fieldset-spacing legend {
+  margin-bottom: 6px;
+}
+
+/* Control Settings Rows */
+.wgm-control-setting-row {
+  margin-bottom: 15px;
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e5e5;
+  transition: background-color 0.2s ease;
+}
+.wgm-control-setting-row:hover {
+  background: #f2f2f2;
+}
+.wgm-control-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.wgm-control-title {
+  font-weight: 600;
+  color: #333;
+}
+.wgm-control-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px dashed #ddd;
+}
+.wgm-control-sub-label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+.wgm-control-setting-row select {
+  width: 160px;
+  font-size: 13px;
+  height: 30px;
+  line-height: 1;
+}
+
+/* Toggle Header */
+.wgm-toggle-header:hover {
+  background-color: #f0f0f0;
+}
+.wgm-toggle-header .dashicons {
+  transition: transform 0.3s ease;
+  transform: rotate(0deg);
+}
+.wgm-toggle-header.active .dashicons {
+  transform: rotate(-180deg);
+}
+
+/* =========================================
+   8. MARKERS & LISTING
+   ========================================= */
+.wgm_gmap_marker_list {
+  width: 100%;
+  border: 1px var(--wgm-border-light) solid;
+  background-color: var(--wgm-bg-light);
+  float: left;
+}
+
+.wgm_gmap_marker_list th {
+  text-align: left;
+}
+
+.wgm_gmap_markers {
+  float: left;
+  width: 100%;
+}
+.wgm_gmap_markers table {
+  border: none;
+  padding: 0;
+}
+
+.wgm_marker_cancel {
+  background: var(--wgm-error) !important;
+  border-color: var(--wgm-error) !important;
+}
+.wgm_marker_cancel:hover {
+  background-color: #bb2d3b !important;
+  border-color: #bb2d3b !important;
+}
+
+.add_new_marker_form input[type="text"] {
+  width: 100%;
+}
+
+.wgm_gmap_embed_marker_icons {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.wgm_gmap_embed_marker_icons li {
+  display: inline;
+  padding: 2px;
+  margin: 5px;
+  border: 1px gray solid;
+  width: 50px;
+  height: 50px;
+  float: left;
+  text-align: center;
+  cursor: pointer;
+}
+
+.wgm_marker_create_hints {
+  height: 59px;
+  background-color: white;
+  width: 97%;
+  box-shadow: 0 0 5px #d0d0d0;
+  margin-top: 10px;
+  padding: 5px 0 5px 5px;
+  display: none;
+}
+.wgm_marker_create_hints ul {
+  line-height: 10px;
+  list-style: decimal;
+  padding-left: 18px;
+}
+.wgm_marker_create_hints ul li b {
+  font-style: italic;
+  color: blue;
+}
+
+/* Marker Guide */
+.wgm_marker_quick_guide {
+  background-color: #f0f6fb;
+  border: 1px solid #dce6f0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 20px;
+  width: 98%;
+  box-sizing: border-box;
+  clear: both;
+}
+.wgm_guide_header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #dce6f0;
+  padding-bottom: 8px;
+}
+.wgm_guide_header .dashicons {
+  color: var(--wgm-primary);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+.wgm_guide_header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3338;
+}
+.wgm_guide_steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.wgm_guide_step {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  gap: 12px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.wgm_step_icon {
+  background: #e7f0f7;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.wgm_step_icon .dashicons {
+  color: var(--wgm-primary);
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.wgm_step_text strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #1d2327;
+}
+.wgm_step_text p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #646970;
+}
+@media (max-width: 600px) {
+  .wgm_guide_steps {
+    flex-direction: column;
+  }
+}
+
+/* Listing Styles Carousel */
+.wgm-style-carousel {
+  position: relative;
+  margin-top: 6px;
+}
+.wgm-style-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+.wgm-style-track {
+  display: flex;
+  gap: 10px;
+  transition: transform 300ms ease;
+  will-change: transform;
+  padding: 6px 2px;
+  box-sizing: border-box;
+}
+.wgm-style-card {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 6px;
+  background: #fff;
+  width: 150px;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+.wgm-style-card input[type="radio"] {
+  position: absolute;
+  left: -9999px;
+}
+.wgm-style-thumb img {
+  display: block;
+  width: 138px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.wgm-style-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 13px;
+}
+.wgm-style-selected-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: #fff;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.wgm-style-card[aria-checked="true"] {
+  border-color: #008dff;
+  box-shadow: 0 0 0 4px rgba(0, 141, 255, 0.08);
+}
+.wgm-style-card[aria-checked="true"] .wgm-style-selected-dot {
+  background: #008dff;
+  border-color: #006fcc;
+}
+.wgm-style-carousel .wgm-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wgm-style-carousel .wgm-carousel-prev {
+  left: -12px;
+}
+.wgm-style-carousel .wgm-carousel-next {
+  right: -12px;
+}
+.wgm-carousel-btn[disabled] {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Placement Selector */
+.wgm-placement-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin-top: 8px;
+}
+.wgm-placement-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 4px;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  gap: 3px;
+  color: #555;
+  font-size: 10px;
+  font-weight: 500;
+}
+.wgm-placement-btn i {
+  font-size: 13px;
+  color: #888;
+}
+.wgm-placement-btn:hover {
+  border-color: #008dff;
+  background: #f0f8ff;
+}
+.wgm-placement-btn.active {
+  border-color: #008dff;
+  background: #008dff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 141, 255, 0.2);
+}
+.wgm-placement-btn.active i {
+  color: #fff;
+}
+
+/* =========================================
+   9. CATEGORIES MANAGEMENT UI
+   ========================================= */
+.wgm-categories-page {
+  padding: 10px !important;
+}
+.wgm-categories-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+.wgm-category-postbox {
+  border: 1px solid var(--wgm-border-color);
+  border-radius: var(--wgm-radius-md);
+  box-shadow: var(--wgm-shadow-sm);
+  margin-bottom: 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+.wgm-locked-feature {
+  filter: grayscale(1);
+  pointer-events: none;
+  user-select: none;
+  opacity: 1;
+}
+.wgm-lock-overlay {
+  transition: var(--wgm-transition-fast);
+}
+.wgm-lock-overlay:hover {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+.wgm-category-postbox .postbox-header {
+  padding: 8px 12px !important;
+  border-bottom: 1px solid var(--wgm-border-light);
+  background: transparent;
+}
+.wgm-category-postbox .hndle {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+.wgm-category-inside {
+  padding: 12px !important;
+}
+.wgm-category-inside .wgm-field-group {
+  margin-bottom: 10px;
+}
+.wgm-category-inside label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 13px;
+  color: var(--wgm-text-primary);
+}
+.wgm-category-inside input[type="text"],
+.wgm-category-inside select {
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  border: 1px solid var(--wgm-border-color);
+  border-radius: var(--wgm-radius-sm);
+  box-shadow: none;
+  transition: var(--wgm-transition-fast);
+}
+.wgm-category-inside input[type="text"]:focus,
+.wgm-category-inside select:focus {
+  border-color: var(--wgm-primary);
+  box-shadow: 0 0 0 1px var(--wgm-primary);
+  outline: none;
+}
+.wgm-icon-picker-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+.wgm-icon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.wgm-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid var(--wgm-border-light);
+}
+#wgm-categories-table_wrapper .dataTables_length select {
+  width: 60px !important;
+  padding: 0 20px 0 8px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  margin: 0 5px !important;
+  vertical-align: middle !important;
+}
+#wgm-categories-table thead th {
+  background-color: var(--wgm-bg-light);
+  border-bottom: 2px solid var(--wgm-border-color);
+  padding: 8px 10px;
+  font-weight: 600;
+  text-align: left;
+  font-size: 13px;
+}
+#wgm-categories-table tbody td {
+  padding: 8px 10px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--wgm-border-light);
+  font-size: 13px;
+}
+#wgm-categories-table td:nth-child(1),
+#wgm-categories-table td:nth-child(2) {
+  text-align: center;
+}
+.wgm-edit-category,
+.wgm-delete-category {
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  margin-right: 3px !important;
+}
+@media (max-width: 960px) {
+  .wgm-categories-container {
+    flex-direction: column !important;
+  }
+  .wgm-category-form-col {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* =========================================
+   10. BANNERS, NOTICES & SUPPORT
+   ========================================= */
+/* Pro Banner */
+.wgm-upgrade-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: #ffffff !important;
+  padding: 18px 25px !important;
+  border-radius: 12px !important;
+  margin: 20px 0 !important;
+  box-shadow: 0 6px 15px rgba(118, 75, 162, 0.25) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.wgm-upgrade-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.wgm-upgrade-banner-icon {
+  background: rgba(255, 255, 255, 0.2);
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  backdrop-filter: blur(4px);
+}
+.wgm-upgrade-banner-icon .dashicons {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: #ffd700;
+}
+.wgm-upgrade-banner-content {
+  flex: 1;
+}
+.wgm-upgrade-banner-content p {
+  margin: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+}
+.wgm-upgrade-banner-content p b {
+  color: #ffd700 !important;
+}
+.wgm-upgrade-banner-btn {
+  background: #ffffff !important;
+  color: #667eea !important;
+  padding: 10px 22px !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+  white-space: nowrap !important;
+  display: inline-block !important;
+}
+.wgm-upgrade-banner-btn:hover {
+  background: #f8f9fa !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2) !important;
+  color: #764ba2 !important;
+}
+@media screen and (max-width: 768px) {
+  .wgm-upgrade-banner {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 25px 20px !important;
+    gap: 15px !important;
+  }
+  .wgm-upgrade-banner-icon {
+    margin: 0 auto !important;
+  }
+  .wgm-upgrade-banner-btn {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Premium Notices */
+.wpgmap_premium_notice_title {
+  color: #0073aa;
+  font-size: 2em;
+  margin: 0.67em 0;
+  display: block;
+  font-weight: 600;
+  text-align: center;
+}
+.wpgmap_premium_notice_button {
+  background-color: #0073aa;
+  color: white;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 0 14px grey;
+}
+.wpgmap_pro_version_title {
+  color: #0073aa;
+  font-size: 2em;
+  margin: 0.67em 0;
+  display: block;
+  font-weight: 600;
+  padding-left: 55px;
+}
+.wpgmap_features_list {
+  padding-left: 51px;
+}
+
+/* Pro Label */
+.wgm-pro-label {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 10px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  top: -6px;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background-image: -moz-linear-gradient(
+    -122deg,
+    rgb(91 211 160) 0%,
+    rgb(54 214 146) 100%
+  );
+  background-image: -webkit-linear-gradient(
+    -122deg,
+    rgb(91 211 160) 0%,
+    rgb(54 214 146) 100%
+  );
+}
+
+/* Support Dashboard Blocks (Legacy Support UI) */
+.wgm_admin_support_wrapper {
+  width: 100%;
+  display: flex;
+  margin-top: 5px;
+}
+.wgm_admin_support_wrapper .wgm_admin_block {
+  flex-basis: 100%;
+  margin: 0 0.2%;
+  background-color: white;
+  box-shadow: 0 0 5px #e8e8e8;
+  border: 1px solid #ece8e8;
+}
+.wgm_admin_block_header {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  padding: 10px 0 0 10px;
+}
+.wgm_admin_block_header_icon {
+  height: 40px;
+  width: 40px;
+  background: #f3edff;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  text-align: center;
+  color: #32c896;
+  font-size: 18px;
+}
+.wgm_admin_title {
+  margin: 0.7em 0 1em;
+  padding: 0 0 0 5px;
+  font-size: 18px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333333;
+}
+.wgm_admin_block_content {
+  overflow: hidden;
+  position: relative;
+  padding: 0 15px 12px 15px;
+}
+.wgm_admin_block_content .wgm_button {
+  font-size: 13px;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(
+    -169deg,
+    rgb(104 204 176) 0%,
+    rgb(28 204 139) 100%
+  );
+  background-image: -ms-linear-gradient(
+    -169deg,
+    rgb(104 204 176) 0%,
+    rgb(28 204 139) 100%
+  );
+  box-shadow: 0 14px 15px 0 rgba(0, 5, 41, 0.08);
+  color: #fff;
+  display: inline-block;
+  padding: 8px 8px;
+  text-decoration: none;
+  line-height: 1;
+  transition: all 0.3s;
+}
+.wgm_admin_support_wrapper p {
+  font-size: 13px;
+  color: #707070;
+  margin: 0 0 20px 0;
+  line-height: 21px;
+}
+.wgm_admin_block_content .wgm_gmap_instructions {
+  padding: 0 0 12px 19px;
+}
+.wgm_admin_block_content .wgm_gmap_instructions ul li a {
+  text-decoration: none;
+}
+.wgm_admin_block_content .wgm_gmap_instructions ul li a i,
+.wgm_faq_item i {
+  margin-right: 8px;
+}
+.wgm_admin_block_content .wgm_gmap_instructions ul li {
+  background-color: #e0e0e040;
+  padding: 4px 0 4px 6px;
+  border-left: 2px solid #5eccac;
+  margin: 9px 0;
+}
+
+.swal2-title {
+  line-height: normal;
+}
+
+/* Datatables */
+#wgm_all_maps .dataTables_wrapper .dataTables_length select,
+#wp-gmap-new .dataTables_wrapper .dataTables_length select,
+#wp-gmap-edit .dataTables_wrapper .dataTables_length select {
+  width: 50px !important;
+  padding: 0 0 0 5px !important;
+}
+#wgm_all_maps .dataTables_wrapper .dataTables_filter input,
+#wp-gmap-new .dataTables_wrapper .dataTables_filter input,
+#wp-gmap-edit .dataTables_wrapper .dataTables_filter input {
+  padding: 0 0 0 5px !important;
+}
+
+/* Link Areas */
+.gmap_embed_create_new_link_area {
+  width: 40%;
+  margin: 30px auto;
+}
+.gmap_embed_create_new_link_area a {
+  padding: 9px;
+  margin-left: 100px;
+  border-radius: 5px;
+  background-color: #0073aa;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+.wpgmapembed_get_api_key,
+.wpgmap_lng_custom_script_settings {
+  padding: 10px;
 }

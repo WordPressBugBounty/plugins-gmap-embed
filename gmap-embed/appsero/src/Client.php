@@ -1,6 +1,6 @@
 <?php
 
-namespace Appsero;
+namespace GmapEmbed\Appsero;
 
 /**
  * Appsero Client
@@ -119,7 +119,7 @@ class Client
     /**
      * Initialize insights class
      *
-     * @return Appsero\Insights
+     * @return GmapEmbed\Appsero\Insights
      */
     public function insights()
     {
@@ -140,7 +140,7 @@ class Client
     /**
      * Initialize plugin/theme updater
      *
-     * @return Appsero\Updater
+     * @return GmapEmbed\Appsero\Updater
      */
     public function updater()
     {
@@ -161,7 +161,7 @@ class Client
     /**
      * Initialize license checker
      *
-     * @return Appsero\License
+     * @return GmapEmbed\Appsero\License
      */
     public function license()
     {
@@ -186,7 +186,7 @@ class Client
      */
     public function endpoint()
     {
-        $endpoint = apply_filters('appsero_endpoint', 'https://api.appsero.com');
+        $endpoint = apply_filters('gmap_embed_appsero_endpoint', 'https://api.appsero.com');
 
         return trailingslashit($endpoint);
     }
@@ -338,7 +338,7 @@ class Client
     {
         $is_local = isset($_SERVER['REMOTE_ADDR']) && in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'], true);
 
-        return apply_filters('appsero_is_local', $is_local);
+        return apply_filters('gmap_embed_appsero_is_local', $is_local);
     }
 
     /**

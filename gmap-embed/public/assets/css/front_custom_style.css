@@ -1,1 +1,2578 @@
-/*Silence is golden*/
+/* WP Google Map - Front-end Custom Styles */
+
+/* Cross-Theme Safeguards: Isolate plugin elements from theme styles */
+.wgm-map-listing-container input,
+.wgm-map-listing-container select,
+.wgm-map-listing-container button {
+  all: revert; /* Reset to browser defaults first */
+  box-sizing: border-box;
+  font-family: var(--wgm-font-family);
+}
+
+.wgm-map-listing-container img {
+  max-width: 100% !important;
+  height: auto !important;
+  box-shadow: none !important; /* Some themes add shadows to all imgs */
+}
+
+.wgm-admin-error {
+  color: darkred;
+}
+
+.wgm-search-control-container {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important; /* Stack items vertically */
+  align-items: center !important; /* Center items horizontally */
+  justify-content: flex-start !important;
+  pointer-events: none !important; /* Don't block map interactions outside the bar */
+  z-index: 1000 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.wpgmap_not_found_message {
+  background: #ffffff !important;
+  color: #d93025 !important;
+  border: 1px solid #d93025 !important;
+  border-radius: 4px !important;
+  padding: 5px 8px !important;
+  margin-top: 0px !important; /* Space between search bar and message */
+  font-size: 13px !important;
+  font-family: var(--wgm-font-family) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+  pointer-events: auto !important;
+  display: none; /* Changed from inline-flex !important to hidden by default */
+  align-items: center !important;
+  max-width: 90% !important;
+  z-index: 1001 !important;
+}
+
+.wpgmap_not_found_message.wgm-show {
+  display: inline-flex !important;
+}
+
+.wgm-not-found-text {
+  margin-right: 5px;
+}
+
+.wpgmap_search_map_control_wrapper {
+  background: var(--wgm-bg-light) !important;
+  border-radius: var(--wgm-radius-md) !important;
+  box-shadow: var(--wgm-shadow-sm) !important;
+  padding: 0 !important;
+  font-family: var(--wgm-font-family) !important;
+  z-index: 999999 !important;
+  margin: 10px 0px 5px 0px !important;
+  border: 1px solid var(--wgm-border-color) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  max-width: calc(100% - 40px) !important;
+  width: auto !important;
+  justify-content: center !important;
+  pointer-events: auto !important; /* Allow interaction with the bar itself */
+}
+
+/* Ensure centering when used as a Map Control */
+.gm-style .wgm-search-control-container {
+  margin: 0 auto !important;
+  max-width: calc(100% - 140px) !important;
+}
+.wpgmap_search_box {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  height: 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+.wpgmap_search_input,
+.wpgmap_search_select {
+  border: none !important;
+  border-radius: 0;
+  padding: 0 12px;
+  font-size: var(--wgm-font-size-sm);
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  color: var(--wgm-text-primary) !important;
+  height: 100% !important;
+}
+.wpgmap_search_input:focus,
+.wpgmap_search_input:hover,
+.wpgmap_search_select:focus,
+.wpgmap_search_select:hover {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+}
+.wpgmap_filter_btn:focus,
+.wpgmap_filter_btn:hover,
+.wpgmap_search_btn:focus,
+.wpgmap_search_btn:hover,
+.wpgmap_search_clear:focus,
+.wpgmap_search_clear:hover {
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: transparent !important;
+  color: var(--wgm-text-muted) !important;
+}
+.wpgmap_search_input {
+  flex: 1 1 50px !important;
+  min-width: 40px !important;
+  width: 100% !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  /* max-width: 300px !important; */
+  /* width: 250px !important; */
+}
+
+/* Vertical Dividers between search elements */
+.wpgmap_search_box > * + * {
+  border-left: 1px solid var(--wgm-border-color) !important;
+}
+
+/* Remove divider for the absolute spinner */
+.wpgmap_search_spinner {
+  border-left: none !important;
+}
+
+.wpgmap_search_select {
+  width: auto;
+  min-width: 60px;
+  max-width: 70px !important;
+  flex: 0 1 auto;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L5%205L9%201%22%20stroke%3D%22%23666666%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 32px;
+}
+.wpgmap_search_input::placeholder {
+  color: var(--wgm-text-muted);
+}
+.wpgmap_search_btn {
+  background-color: transparent;
+  color: var(--wgm-text-muted);
+  border: none !important;
+  border-radius: 0;
+  padding: 0;
+  min-width: 30px;
+  width: auto;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--wgm-transition-fast);
+  font-size: var(--wgm-font-size-lg);
+  box-shadow: none !important;
+}
+.wpgmap_search_btn:hover {
+  background-color: transparent;
+  color: var(--wgm-text-muted); /* Keep same color on hover */
+}
+/* Replaced class name with svg selector for specific filter icon if needed, 
+   but generally wpgmap_search_btn handles flex centering */
+.wpgmap_search_btn svg {
+  vertical-align: middle;
+  display: block;
+}
+.wpgmap_search_clear {
+  background-color: transparent;
+  color: var(--wgm-text-muted);
+  border: none !important;
+  border-radius: 0;
+  padding: 0;
+  min-width: 30px;
+  width: auto;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--wgm-transition-fast);
+  font-size: var(--wgm-font-size-lg);
+  box-shadow: none !important;
+}
+.wpgmap_search_clear:hover {
+  background-color: transparent;
+  color: var(--wgm-text-muted); /* Keep same color on hover */
+}
+.wpgmap_search_spinner {
+  position: absolute;
+  right: 50px;
+  top: 14px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  pointer-events: none;
+}
+@media (max-width: 768px) and (min-width: 601px) {
+  .wpgmap_search_map_control_wrapper {
+    margin-top: 8px;
+    max-width: 90%;
+  }
+  .wpgmap_search_input {
+    min-width: 120px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+  .wpgmap_search_select {
+    min-width: 80px;
+    font-size: 13px;
+  }
+  .wpgmap_search_box {
+    height: 34px;
+  }
+}
+@media (max-width: 600px) {
+  .wpgmap_search_map_control_wrapper {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 8px;
+    width: calc(100% - 20px);
+    max-width: 400px;
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .wpgmap_search_box {
+    flex-direction: column;
+    height: auto;
+    gap: 8px;
+  }
+  /* Remove dividers when stacked vertically */
+  .wpgmap_search_box > * + * {
+    border-left: none !important;
+  }
+  .wpgmap_search_input,
+  .wpgmap_search_select {
+    border: 1px solid #ddd !important;
+    border-radius: 6px;
+    width: 100% !important;
+    min-width: auto !important;
+    height: 44px; /* Increased for touch */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background: #fff !important;
+    padding: 0 12px;
+  }
+  .wpgmap_search_select {
+    background-position: right 12px center;
+  }
+  .wpgmap_search_btn,
+  .wpgmap_search_clear {
+    background-color: var(--wgm-secondary);
+    color: #fff;
+    min-width: 44px !important; /* Minimum touch target */
+    height: 44px !important;
+    justify-content: center;
+    border-radius: 6px !important;
+  }
+  .wpgmap_search_clear {
+    background-color: #f1f1f1;
+    color: #666;
+  }
+  .wpgmap_search_btn:hover {
+    background-color: var(--wgm-primary-dark);
+    color: #fff;
+  }
+  .wpgmap_search_spinner {
+    top: 10px;
+    right: 10px;
+  }
+}
+@media (max-width: 400px) {
+  .wpgmap_search_map_control_wrapper {
+    padding: 6px;
+    margin-top: 6px;
+  }
+  .wpgmap_search_input,
+  .wpgmap_search_select,
+  .wpgmap_search_btn,
+  .wpgmap_search_clear {
+    height: 48px; /* Even larger for very small screens */
+    font-size: 14px;
+  }
+}
+/* Category Filter Styles */
+.wgm-filter-wrapper-front {
+  margin-right: -1px; /* Overlap border if next to input */
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.wpgmap_filter_btn {
+  border-left: 1px solid var(--wgm-border-color) !important;
+  height: 100% !important; /* Force 100% height */
+  width: 100%;
+}
+.wgm-filter-panel-front {
+  position: absolute;
+  top: 100%;
+  right: 0; /* Align right */
+  min-width: 250px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  z-index: 1000;
+  margin-top: 5px;
+  padding: 0 10px 10px 10px; /* Reduced top padding */
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left;
+}
+.wgm-filter-panel-front.hidden {
+  display: none;
+}
+.wgm-filter-header {
+  height: 0;
+  /* The close icon is absolute, so this container doesn't need height */
+}
+.wgm-filter-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: #777;
+  line-height: 1;
+  background: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  z-index: 10;
+}
+.wgm-filter-panel-front ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* Only the top-level list needs padding for the close button */
+.wgm-filter-panel-front > ul {
+  padding-top: 24px;
+}
+.wgm-filter-sublist {
+  margin-left: 20px !important;
+  border-left: 1px solid #eee;
+  padding-left: 5px !important;
+  padding-top: 5px !important;
+}
+.wgm-filter-item {
+  margin-bottom: 5px;
+}
+.wgm-filter-item label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  padding: 2px 0;
+}
+.wgm-filter-item input[type="checkbox"] {
+  margin-right: 8px;
+  margin-top: 0;
+  vertical-align: middle;
+}
+.wgm-no-cats {
+  font-size: 13px;
+  color: #777;
+  margin: 0;
+  padding: 5px;
+}
+.wgm-filter-close:hover {
+  color: #333 !important;
+  background: #f5f5f5;
+  border-radius: 50%;
+}
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .wgm-filter-wrapper-front {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+  .wpgmap_filter_btn {
+    width: 100% !important;
+    border-left: none !important;
+    background: #fff !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    justify-content: space-between;
+    padding: 0 12px;
+  }
+  .wpgmap_filter_btn:after {
+    content: "Filter Categories";
+    font-size: 13px;
+    color: #555;
+  }
+  .wgm-filter-panel-front {
+    width: 100%;
+    right: auto;
+    left: 0;
+  }
+}
+/* Legacy Directions Box - Modern Redesign */
+.wgm-legacy-direction-box {
+  background: #ffffff !important;
+  border: 1px solid #dadce0 !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  margin: 20px 0 !important;
+  box-shadow: 0 2px 8px rgba(60, 64, 67, 0.1) !important;
+  box-sizing: border-box !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.wgm-legacy-direction-header {
+  margin-bottom: 20px !important;
+}
+
+.wgm-legacy-direction-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #202124 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Travel Mode Switcher */
+.wgm-legacy-travel-switcher {
+  display: flex !important;
+  background: #f1f3f4 !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+  gap: 0 !important;
+  margin-bottom: 20px !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+}
+
+.wgm-legacy-travel-btn {
+  flex: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 8px !important;
+  cursor: pointer !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  color: #5f6368 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 40px !important;
+  margin: 0 2px !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.wgm-legacy-travel-btn svg {
+  width: 22px !important;
+  height: 22px !important;
+  fill: currentColor !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+.wgm-legacy-travel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #3c4043 !important;
+}
+
+.wgm-legacy-travel-btn.active {
+  background: #ffffff !important;
+  color: #1a73e8 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  font-weight: bold !important;
+}
+
+/* Input Groups */
+.wgm-legacy-input-group {
+  margin-bottom: 16px !important;
+}
+
+.wgm-legacy-label {
+  display: block !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #5f6368 !important;
+  margin-bottom: 6px !important;
+  line-height: 1.4 !important;
+}
+
+.wgm-legacy-field-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: stretch !important;
+  background: #fff !important;
+  border: 1px solid #dadce0 !important;
+  border-radius: 8px !important;
+  transition: border-color 0.2s !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.wgm-legacy-field-wrap:focus-within {
+  border-color: #1a73e8 !important;
+  box-shadow: 0 0 0 1px #1a73e8 !important;
+}
+
+.wgm-legacy-input {
+  flex: 1 !important;
+  min-width: 0 !important;
+  padding: 12px 14px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  outline: none !important;
+  background: transparent !important;
+  color: #3c4043 !important;
+  height: 44px !important;
+  line-height: normal !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  margin: 0 !important;
+}
+
+.wgm-legacy-input::placeholder {
+  color: #9aa0a6 !important;
+  opacity: 1 !important;
+}
+
+.wgm-legacy-loc-btn {
+  position: static !important;
+  background: transparent !important;
+  border: none !important;
+  border-left: 1px solid #f1f3f4 !important;
+  padding: 0 14px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  color: #70757a !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s !important;
+  height: auto !important;
+  width: auto !important;
+  min-width: 48px !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+  flex-shrink: 0 !important;
+}
+
+.wgm-legacy-loc-btn:hover {
+  background: #f8f9fa !important;
+  color: #202124 !important;
+}
+
+.wgm-legacy-loc-btn svg {
+  fill: currentColor !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+/* Submit Button */
+.wgm-legacy-submit-btn {
+  width: 100% !important;
+  padding: 12px 24px !important;
+  background: #1a73e8 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 24px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  height: 48px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  margin-top: 8px !important;
+  font-family: inherit !important;
+  text-transform: none !important;
+}
+
+.wgm-legacy-submit-btn:hover {
+  background: #1765cc !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.wgm-legacy-submit-btn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.wgm-legacy-submit-btn svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: currentColor !important;
+  display: block !important;
+}
+
+/* Loading Indicator */
+.wgm-legacy-loading {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  color: #5f6368 !important;
+  font-size: 14px !important;
+  margin-top: 12px !important;
+  padding: 8px !important;
+}
+
+.wgm-legacy-loading.wgm-show {
+  display: flex !important;
+}
+
+.wgm-legacy-spinner {
+  width: 20px !important;
+  height: 20px !important;
+  animation: wgm-spin 1s linear infinite !important;
+}
+
+.wgm-legacy-spinner circle {
+  stroke-dasharray: 90, 150 !important;
+  stroke-dashoffset: 0 !important;
+  stroke-linecap: round !important;
+}
+
+@keyframes wgm-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Results Panel */
+.wgm-legacy-results {
+  margin-top: 20px !important;
+  padding: 16px !important;
+  background: #f8f9fa !important;
+  border-radius: 8px !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  border: 1px solid #e8eaed !important;
+  box-sizing: border-box !important;
+}
+
+.wgm-legacy-results::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.wgm-legacy-results::-webkit-scrollbar-track {
+  background: #f1f3f4 !important;
+  border-radius: 4px !important;
+}
+
+.wgm-legacy-results::-webkit-scrollbar-thumb {
+  background: #dadce0 !important;
+  border-radius: 4px !important;
+}
+
+.wgm-legacy-results::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6 !important;
+}
+
+/* Style Google's direction results */
+.wgm-legacy-results .adp-placemark {
+  background: #fff !important;
+  padding: 12px !important;
+  border-radius: 6px !important;
+  margin-bottom: 12px !important;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15) !important;
+}
+
+.wgm-legacy-results .adp-summary {
+  font-weight: 600 !important;
+  color: #202124 !important;
+  font-size: 14px !important;
+  margin-bottom: 8px !important;
+}
+
+.wgm-legacy-results .adp-step {
+  padding: 8px 0 !important;
+  border-bottom: 1px solid #f1f3f4 !important;
+  font-size: 13px !important;
+  color: #3c4043 !important;
+}
+
+.wgm-legacy-results .adp-step:last-child {
+  border-bottom: none !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .wgm-legacy-direction-box {
+    padding: 16px !important;
+    margin: 16px 0 !important;
+  }
+
+  .wgm-legacy-travel-btn {
+    height: 44px !important;
+  }
+
+  .wgm-legacy-input {
+    height: 48px !important;
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
+
+  .wgm-legacy-loc-btn {
+    min-width: 52px !important;
+  }
+
+  .wgm-legacy-submit-btn {
+    height: 52px !important;
+    font-size: 16px !important;
+  }
+}
+
+/* Hide old classes for backward compatibility */
+.wp_gmap_direction_box .ui-bar-c,
+.wp_gmap_direction_box .fieldcontain,
+.wp_gmap_direction_box .wgm_direction_input,
+.wp_gmap_direction_box .wgm_direction_select,
+.wp_gmap_direction_box .wgm_direction_btn {
+  display: none !important;
+}
+
+/* Marker Listing - Basic Table */
+.wpgmap-marker-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: Arial, sans-serif;
+}
+.wpgmap-marker-table td {
+  padding: 15px;
+  border-top: 1px solid var(--wgm-border-light);
+  vertical-align: top;
+}
+.wpgmap-marker-table tr:first-child td {
+  border-top: 0;
+}
+.wpgmap-marker-table tbody tr:hover {
+  background: #fcfcfc;
+  cursor: pointer;
+}
+.wpgmap-marker-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 15px;
+}
+.wpgmap-card-content {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 0;
+}
+.wpgmap-card-image {
+  flex: 0 0 140px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+.wpgmap-row-title {
+  margin-bottom: 6px;
+}
+.wpgmap-row-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+  color: var(--wgm-text-muted);
+  font-size: 13px;
+}
+.wpgmap-row-desc {
+  font-size: 13px;
+  color: var(--wgm-text-primary);
+  line-height: 1.4;
+}
+.wpgmap-marker-icon-small {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.wpgmap-marker-image-thumb {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: var(--wgm-radius-sm);
+  border: 1px solid var(--wgm-border-color);
+  display: block;
+  min-height: 100px;
+}
+@media (max-width: 600px) {
+  .wpgmap-marker-card {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .wpgmap-card-content {
+    padding: 0;
+    width: 100%;
+  }
+  .wpgmap-card-image {
+    flex: 0 0 auto;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .wpgmap-marker-image-thumb {
+    width: 100%;
+    height: 180px !important;
+  }
+}
+.wpgmap-btn {
+  background: #1976d2;
+  color: #fff;
+  border: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.wpgmap-btn:hover {
+  background: #1565c0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+}
+.wpgmap-btn--ghost {
+  background: transparent;
+  color: #1976d2;
+  border: 1px solid #cfe3fb;
+}
+
+/* Marker Listing - Unified Design System */
+.wgm-item-card {
+  padding: 20px !important;
+  margin-bottom: 20px !important;
+  border-radius: var(--wgm-radius-lg) !important;
+  background: var(--wgm-white) !important;
+  border: 1px solid var(--wgm-border-color) !important;
+  box-shadow: var(--wgm-shadow-sm) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  list-style: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.wgm-item-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06) !important;
+}
+
+.wgm-item-title {
+  margin: 0 0 10px 0 !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: var(--wgm-text-primary) !important;
+  line-height: 1.3 !important;
+}
+.wgm-item-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  margin-bottom: 12px !important;
+  color: var(--wgm-text-muted) !important;
+  font-size: 13px !important;
+}
+
+.wgm-item-meta-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.wgm-item-meta-item svg,
+.wgm-item-meta-item img {
+  flex-shrink: 0 !important;
+}
+
+.wgm-item-desc {
+  font-size: 14px !important;
+  color: var(--wgm-text-primary) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden !important;
+}
+.wgm-item-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  /* margin-top: 8px !important; */
+}
+
+.wgm-item-action-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  background: var(--wgm-white) !important;
+  color: var(--wgm-text-muted) !important;
+  border: 1px solid var(--wgm-border-color) !important;
+  border-radius: var(--wgm-radius-sm) !important;
+  cursor: pointer !important;
+  transition: all var(--wgm-transition-fast) ease !important;
+  width: 36px !important;
+  height: 36px !important;
+  text-decoration: none !important;
+  flex-shrink: 0 !important;
+  box-shadow: none !important;
+}
+
+.wgm-marker-distance-badge {
+  background: var(--wgm-bg-light) !important;
+  color: var(--wgm-secondary) !important;
+  padding: 4px 10px !important;
+  border-radius: var(--wgm-radius-md) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  display: inline-block !important;
+}
+
+/* Compact Carousel Specific Layout */
+.wgm-carousel-card .wgm-card-body {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  padding: 16px !important;
+}
+
+.wgm-location-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 12px !important;
+}
+
+.wgm-location-icon-col {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+}
+
+.wgm-location-pin-main {
+  width: 18px !important;
+  height: 18px !important;
+  color: #333333 !important;
+  opacity: 0.9 !important;
+}
+
+.wgm-location-info-col {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.wgm-item-address {
+  font-size: 13px !important;
+  color: #555555 !important;
+  line-height: 1.2 !important;
+  font-weight: 500 !important;
+}
+
+.wgm-distance-wrapper {
+  margin-top: 2px !important;
+}
+
+/* Equal Height Logic */
+.wpgmap-carousel-container .swiper-slide {
+  height: auto !important;
+  display: flex !important;
+}
+
+.wgm-carousel-card {
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.wgm-carousel-card .wgm-item-desc {
+  margin-bottom: 5px !important;
+  flex: 1 !important; /* Pushes actions to bottom */
+}
+
+.wpgmap-marker-listing ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 20px !important;
+}
+.wgm-item-action-btn:hover {
+  background: #f8f9fa !important;
+  border-color: #bbb !important;
+  color: #1a1a1a !important;
+}
+
+.wgm-item-action-btn.wgm-action-primary {
+  background: #1a73e8 !important;
+  color: #fff !important;
+  border-color: #1a73e8 !important;
+}
+
+.wgm-item-action-btn.wgm-action-primary:hover {
+  background: #1765cc !important;
+  box-shadow: 0 4px 10px rgba(26, 115, 232, 0.2) !important;
+}
+
+.wgm-item-action-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+  fill: currentColor !important;
+}
+
+.wgm-marker-distance-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: #f1f7ff !important;
+  color: #1a73e8 !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+  border: 1px solid #d1e5ff !important;
+}
+
+/* Fallback for basic list if not using new classes yet */
+.wpgmap-marker-listing ul {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Marker Listing - Advanced Table Redesign */
+.wpgmap-adv-table-listing {
+  background: var(--wgm-white);
+  border-radius: var(--wgm-radius-lg) !important;
+  padding: var(--wgm-space-lg);
+  box-shadow: var(--wgm-shadow-md);
+  border: 1px solid var(--wgm-border-color);
+  margin-top: 30px !important;
+}
+
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_filter {
+  margin-bottom: 24px;
+}
+
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_filter input {
+  border: 1px solid var(--wgm-border-color);
+  border-radius: var(--wgm-radius-md);
+  padding: 8px 12px 8px 36px;
+  outline: none;
+  transition: all var(--wgm-transition-fast) ease;
+  background: var(--wgm-bg-light)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='18' width='18' viewBox='0 0 24 24'%3E%3Cpath fill='%2370757a' d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E")
+    no-repeat 10px center;
+  font-size: var(--wgm-font-size-md);
+  width: 240px;
+}
+
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_filter input:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  background-color: #fff;
+}
+
+/* Redesign entries dropdown */
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_length {
+  margin-bottom: 24px;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_length select {
+  border: 1px solid var(--wgm-border-color);
+  border-radius: var(--wgm-radius-md);
+  padding: 6px 30px 6px 12px;
+  outline: none;
+  background: var(--wgm-bg-light)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%235f6368' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_length select:focus {
+  border-color: #1a73e8;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.wpgmap-adv-table-listing table.dataTable {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border: none !important;
+  width: 100% !important;
+  margin: 15px 0 !important;
+}
+
+.wpgmap-adv-table-listing table.dataTable thead th {
+  background: var(--wgm-bg-light);
+  color: var(--wgm-text-secondary);
+  font-weight: var(--wgm-font-weight-bold);
+  text-transform: uppercase;
+  font-size: var(--wgm-font-size-xs);
+  letter-spacing: 0.8px;
+  padding: var(--wgm-space-md);
+  border-bottom: 2px solid var(--wgm-border-light) !important;
+  border-top: none !important;
+}
+
+/* Remove duplicate sort icons (background images) if DataTables adds them alongside pseudo-elements */
+.wpgmap-adv-table-listing table.dataTable thead .sorting,
+.wpgmap-adv-table-listing table.dataTable thead .sorting_asc,
+.wpgmap-adv-table-listing table.dataTable thead .sorting_desc {
+  background-image: none !important;
+}
+
+.wpgmap-adv-table-listing table.dataTable tbody td {
+  padding: var(--wgm-space-md);
+  border-bottom: 1px solid var(--wgm-border-light);
+  vertical-align: middle;
+  color: var(--wgm-text-primary);
+  font-size: var(--wgm-font-size-md);
+}
+
+.wpgmap-adv-table-listing table.dataTable tbody tr {
+  background-color: transparent !important;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.wpgmap-adv-table-listing table.dataTable tbody tr:hover {
+  background-color: var(--wgm-bg-light) !important;
+  box-shadow: inset 4px 0 0 var(--wgm-secondary);
+}
+
+.wpgmap-adv-table-listing table.dataTable tbody tr.odd {
+  background-color: transparent !important;
+}
+
+/* DataTables Pagination & Info Premium Style */
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_info {
+  font-size: 13px;
+  color: #70757a;
+  padding-top: 20px;
+}
+
+.wpgmap-adv-table-listing .dataTables_wrapper .dataTables_paginate {
+  padding-top: 15px;
+}
+
+.wpgmap-adv-table-listing
+  .dataTables_wrapper
+  .dataTables_paginate
+  .paginate_button {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  padding: 6px 14px !important;
+  margin: 0 4px !important;
+  transition: all 0.2s ease !important;
+  font-size: 13px !important;
+  color: #3c4043 !important;
+}
+
+.wpgmap-adv-table-listing
+  .dataTables_wrapper
+  .dataTables_paginate
+  .paginate_button.current {
+  background: var(--wgm-secondary) !important;
+  color: var(--wgm-white) !important;
+  border: 1px solid var(--wgm-secondary) !important;
+  font-weight: var(--wgm-font-weight-bold);
+}
+
+.wpgmap-adv-table-listing
+  .dataTables_wrapper
+  .dataTables_paginate
+  .paginate_button:hover:not(.disabled) {
+  background: #f1f3f4 !important;
+  color: #1a73e8 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.wpgmap-adv-table-listing
+  .dataTables_wrapper
+  .dataTables_paginate
+  .paginate_button.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Image/Icon Refinements for Advanced Table */
+.wpgmap-adv-table-listing .wpgmap-marker-image {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.wpgmap-adv-table-listing .wpgmap-marker-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .wpgmap-adv-table-listing {
+    padding: 15px;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+  }
+  .wpgmap-adv-table-listing table.dataTable thead {
+    display: none;
+  }
+  .wpgmap-adv-table-listing table.dataTable,
+  .wpgmap-adv-table-listing table.dataTable tbody,
+  .wpgmap-adv-table-listing table.dataTable tr,
+  .wpgmap-adv-table-listing table.dataTable td {
+    display: block !important;
+    width: 100% !important;
+  }
+  .wpgmap-adv-table-listing table.dataTable tr {
+    background: #fff !important;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+  }
+  .wpgmap-adv-table-listing table.dataTable td {
+    border: none !important;
+    padding: 8px 0 !important;
+    text-align: left;
+    position: relative;
+  }
+  .wpgmap-adv-table-listing table.dataTable td:before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #888;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .wpgmap-adv-table-listing .wpgmap-marker-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .wpgmap-adv-table-listing .wpgmap-marker-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .wpgmap-adv-table-listing .dataTables_wrapper .dataTables_filter input {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Marker Listing - Premium Carousel Design */
+.wpgmap-carousel-container {
+  margin-top: 40px;
+  padding-bottom: 50px;
+  position: relative;
+  --card-radius: var(--wgm-radius-lg);
+  --card-shadow: var(--wgm-shadow-sm);
+  --card-shadow-hover: var(--wgm-shadow-md);
+  --accent-color: var(--wgm-primary);
+  --text-dark: var(--wgm-text-primary);
+  --text-muted: var(--wgm-text-muted);
+  --bg-card: var(--wgm-white);
+}
+
+.wpgmap-carousel-container .swiper {
+  padding: 10px 10px 60px;
+  overflow: hidden;
+}
+
+/* Grid layout as fallback when Swiper is not initialized */
+.wpgmap-carousel-container .swiper-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* When Swiper is active, completely disable grid and use flex */
+.wpgmap-carousel-container.wgm-swiper-active .swiper-wrapper {
+  display: flex !important;
+  grid-template-columns: none !important;
+  gap: 0 !important;
+}
+
+@media screen and (min-width: 600px) {
+  .wpgmap-carousel-container .swiper-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .wpgmap-carousel-container .swiper-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Left/Right Placement: Force single slide view */
+@media screen and (min-width: 768px) {
+  .wgm-placement-left_map .wpgmap-carousel-container .swiper,
+  .wgm-placement-right_map .wpgmap-carousel-container .swiper {
+    overflow: visible;
+  }
+
+  .wgm-placement-left_map .wpgmap-carousel-container .swiper-wrapper,
+  .wgm-placement-right_map .wpgmap-carousel-container .swiper-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .wgm-placement-left_map .wpgmap-carousel-container,
+  .wgm-placement-right_map .wpgmap-carousel-container {
+    margin-top: 0;
+    padding-bottom: 20px;
+  }
+}
+
+.wgm-carousel-card {
+  background: var(--bg-card);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--wgm-border-color);
+  box-shadow: var(--card-shadow);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+}
+
+.wgm-carousel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--accent-color);
+}
+
+.wgm-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--wgm-bg-light);
+}
+
+.wgm-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.wgm-carousel-card:hover .wgm-card-img {
+  transform: scale(1.1);
+}
+
+.wgm-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.wgm-card-badge {
+  position: absolute !important;
+  bottom: 12px !important;
+  right: 12px !important;
+  background: #ffffff !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 5 !important;
+}
+
+.wgm-card-badge img {
+  width: 18px !important;
+  height: 18px !important;
+  object-fit: contain !important;
+}
+
+.wgm-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.wgm-card-title {
+  margin: 0 0 10px !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--text-dark) !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+.wgm-card-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.wgm-card-address svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wgm-card-address span {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wgm-card-excerpt {
+  font-size: var(--wgm-font-size-md);
+  color: var(--wgm-text-primary);
+  line-height: 1.6;
+  margin: 0 0 20px !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wgm-card-footer {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid var(--wgm-border-light);
+}
+
+.wgm-show-on-map-btn {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: var(--wgm-radius-lg);
+  background: var(--wgm-bg-light);
+  border: 1px solid var(--wgm-border-color);
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.wgm-show-on-map-btn:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.wgm-show-on-map-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.wgm-show-on-map-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* Swiper Navigation Customization */
+.wpgmap-carousel-container .swiper-button-next,
+.wpgmap-carousel-container .swiper-button-prev {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+.wpgmap-carousel-container .swiper-button-next:after,
+.wpgmap-carousel-container .swiper-button-prev:after {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.wpgmap-carousel-container .swiper-button-next:hover,
+.wpgmap-carousel-container .swiper-button-prev:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.wpgmap-carousel-container .swiper-pagination-bullet {
+  background: #cbd5e1;
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  transition: all 0.3s ease;
+}
+
+.wpgmap-carousel-container .swiper-pagination-bullet-active {
+  background: var(--accent-color);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.wgm-no-markers {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: var(--card-radius);
+  color: var(--text-muted);
+  font-size: 16px;
+  border: 2px dashed #e2e8f0;
+  width: 100%;
+}
+
+/* Modern InfoWindow Design */
+.wgm-infowindow-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+}
+.wgm-iw-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+.wgm-infowindow-title {
+  font-size: var(--wgm-font-size-lg) !important;
+  font-weight: var(--wgm-font-weight-bold) !important;
+  color: var(--wgm-text-primary);
+  margin: 0 0 10px 0 !important;
+  line-height: 1.3;
+  padding-right: 35px;
+  display: block;
+  font-family: inherit;
+}
+.wgm-infowindow-wrapper {
+  width: 300px;
+  margin: 0;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 250px; /* Ensure scrolling within limits */
+  box-sizing: border-box;
+}
+@media (max-width: 400px) {
+  .wgm-infowindow-wrapper {
+    width: 260px;
+    padding: 10px;
+  }
+}
+.wgm-infowindow-wrapper.wgm-no-img .wgm-infowindow-content {
+  padding-top: 5px;
+}
+.wgm-infowindow-content {
+  padding: 0;
+}
+.wgm-iw-desc {
+  font-size: var(--wgm-font-size-md);
+  color: var(--wgm-text-primary);
+  line-height: 1.6;
+  margin-bottom: var(--wgm-space-sm);
+}
+
+/* Neutralize Google Maps default InfoWindow container and header styling */
+.gm-style .gm-style-iw-c {
+  padding: 0 !important;
+  max-height: none !important;
+}
+.gm-style-iw-chr {
+  background: transparent !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Ensure the content container has proper spacing */
+.gm-style-iw-d {
+  padding-top: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Refined Close Button */
+.gm-style-iw-c .gm-ui-hover-effect {
+  top: 0px !important;
+  right: 0px !important;
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: var(--wgm-radius-round) !important;
+  box-shadow: var(--wgm-shadow-sm) !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--wgm-transition-fast);
+}
+.gm-style-iw-c .gm-ui-hover-effect:hover {
+  background: var(--wgm-white) !important;
+  box-shadow: var(--wgm-shadow-md) !important;
+  transform: scale(1.1);
+}
+.gm-style-iw-c .gm-ui-hover-effect span {
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* Lightbox Image Preview */
+.wgm-lightbox-overlay {
+  display: none;
+  position: fixed;
+  z-index: 999999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.wgm-lightbox-overlay.show {
+  display: flex !important;
+  opacity: 1;
+}
+.wgm-lightbox-content {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+.wgm-lightbox-overlay.show .wgm-lightbox-content {
+  transform: scale(1);
+}
+.wgm-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000000;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+.wgm-lightbox-close:hover {
+  color: #bbb;
+}
+.wgm-lightbox-trigger {
+  cursor: pointer;
+}
+
+/* Common Utility Classes */
+.wpgmap-no-results {
+  color: var(--wgm-text-muted);
+  padding: var(--wgm-space-md);
+  text-align: center;
+}
+.wpgmap-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.wpgmap-title-text {
+  font-size: var(--wgm-font-size-md);
+  color: var(--wgm-text-primary);
+}
+.wpgmap-marker-loading {
+  padding: var(--wgm-space-lg);
+  text-align: center;
+  color: var(--wgm-text-muted);
+}
+.wpgmap-marker-image {
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+/* Marker Listing Placement Layouts */
+.wgm-map-listing-container,
+.wgm-map-listing-container * {
+  box-sizing: border-box;
+}
+
+.wgm-map-listing-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.wgm-placement-above_map {
+  flex-direction: column-reverse;
+}
+
+.wgm-placement-below_map {
+  flex-direction: column;
+}
+
+.wgm-placement-left_map {
+  flex-direction: row-reverse;
+  align-items: flex-start;
+}
+
+.wgm-placement-right_map {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* Map Canvas Adjustments */
+.wgm-map-listing-container .wgm-map-canvas {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Marker Listing Container Adjustments */
+.wgm-map-listing-container .wpgmap-marker-listing {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Side Placement Adjustments (Desktop) */
+@media screen and (min-width: 768px) {
+  .wgm-placement-left_map .wgm-map-area,
+  .wgm-placement-right_map .wgm-map-area {
+    flex: 1;
+    min-width: 0; /* Allow shrinking smaller than default content */
+  }
+
+  .wgm-placement-left_map .wgm-listing-area,
+  .wgm-placement-right_map .wgm-listing-area {
+    flex: 0 0 var(--wgm-listing-width, 300px);
+    width: var(--wgm-listing-width, 300px);
+    max-width: 80%; /* Increased max-width to allow more flexibility */
+    max-height: var(--wgm-map-height);
+    overflow-y: auto;
+  }
+
+  /* Compact Card UI for Side Placements */
+  .wgm-placement-left_map .wpgmap-marker-card,
+  .wgm-placement-right_map .wpgmap-marker-card {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .wgm-placement-left_map .wpgmap-card-image,
+  .wgm-placement-right_map .wpgmap-card-image {
+    flex: 0 0 auto;
+    width: 100%;
+    text-align: left;
+  }
+
+  .wgm-placement-left_map .wpgmap-marker-image-thumb,
+  .wgm-placement-right_map .wpgmap-marker-image-thumb {
+    aspect-ratio: 16 / 9;
+    height: auto !important;
+    min-height: auto;
+  }
+
+  .wgm-placement-left_map .wpgmap-card-content,
+  .wgm-placement-right_map .wpgmap-card-content {
+    padding: 0;
+  }
+
+  .wgm-placement-left_map .wpgmap-title-text,
+  .wgm-placement-right_map .wpgmap-title-text {
+    font-size: var(--wgm-font-size-md);
+  }
+
+  .wgm-placement-left_map .wpgmap-row-meta,
+  .wgm-placement-right_map .wpgmap-row-meta {
+    font-size: 12px;
+    margin-bottom: var(--wgm-space-xs);
+  }
+
+  .wgm-placement-left_map .wpgmap-row-desc,
+  .wgm-placement-right_map .wpgmap-row-desc {
+    font-size: var(--wgm-font-size-sm);
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Scrollbar Styling for Listing Area */
+.wgm-listing-area::-webkit-scrollbar {
+  width: 6px;
+}
+.wgm-listing-area::-webkit-scrollbar-track {
+  background: var(--wgm-border-light);
+  border-radius: var(--wgm-radius-lg);
+}
+.wgm-listing-area::-webkit-scrollbar-thumb {
+  background: var(--wgm-border-color);
+  border-radius: var(--wgm-radius-lg);
+}
+.wgm-listing-area::-webkit-scrollbar-thumb:hover {
+  background: var(--wgm-text-muted);
+}
+
+/* Ensure map fills its area */
+.wgm-map-area .wgm-map-canvas {
+  width: 100%;
+  max-width: 100% !important;
+}
+
+/* Mobile Responsiveness & Stacking */
+@media screen and (max-width: 991px) {
+  .wgm-map-listing-container.wgm-placement-left_map,
+  .wgm-map-listing-container.wgm-placement-right_map {
+    flex-direction: column !important;
+  }
+
+  .wgm-map-listing-container.wgm-placement-left_map .wgm-listing-area,
+  .wgm-map-listing-container.wgm-placement-right_map .wgm-listing-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    margin-top: 15px !important;
+  }
+
+  /* Force side-placement cards to look normal when stacked */
+  .wgm-map-listing-container.wgm-placement-left_map .wpgmap-marker-card,
+  .wgm-map-listing-container.wgm-placement-right_map .wpgmap-marker-card {
+    flex-direction: row !important;
+  }
+}
+
+/* Container-Aware Stacking (Triggered by JS) */
+.wgm-map-listing-container.wgm-force-stack {
+  flex-direction: column !important;
+}
+.wgm-force-stack .wgm-listing-area {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: none !important;
+}
+.wgm-force-stack .wpgmap-marker-card {
+  flex-direction: row !important;
+}
+
+/* Directions Drawer Mobile */
+@media screen and (max-width: 600px) {
+  .wgm-direction-drawer {
+    width: 100% !important;
+    left: -100% !important;
+    border-radius: 0 !important;
+  }
+  .wgm-direction-drawer.active {
+    left: 0 !important;
+  }
+}
+
+/* Mobile Responsiveness Legacy */
+@media screen and (max-width: 767px) {
+  .wgm-map-listing-container {
+    flex-direction: column !important;
+    gap: 15px;
+  }
+
+  .wgm-placement-above_map {
+    flex-direction: column-reverse !important;
+  }
+
+  .wgm-map-area,
+  .wgm-listing-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+
+  .wgm-listing-area {
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+}
+
+/* Fix for Carousel/Swiper in Flex Column Layouts (Above/Below) */
+.wgm-placement-above_map .wgm-listing-area,
+.wgm-placement-below_map .wgm-listing-area {
+  width: var(--wgm-listing-width, 100%);
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 0; /* Crucial for Swiper inside Flex */
+  flex: 0 0 auto; /* Do not shrink/grow unexpectedly */
+}
+
+/* Fix "Store Locator Above" visibility with Basic List */
+.wgm-placement-above_map .wpgmap_search_map_control_wrapper {
+  display: block !important;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 15px;
+}
+
+.wgm-placement-above_map .wpgmap_search_input,
+.wgm-placement-below_map .wpgmap_search_input {
+  max-width: 300px;
+}
+
+/* Ensure Carousel container allows Swiper to calculate width */
+.wgm-placement-above_map .wpgmap-carousel-container,
+.wgm-placement-below_map .wpgmap-carousel-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+}
+
+/* Advanced Directions Drawer */
+.wgm-map-area {
+  position: relative;
+  overflow-x: clip; /* Clip horizontally to hide drawer, but allow toggle button */
+  overflow-y: visible;
+}
+
+.wgm-direction-drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--wgm-drawer-width, 300px) * -1); /* Hidden initially */
+  width: var(--wgm-drawer-width, 300px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 var(--wgm-radius-lg) var(--wgm-radius-lg) 0;
+  box-sizing: border-box;
+}
+
+.wgm-direction-drawer.active {
+  left: 0;
+}
+
+.wgm-drawer-close {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  cursor: pointer !important;
+  background: #ffffff !important;
+  border: 1px solid #dadce0 !important;
+  padding: 0 !important;
+  color: #5f6368 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 10 !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15) !important;
+  transition: all 0.2s ease !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+.wgm-drawer-close svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: inherit !important;
+  fill: currentColor !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+.wgm-drawer-close:hover {
+  background: #f8f9fa !important;
+  color: #202124 !important;
+  box-shadow: 0 2px 4px rgba(60, 64, 67, 0.3),
+    0 2px 6px 2px rgba(60, 64, 67, 0.15) !important;
+  transform: scale(1.05) !important;
+  border-color: #dadce0 !important;
+}
+
+.wgm-drawer-close:active {
+  transform: scale(0.95) !important;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3) !important;
+}
+
+.wgm-drawer-header {
+  margin-bottom: 12px;
+  padding-right: 25px;
+}
+
+.wgm-drawer-title {
+  font-size: var(--wgm-font-size-sm);
+  font-weight: var(--wgm-font-weight-bold);
+  margin: 0;
+  color: var(--wgm-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Drawer Toggle Icon */
+.wgm-drawer-toggle-btn {
+  position: absolute !important;
+  left: 100% !important;
+  top: 80px !important;
+  transform: none !important;
+  z-index: 1001 !important;
+  background: var(--wgm-white) !important;
+  border: 1px solid var(--wgm-border-color) !important;
+  border-left: 1px solid var(--wgm-white) !important;
+  border-radius: 0 var(--wgm-radius-md) var(--wgm-radius-md) 0 !important;
+  width: 40px !important;
+  height: 48px !important;
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: var(--wgm-shadow-sm) !important;
+  color: var(--wgm-text-primary) !important;
+  transition: all var(--wgm-transition-fast) ease !important;
+  margin-left: -1px !important;
+  padding: 0px !important;
+}
+
+.wgm-drawer-toggle-btn svg {
+  width: 20px !important;
+  height: 20px !important;
+  opacity: 1 !important;
+  color: #333 !important;
+  fill: currentColor !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.wgm-drawer-toggle-btn svg path {
+  fill: currentColor !important;
+}
+
+.wgm-drawer-toggle-btn:hover {
+  background: #f8f9fa !important;
+  color: #000 !important;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Travel Mode Switcher */
+.wgm-travel-mode-switcher {
+  display: flex !important;
+  background: #f1f3f4 !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+  gap: 0 !important;
+  margin-bottom: 20px !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+}
+
+.wgm-travel-btn {
+  flex: 1 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 6px !important;
+  cursor: pointer !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  color: #5f6368 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 36px !important;
+  margin: 0 2px !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.wgm-travel-btn svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: currentColor !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+.wgm-travel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #3c4043 !important;
+  box-shadow: none !important;
+}
+
+.wgm-travel-btn.active {
+  background: #ffffff !important;
+  color: #1a73e8 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  font-weight: bold !important;
+}
+
+/* Direction Inputs */
+.wgm-dir-input-group {
+  position: relative !important;
+  margin-bottom: 15px !important;
+}
+
+.wgm-dir-field-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: stretch !important;
+  background: #fff !important;
+  border: 1px solid #dadce0 !important;
+  border-radius: 8px !important;
+  transition: border-color 0.2s !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.wgm-dir-field-wrap:focus-within {
+  border-color: #1a73e8 !important;
+  box-shadow: 0 0 0 1px #1a73e8 !important;
+  z-index: 2 !important;
+}
+
+.wgm-dir-field-wrap .wgm-dir-input {
+  flex: 1 !important;
+  min-width: 0 !important;
+  width: auto !important;
+  padding: 10px 12px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  outline: none !important;
+  background: transparent !important;
+  color: #3c4043 !important;
+  height: 40px !important;
+  line-height: normal !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  margin: 0 !important;
+}
+
+.wgm-dir-field-wrap .wgm-dir-input::placeholder {
+  color: #9aa0a6 !important;
+  opacity: 1 !important;
+}
+
+.wgm-current-loc-btn,
+.wgm-remove-waypoint-btn {
+  position: static !important;
+  background: transparent !important;
+  border: none !important;
+  border-left: 1px solid #f1f3f4 !important;
+  padding: 0 12px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  color: #70757a !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s !important;
+  height: auto !important;
+  width: auto !important;
+  min-width: 44px !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+  box-shadow: none !important;
+  flex-shrink: 0 !important;
+}
+
+.wgm-current-loc-btn:hover,
+.wgm-remove-waypoint-btn:hover {
+  background: #f8f9fa !important;
+  color: #202124 !important;
+  box-shadow: none !important;
+}
+
+.wgm-current-loc-btn svg,
+.wgm-remove-waypoint-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+  fill: currentColor !important;
+  pointer-events: none !important;
+}
+
+/* Action Buttons */
+.wgm-get-direction-btn,
+.wgm-show-on-map-btn {
+  background: #fff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  padding: 8px 16px;
+  border-radius: 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.wgm-get-direction-btn:hover,
+.wgm-show-on-map-btn:hover {
+  background: #f1f3f4;
+  border-color: #dadce0;
+  color: #202124;
+}
+
+.wgm-get-direction-btn.active {
+  background: #e8f0fe;
+  color: #1a73e8;
+  border-color: #e8f0fe;
+}
+
+.wgm-action-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Results Panel */
+.wgm-dir-results-panel {
+  display: none;
+  margin-top: 10px;
+  border-top: 1px solid #f1f3f4;
+  padding-top: 10px;
+  overflow-y: auto;
+  max-height: calc(100vh - 350px);
+}
+
+.wgm-dir-results-panel.active {
+  display: block;
+}
+
+/* Scrollable Drawer Content */
+.wgm-direction-drawer {
+  overflow: visible;
+}
+
+.wgm-drawer-content {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  padding-top: 50px; /* Space for close button */
+}
+
+/* Styling Google's panel content */
+.adp-placard {
+  border: none !important;
+  background: #fff !important;
+  padding: 10px !important;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15) !important;
+  border-radius: 8px !important;
+  margin-bottom: 15px !important;
+}
+
+.adp-summary {
+  padding: 5px 0 !important;
+  font-weight: 500 !important;
+  color: #202124 !important;
+  font-size: 14px !important;
+}
+
+.adp-directions {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  margin-top: 10px;
+}
+
+.adp-step {
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #f1f3f4 !important;
+  font-size: 13px !important;
+  color: #3c4043 !important;
+}
+
+.adp-substep {
+  padding-left: 20px !important;
+  border-left: 2px solid #e8eaed !important;
+}
+
+/* Mobile Adjustments */
+@media screen and (max-width: 600px) {
+  .wgm-direction-drawer {
+    width: 100% !important;
+  }
+  .wgm-travel-btn {
+    height: 44px; /* Larger for touch */
+  }
+  .wgm-dir-field-wrap .wgm-dir-input {
+    height: 44px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  .wgm-current-loc-btn,
+  .wgm-remove-waypoint-btn {
+    min-width: 48px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wgm-direction-drawer {
+    width: 100%;
+  }
+}
+
+/* Restoring missing styles for Advanced Options and Go Button */
+.wgm-dir-options_wrap {
+  margin-top: 15px;
+}
+
+.wgm-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.wgm-dir-adv-toggle {
+  color: #1a73e8;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  user-select: none;
+}
+
+.wgm-dir-adv-toggle:hover {
+  text-decoration: underline;
+}
+
+.wgm-dir-adv-options {
+  display: none;
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #f1f3f4;
+}
+
+.wgm-dir-adv-options.active {
+  display: block;
+}
+
+.wgm-adv-opt-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #5f6368;
+  cursor: pointer;
+}
+
+.wgm-adv-opt-item:last-child {
+  margin-bottom: 0;
+}
+
+.wgm-adv-opt-item input {
+  margin: 0;
+  accent-color: #1a73e8;
+  width: 16px;
+  height: 16px;
+}
+
+.wgm-direction-drawer .wgm-dir-go-btn {
+  width: auto;
+  min-width: 80px;
+  padding: 0 20px;
+  background: #1a73e8 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  line-height: normal;
+  text-transform: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.wgm-direction-drawer .wgm-dir-go-btn:hover {
+  background: #1765cc !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.wgm-direction-drawer .wgm-dir-go-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  margin: 0;
+  fill: currentColor;
+}
+
+.wgm-direction-drawer .wgm-dir-go-btn span {
+  display: inline-block;
+}
+
+.wgm-add-waypoint-trigger {
+  color: #1a73e8;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 4px 8px; /* Touch target */
+  margin-left: -8px; /* Visual alignment */
+  border-radius: 4px;
+}
+
+.wgm-add-waypoint-trigger svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.wgm-add-waypoint-trigger:hover {
+  background: #f1f3f4;
+  text-decoration: none;
+}
+/* Category Badge in Listings */
+.wgm-category-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: var(--wgm-bg-light);
+  color: var(--wgm-text-color-secondary);
+  border: 1px solid var(--wgm-border-color);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  /* margin-left: 8px; */
+  vertical-align: middle;
+}
+.wgm-item-meta .wgm-category-badge {
+  /* margin-left: 10px; */
+}
+/* Carousel specific */
+.wgm-carousel-cat {
+  margin-top: 5px;
+}
+/* Advanced Table specific */
+.wgm-table-cat-wrap {
+  margin-top: 4px;
+}
+
+/* Responsive Table Wrapper */
+.wgm-table-responsive {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  width: 100% !important;
+  margin-bottom: 15px;
+}

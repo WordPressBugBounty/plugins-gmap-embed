@@ -1,0 +1,2308 @@
+# Copyright (C) 2026 WP Google Map
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Google Map 1.9.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gmap-embed\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-01-05T17:15:12+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: gmap-embed\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: srm_gmap_embed.php
+msgid "WP Google Map"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: srm_gmap_embed.php
+msgid "https://www.wpgooglemap.com?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=branding&utm_content=plugin-uri"
+msgstr ""
+
+#. Description of the plugin
+#: srm_gmap_embed.php
+msgid "WP Google Map plugin allows creating Google Map with marker or location with a responsive interface. Marker supports text, images, links, videos, and custom icons. Simply, Just put the shortcode on the page, post, or widget to display the map anywhere."
+msgstr ""
+
+#. Author URI of the plugin
+#: srm_gmap_embed.php
+msgid "https://www.wpgooglemap.com?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=branding&utm_content=author-uri"
+msgstr ""
+
+#: admin/includes/categories.php:12
+#: admin/includes/wpgmap_settings.php:219
+#: admin/includes/wpgmap_settings.php:383
+#: includes/Traits/Menu.php:89
+#: includes/Traits/Menu.php:90
+msgid "Categories"
+msgstr ""
+
+#: admin/includes/categories.php:21
+msgid "Unlock Marker Categories (Premium Feature)"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/categories.php:26
+#, php-format
+msgid "Organize your markers into categories and filter them on the frontend. This feature and many more are available in the %s."
+msgstr ""
+
+#: admin/includes/categories.php:27
+#: admin/includes/wpgmap_edit.php:352
+#: admin/includes/wpgmap_edit.php:617
+msgid "Premium Version"
+msgstr ""
+
+#: admin/includes/categories.php:32
+#: admin/includes/wpgmap_edit.php:357
+#: admin/includes/wpgmap_edit.php:622
+#: admin/includes/wpgmap_settings.php:181
+#: admin/includes/wpgmap_settings.php:345
+msgid "Upgrade Now"
+msgstr ""
+
+#: admin/includes/categories.php:42
+msgid "Add New Category"
+msgstr ""
+
+#: admin/includes/categories.php:49
+msgid "Category Name"
+msgstr ""
+
+#: admin/includes/categories.php:54
+msgid "Category Icon"
+msgstr ""
+
+#: admin/includes/categories.php:58
+#: admin/includes/markers-settings.php:132
+msgid "Choose Icon"
+msgstr ""
+
+#: admin/includes/categories.php:59
+#: admin/includes/markers-settings.php:171
+msgid "Remove"
+msgstr ""
+
+#: admin/includes/categories.php:66
+msgid "Parent Category"
+msgstr ""
+
+#: admin/includes/categories.php:68
+#: admin/includes/markers-settings.php:196
+msgid "None"
+msgstr ""
+
+#: admin/includes/categories.php:79
+msgid "Save Category"
+msgstr ""
+
+#: admin/includes/categories.php:82
+#: admin/includes/markers-settings.php:288
+#: includes/Traits/AssetHandler.php:124
+msgid "Cancel"
+msgstr ""
+
+#: admin/includes/categories.php:100
+msgid "All Categories"
+msgstr ""
+
+#: admin/includes/categories.php:107
+#: admin/includes/markers-settings.php:33
+#: admin/includes/wpgmap_edit.php:509
+#: admin/includes/wpgmap_list.php:33
+#: templates/admin/map-list.php:32
+msgid "ID"
+msgstr ""
+
+#: admin/includes/categories.php:108
+#: admin/includes/markers-settings.php:35
+#: public/includes/marker_listing_theme/advanced_table.php:10
+#: templates/public/marker-listing/advanced_table.php:8
+#: templates/public/marker-listing/advanced_table.php:125
+msgid "Icon"
+msgstr ""
+
+#: admin/includes/categories.php:109
+msgid "Name"
+msgstr ""
+
+#: admin/includes/categories.php:110
+msgid "Parent"
+msgstr ""
+
+#: admin/includes/categories.php:111
+#: admin/includes/markers-settings.php:36
+#: admin/includes/wpgmap_list.php:39
+#: templates/admin/map-list.php:38
+msgid "Action"
+msgstr ""
+
+#: admin/includes/markers-icons.php:128
+msgid "Search icons..."
+msgstr ""
+
+#: admin/includes/markers-icons.php:130
+msgid "Search marker icons"
+msgstr ""
+
+#: admin/includes/markers-icons.php:132
+#: templates/public/search-control.php:59
+msgid "Clear search"
+msgstr ""
+
+#: admin/includes/markers-icons.php:136
+msgid "No icons found matching your search."
+msgstr ""
+
+#: admin/includes/markers-icons.php:169
+msgid "Directory not found!"
+msgstr ""
+
+#: admin/includes/markers-icons.php:193
+msgid "No icon found, please upload icon by clicking the Upload Icon button"
+msgstr ""
+
+#: admin/includes/markers-settings.php:10
+#: admin/includes/wpgmap_edit.php:8
+msgid "Invalid request. Nonce verification failed."
+msgstr ""
+
+#: admin/includes/markers-settings.php:18
+msgid "New Marker"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/markers-settings.php:23
+#: admin/includes/markers-settings.php:93
+#: admin/includes/markers-settings.php:150
+#: admin/includes/markers-settings.php:209
+#: admin/includes/wpgmap_edit.php:35
+#: admin/includes/wpgmap_edit.php:164
+#: admin/includes/wpgmap_edit.php:179
+#: admin/includes/wpgmap_edit.php:199
+#: admin/includes/wpgmap_list.php:17
+#: templates/admin/map-list.php:16
+msgid "Pro"
+msgstr ""
+
+#: admin/includes/markers-settings.php:34
+msgid "Marker Name"
+msgstr ""
+
+#: admin/includes/markers-settings.php:45
+msgid "How to Create a Marker"
+msgstr ""
+
+#: admin/includes/markers-settings.php:51
+msgid "1. Search"
+msgstr ""
+
+#: admin/includes/markers-settings.php:52
+msgid "Click \"New Marker\" and search for a location or address."
+msgstr ""
+
+#: admin/includes/markers-settings.php:58
+msgid "2. Fine-tune"
+msgstr ""
+
+#: admin/includes/markers-settings.php:59
+msgid "Right-click anywhere on the map to set or move the pin."
+msgstr ""
+
+#: admin/includes/markers-settings.php:65
+msgid "3. Save"
+msgstr ""
+
+#. translators: 1: Save Marker text, 2: Save Map text
+#: admin/includes/markers-settings.php:68
+#, php-format
+msgid "Fill details and click %1$s, then %2$s."
+msgstr ""
+
+#. translators: 1: Save Marker text, 2: Save Map text
+#: admin/includes/markers-settings.php:68
+#: admin/includes/markers-settings.php:293
+msgid "Save Marker"
+msgstr ""
+
+#. translators: 1: Save Marker text, 2: Save Map text
+#: admin/includes/markers-settings.php:68
+msgid "Save Map"
+msgstr ""
+
+#: admin/includes/markers-settings.php:80
+#: admin/includes/wpgmap_list.php:34
+#: public/includes/marker_listing_theme/advanced_table.php:12
+#: templates/admin/map-list.php:33
+#: templates/public/marker-listing/advanced_table.php:10
+#: templates/public/marker-listing/advanced_table.php:127
+msgid "Title"
+msgstr ""
+
+#: admin/includes/markers-settings.php:88
+#: admin/includes/wpgmap_edit.php:512
+#: public/includes/marker_listing_theme/advanced_table.php:13
+#: templates/public/marker-listing/advanced_table.php:11
+#: templates/public/marker-listing/advanced_table.php:128
+msgid "Description"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/markers-settings.php:92
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to add <b> Images in marker InfoWindow </b>."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/markers-settings.php:93
+msgid "Add Media"
+msgstr ""
+
+#: admin/includes/markers-settings.php:111
+msgid "Marker Icon"
+msgstr ""
+
+#: admin/includes/markers-settings.php:131
+msgid "Choose marker icon"
+msgstr ""
+
+#: admin/includes/markers-settings.php:135
+msgid "Upload Icon"
+msgstr ""
+
+#: admin/includes/markers-settings.php:145
+msgid "Marker Image"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/markers-settings.php:165
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to add <b>Marker Images</b>."
+msgstr ""
+
+#: admin/includes/markers-settings.php:169
+msgid "Upload Image"
+msgstr ""
+
+#: admin/includes/markers-settings.php:178
+#: admin/includes/wpgmap_edit.php:511
+#: public/includes/marker_listing_theme/advanced_table.php:14
+#: templates/public/marker-listing/advanced_table.php:12
+#: templates/public/marker-listing/advanced_table.php:129
+msgid "Address"
+msgstr ""
+
+#: admin/includes/markers-settings.php:186
+msgid "Latitude,Longitude"
+msgstr ""
+
+#: admin/includes/markers-settings.php:194
+msgid "Animation"
+msgstr ""
+
+#: admin/includes/markers-settings.php:197
+msgid "BOUNCE"
+msgstr ""
+
+#: admin/includes/markers-settings.php:198
+msgid "DROP"
+msgstr ""
+
+#: admin/includes/markers-settings.php:205
+msgid "Category"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/markers-settings.php:226
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b>assign Categories to markers</b>."
+msgstr ""
+
+#: admin/includes/markers-settings.php:247
+msgid "Link"
+msgstr ""
+
+#: admin/includes/markers-settings.php:249
+#: admin/includes/markers-settings.php:273
+msgid "Yes"
+msgstr ""
+
+#: admin/includes/markers-settings.php:250
+msgid "No"
+msgstr ""
+
+#: admin/includes/markers-settings.php:255
+msgid "Enter link here"
+msgstr ""
+
+#: admin/includes/markers-settings.php:261
+msgid "Open link in new tab"
+msgstr ""
+
+#: admin/includes/markers-settings.php:271
+msgid "Open marker description by default"
+msgstr ""
+
+#: admin/includes/markers-settings.php:275
+msgid "No, Open description on click"
+msgstr ""
+
+#. translators: %s: YouTube tutorial URL.
+#: admin/includes/wgm_messages_viewer.php:35
+#, php-format
+msgid "Map has been created Successfully. <a href=\"%s\" target=\"_blank\"> See How to use &gt;&gt;</a>"
+msgstr ""
+
+#. translators: %s: Add New menu admin URL.
+#: admin/includes/wgm_messages_viewer.php:47
+#, php-format
+msgid "API key updated Successfully, Please click on <a href=\"%s\"><i style=\"color: green;\">Add New</i></a> menu to add new map."
+msgstr ""
+
+#: admin/includes/wgm_messages_viewer.php:54
+msgid "License key updated successfully. Now you can enjoy premium features!"
+msgstr ""
+
+#. translators: %s: License pricing URL.
+#: admin/includes/wgm_messages_viewer.php:61
+#, php-format
+msgid "Invalid license key, please get your license key. <a target=\"_blank\" href=\"%s\">Get License Key</a>"
+msgstr ""
+
+#: admin/includes/wgm_messages_viewer.php:68
+msgid "License key is required."
+msgstr ""
+
+#: admin/includes/wgm_messages_viewer.php:71
+msgid "Map Deleted Successfully."
+msgstr ""
+
+#: admin/includes/wgm_messages_viewer.php:84
+#: admin/includes/wgm_messages_viewer.php:137
+msgid "Dismiss this notice."
+msgstr ""
+
+#. translators: %d: categories count
+#: admin/includes/wgm_messages_viewer.php:109
+#, php-format
+msgid "%d categories imported successfully."
+msgstr ""
+
+#. translators: %d: markers count
+#: admin/includes/wgm_messages_viewer.php:112
+#, php-format
+msgid "%d markers imported successfully."
+msgstr ""
+
+#: admin/includes/wgm_messages_viewer.php:114
+msgid "Data imported successfully."
+msgstr ""
+
+#. translators: %d: categories count
+#: admin/includes/wgm_messages_viewer.php:119
+#, php-format
+msgid "Simulation: %d categories would be imported."
+msgstr ""
+
+#. translators: %d: markers count
+#: admin/includes/wgm_messages_viewer.php:122
+#, php-format
+msgid "Simulation: %d markers would be imported."
+msgstr ""
+
+#. translators: 1: maps count, 2: markers count
+#: admin/includes/wgm_messages_viewer.php:128
+#, php-format
+msgid "Simulation: %1$d maps and %2$d markers would be imported."
+msgstr ""
+
+#. translators: %s: error message
+#: admin/includes/wgm_messages_viewer.php:132
+#, php-format
+msgid "Import failed: %s"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:20
+msgid "Failed to load map data. The data may be corrupted."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:28
+msgid "Edit Map"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:31
+#: admin/includes/wpgmap_edit.php:35
+#: admin/includes/wpgmap_list.php:13
+#: admin/includes/wpgmap_list.php:17
+#: includes/Traits/Menu.php:52
+#: templates/admin/map-list.php:12
+#: templates/admin/map-list.php:16
+msgid "Add New"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:35
+#: admin/includes/wpgmap_list.php:17
+#: templates/admin/map-list.php:16
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> Create Unlimited Maps</b>."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:40
+#: admin/includes/wpgmap_list.php:20
+#: admin/includes/wpgmap_settings.php:31
+#: admin/includes/wpgmap_support.php:335
+#: templates/admin/map-list.php:19
+msgid "Upgrade ($19 only)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:42
+#: admin/includes/wpgmap_list.php:22
+#: admin/includes/wpgmap_settings.php:33
+#: templates/admin/map-list.php:21
+msgid "LIVE Chat"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:43
+#: admin/includes/wpgmap_list.php:23
+#: admin/includes/wpgmap_settings.php:34
+#: admin/includes/wpgmap_setup_wizard.php:79
+#: admin/includes/wpgmap_support.php:353
+#: templates/admin/map-list.php:22
+msgid "Documentation"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:62
+msgid "Store Locator"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:70
+msgid "Map Title"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:79
+msgid "Show as map title"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:86
+msgid "Latitude, Longitude(Approx)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:98
+msgid "Zoom"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:110
+msgid "Width (%)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:120
+msgid "Height (px)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:129
+msgid "Map Type"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:150
+msgid "Heading Custom Class"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:162
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> Enable Direction Option on Map</b>."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:163
+msgid "Enable Direction feature(legacy) below map"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:177
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b>Enable Modern Direction Option</b>."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:178
+msgid "Enable Direction feature(modern) inside map"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:197
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> Adjust Direction Drawer Width</b>."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:197
+#: admin/includes/wpgmap_edit.php:198
+msgid "Direction drawer width (px)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:211
+msgid "Map Theme Presets"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:234
+msgid "Map Theme JSON"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:248
+msgid "Advanced Map Controls"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:255
+msgid "Zoom Control"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:260
+msgid "Map Type Control"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:265
+msgid "Street View Control"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:270
+msgid "Fullscreen Control"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:275
+msgid "Rotate Control"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:280
+msgid "Scale Control"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:287
+#: admin/includes/wpgmap_edit.php:310
+msgid "Global/Default"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:311
+msgid "Enable"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:312
+msgid "Disable"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:316
+msgid "Position"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:351
+#, php-format
+msgid "Marker listing styles and advanced options are available in the %s."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:364
+msgid "Marker Listing Style"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:368
+msgid "Marker listing styles"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:371
+msgid "Previous styles"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:377
+msgid "No marker listing"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:378
+msgid "Basic table"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:379
+msgid "Basic list"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:380
+msgid "Advanced table"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:381
+msgid "Carousel"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:403
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> use this Marker Listing Style</b>."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:433
+msgid "Next styles"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:437
+msgid "Choose how markers are listed. Select \"No marker listing\" to disable."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:451
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b>change Listing Placement</b>."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:457
+msgid "Listing Placement"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:467
+msgid "Above"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:471
+msgid "Below"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:475
+msgid "Left"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:479
+msgid "Right"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:483
+msgid "Marker Listing Width (px)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:484
+msgid "e.g. 300 (leave empty for default)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:485
+msgid "Default: 300px for Left/Right placement, 100% for Above/Below."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:494
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b>configure Sorting & Ordering options</b>."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:501
+msgid "Sorting & Ordering"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:504
+msgid "Order Markers By"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:510
+msgid "Title/Name"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:513
+msgid "Created Date"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:514
+msgid "Updated Date"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:515
+msgid "Latitude/Longitude"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:520
+msgid "Sorting Order"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:525
+msgid "Ascending"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:526
+msgid "Descending"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:535
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b>configure Icon Visibility options</b>."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:542
+msgid "Icon Visibility"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:545
+msgid "Enable show on map icon"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:554
+msgid "Enable Get direction icon"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:563
+msgid "Enable direction link"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:569
+msgid "If enabled, a \"Get Directions\" link will be added to the marker infowindow."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:576
+msgid "Search & Filtering"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:579
+msgid "Enable Title Search"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:588
+msgid "Enable Category Filter"
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:616
+#, php-format
+msgid "Store Locator feature is available in the %s."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: admin/includes/wpgmap_edit.php:627
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b> use Store Locator Feature</b>."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:635
+msgid "Enable Store Locator"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:641
+msgid "When enabled, a radius-based search control will be displayed on the map."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:646
+msgid "Title Search Placeholder"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:648
+#: includes/Classes/ShortcodeHandler.php:102
+msgid "Search by Title/Description"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:652
+msgid "Address Search Placeholder"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:654
+#: includes/Classes/ShortcodeHandler.php:105
+msgid "Search by Address, Zip Code..."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:658
+msgid "Default Address"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:664
+msgid "Default Radius"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:670
+msgid "Not Found Message"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:672
+#: includes/Classes/ShortcodeHandler.php:108
+msgid "No results found."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:677
+msgid "Hide markers until search"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:683
+msgid "If enabled, markers will be hidden until a search is performed."
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:687
+msgid "Show center point as an icon"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:696
+msgid "Show distance from search"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:705
+msgid "Show distance in"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:708
+#: includes/Traits/Settings.php:105
+msgid "Miles"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:709
+#: includes/Traits/Settings.php:102
+msgid "Kilometers"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:714
+msgid "Markers listing sort by distance"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:723
+msgid "Store Locator Placement"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:726
+msgid "Inside Map"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:727
+msgid "Above Map"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:728
+msgid "Below Map"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:735
+msgid "Radius Circle Settings"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:738
+msgid "Stroke Color"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:744
+msgid "Stroke Opacity (0-1)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:750
+msgid "Stroke Weight"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:756
+msgid "Fill Color"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:762
+msgid "Fill Opacity (0-1)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:780
+msgid "Search by Address, Zip Code, (Latitude,Longitude)"
+msgstr ""
+
+#: admin/includes/wpgmap_edit.php:787
+msgid "Update Map"
+msgstr ""
+
+#: admin/includes/wpgmap_how_to_use_manuals.php:8
+msgid "How to add Google Map in Page (Block Editor)?"
+msgstr ""
+
+#: admin/includes/wpgmap_how_to_use_manuals.php:13
+msgid "How to add Google Map in Post (Block Editor)?"
+msgstr ""
+
+#: admin/includes/wpgmap_how_to_use_manuals.php:18
+msgid "How to add Google Map in Sidebar as widget?"
+msgstr ""
+
+#: admin/includes/wpgmap_how_to_use_manuals.php:23
+msgid "How to add custom CSS and Javascript?"
+msgstr ""
+
+#: admin/includes/wpgmap_how_to_use_manuals.php:28
+msgid "How to disable Zoom, Street View, Dragging (Control Options)"
+msgstr ""
+
+#: admin/includes/wpgmap_installation_manuals.php:8
+msgid "Complete Installation Help Manual"
+msgstr ""
+
+#: admin/includes/wpgmap_installation_manuals.php:13
+msgid "How to get your own API key?"
+msgstr ""
+
+#: admin/includes/wpgmap_installation_manuals.php:18
+msgid "How to add billing in existing Google Cloud project?"
+msgstr ""
+
+#: admin/includes/wpgmap_installation_manuals.php:23
+msgid "Customize Map Language and Regional Area Settings?"
+msgstr ""
+
+#: admin/includes/wpgmap_installation_manuals.php:28
+msgid "How to get your Lifetime License key? ($59 only)?"
+msgstr ""
+
+#: admin/includes/wpgmap_list.php:8
+#: includes/Traits/Menu.php:36
+#: includes/Traits/Menu.php:37
+#: templates/admin/map-list.php:7
+msgid "All Maps"
+msgstr ""
+
+#: admin/includes/wpgmap_list.php:35
+#: templates/admin/map-list.php:34
+msgid "Type"
+msgstr ""
+
+#: admin/includes/wpgmap_list.php:36
+#: templates/admin/map-list.php:35
+msgid "Width"
+msgstr ""
+
+#: admin/includes/wpgmap_list.php:37
+#: templates/admin/map-list.php:36
+msgid "Height"
+msgstr ""
+
+#: admin/includes/wpgmap_list.php:38
+#: templates/admin/map-list.php:37
+msgid "Shortcode"
+msgstr ""
+
+#: admin/includes/wpgmap_list.php:57
+#: templates/admin/map-list.php:56
+msgid "Copied to Clipboard"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:11
+msgid "Settings updated successfully."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:28
+#: admin/includes/wpgmap_support.php:398
+#: includes/Traits/ActionLinks.php:31
+#: includes/Traits/Menu.php:130
+#: includes/Traits/Menu.php:131
+msgid "Settings"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:51
+msgid "API Key and License Information"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:62
+msgid "Enter API Key: "
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:70
+msgid "The API key may take up to 5 minutes to take effect"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:77
+msgid "Update"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:85
+msgid "Go to Quick Setup"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:99
+msgid "License Key: "
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:107
+msgid "After payment you will get an email with license key"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:114
+msgid "Validate"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:122
+msgid "GET LICENSE KEY"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:176
+msgid "Unlock Export Feature (Premium)"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:178
+msgid "Export your maps and markers to JSON or CSV/Excel for backups or migration. Upgrade now to unlock this feature."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:193
+msgid "Export format"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:204
+msgid "Choose the file format to download."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:210
+msgid "Data type"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:218
+#: admin/includes/wpgmap_settings.php:382
+msgid "Markers"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:232
+msgid "For CSV/Excel choose a single data type to export."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:246
+msgid "For JSON you may select one or more data types to include."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:253
+msgid "Select maps"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:275
+msgid "Search maps..."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:278
+#: admin/includes/wpgmap_settings.php:299
+msgid "Select All"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:280
+#: admin/includes/wpgmap_settings.php:301
+msgid "Select None"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:307
+msgid "No maps found to select. Export \"All maps\" instead or create maps first."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:319
+msgid "Export"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:332
+#: admin/includes/wpgmap_settings.php:472
+msgid "Import"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:340
+msgid "Unlock Import Feature (Premium)"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:342
+msgid "Easily import markers and maps from other plugins or your own backups via JSON or CSV. Upgrade now to unlock this feature."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:351
+msgid "Import maps or markers from a JSON or CSV file. Choose how to merge data and select a target map if applicable."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:364
+msgid "File type"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:367
+#: admin/includes/wpgmap_settings.php:381
+msgid "-- Select --"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:372
+msgid "Select the format of the file you will upload."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:378
+msgid "CSV data type"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:386
+msgid "When importing CSV, choose whether the file contains maps, markers, or categories."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:392
+msgid "Upload file"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:397
+msgid "Choose a .json or .csv file exported from this plugin (or compatible format). Files larger than your PHP upload limit will fail."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:409
+msgid "Import mode"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:412
+msgid "Merge with existing"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:414
+msgid "Replace existing (destructive)"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:416
+msgid "Merge will add records and update where applicable. Replace will remove existing items of the selected type first."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:422
+msgid "Target map"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:426
+msgid "Create new map from import (when applicable)"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:429
+msgid "Import into an existing map"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:448
+msgid "No existing maps found. A new map will be created."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:453
+msgid "Choose whether to create a new map or import into one of your existing maps (if applicable to the file)."
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:459
+msgid "Preview & options"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:462
+msgid "Dry run (validate file, do not write)"
+msgstr ""
+
+#: admin/includes/wpgmap_settings.php:464
+msgid "When enabled the import will be validated and a report returned instead of making changes."
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:12
+msgid "WP Google Map Logo"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:13
+msgid "Quick Setup Wizard"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:21
+msgid "CREATE YOUR API KEY"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:27
+msgid "MAP LANGUAGE & REGION"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:38
+msgid "Create an API Key from Google Maps Platform"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:40
+msgid "Just click on the following button and follow steps, once done copy the API key"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:46
+msgid "Powered by Google Maps Platform"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:51
+msgid "Google Maps Platform"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:52
+msgid " Get an API Key"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:58
+msgid "Once done, enter your API key below"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:65
+msgid "Enter your API KEY here"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:71
+msgid "This process managed by Google Cloud Platform and takes few minutes only!"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:76
+msgid "If you face any issues, please review our"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:88
+msgid "Language and Regional Setup"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:90
+msgid "You can customize your Google Map title & contents by setting up Language and Regional setup"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:94
+#: includes/Traits/Settings.php:278
+msgid "Map Language:"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:111
+msgid "Choose your desired map language"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:117
+msgid "Regional Area:"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:134
+msgid "Choose your regional area"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:145
+msgid "Previous"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:147
+msgid "Next"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:150
+msgid "Finish"
+msgstr ""
+
+#: admin/includes/wpgmap_setup_wizard.php:153
+msgid "Skip Setup Wizard"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:332
+msgid "Support & Documentation"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:343
+msgid "How can we help you?"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:344
+msgid "Find answers in our documentation or get in touch with our support team."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:349
+#: admin/includes/wpgmap_support.php:414
+msgid "Live Chat"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:357
+msgid "Contact Us"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:364
+msgid "📚 Documentation"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:370
+msgid "Installation"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:371
+msgid "Get started with plugin setup, API key configuration, and license activation."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:372
+#: admin/includes/wpgmap_support.php:379
+#: admin/includes/wpgmap_support.php:386
+#: admin/includes/wpgmap_support.php:393
+#: admin/includes/wpgmap_support.php:400
+msgid "Learn more →"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:377
+msgid "Customization"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:378
+msgid "Style your maps with themes, markers, directions, and custom CSS."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:384
+msgid "Troubleshooting"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:385
+msgid "Fix common issues like map loading errors, API conflicts, and billing problems."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:391
+msgid "FAQ"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:392
+msgid "Find quick answers to frequently asked questions about the plugin."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:399
+msgid "Configure global settings, map controls, and advanced options."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:406
+msgid "💬 Get Support"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:415
+msgid "Get instant help from our support team. Available 24/7 for quick questions and guidance."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:417
+msgid "Start Chat"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:425
+msgid "Community Support"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:426
+msgid "Get help from the community and our team on WordPress.org forum."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:429
+msgid "WordPress.org Forum"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:432
+msgid "GitHub Issues"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:441
+msgid "Priority Support"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:442
+msgid "Premium users get priority support with faster response times."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:444
+msgid "Contact Support"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:451
+msgid "🎬 Video Tutorial"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:457
+msgid "WP Google Map Tutorial"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:465
+msgid "🤝 Community & Contribute"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:474
+msgid "Report a Bug"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:475
+msgid "Found a bug? Help us improve by reporting it on GitHub."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:477
+msgid "Create Issue →"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:487
+msgid "Leave a Review"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:488
+msgid "Enjoying the plugin? Your review helps others discover it."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:490
+msgid "Write Review →"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:500
+msgid "Join Community"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:501
+msgid "Connect with other users and get tips on Facebook."
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:503
+msgid "Join Facebook →"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:512
+msgid "System Information (for debugging)"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:518
+msgid "Plugin Version"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:522
+msgid "WordPress Version"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:526
+msgid "PHP Version"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:530
+msgid "Active Theme"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:534
+msgid "Premium Status"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:535
+msgid "Active"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:535
+msgid "Free Version"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:538
+msgid "Memory Limit"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:544
+#: admin/includes/wpgmap_support.php:567
+#: admin/includes/wpgmap_support.php:580
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: admin/includes/wpgmap_support.php:565
+#: admin/includes/wpgmap_support.php:578
+msgid "Copied!"
+msgstr ""
+
+#: admin/includes/wpgmap_troubleshooting_manuals.php:8
+msgid "Do you see \"the page can’t load the map correctly\"?"
+msgstr ""
+
+#: admin/includes/wpgmap_troubleshooting_manuals.php:13
+msgid "Can’t see the “WP Google Map” button in new Guttenburg Editor?"
+msgstr ""
+
+#: admin/includes/wpgmap_troubleshooting_manuals.php:18
+msgid "How to debug and fix the Map loading problems?"
+msgstr ""
+
+#: admin/includes/wpgmap_troubleshooting_manuals.php:23
+msgid "How to fix Multiple Google Map API loading?"
+msgstr ""
+
+#: includes/Classes/Bootstrap.php:121
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/Classes/Bootstrap.php:167
+#: includes/Classes/Bootstrap.php:190
+msgid "Invalid nonce."
+msgstr ""
+
+#: includes/Classes/Bootstrap.php:170
+#: includes/Classes/Bootstrap.php:180
+msgid "Unauthorized"
+msgstr ""
+
+#: includes/Classes/Bootstrap.php:303
+#: includes/Classes/Bootstrap.php:325
+msgid "You do not have permission to update settings."
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:56
+msgid "Shortcode attribute 'id' is missing or invalid."
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:245
+#: templates/public/directions-drawer.php:19
+#: templates/public/legacy-directions.php:8
+#: templates/public/legacy-directions.php:59
+msgid "Get Directions"
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:246
+msgid "Via..."
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:247
+msgid "Remove waypoint"
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:248
+msgid "Unable to retrieve your location."
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:249
+msgid "Geolocation is not supported by your browser."
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:250
+msgid "Please enter both origin and destination."
+msgstr ""
+
+#: includes/Classes/ShortcodeHandler.php:274
+msgid "This message is only visible to Administrator."
+msgstr ""
+
+#: includes/Classes/srmgmap_widget.php:83
+msgid "No title"
+msgstr ""
+
+#: includes/Classes/srmgmap_widget.php:98
+msgid "Title:"
+msgstr ""
+
+#: includes/Classes/srmgmap_widget.php:106
+msgid "Select Google Map Shortcode:"
+msgstr ""
+
+#: includes/Traits/ActionLinks.php:25
+msgid "Upgrade To Pro ($19 only)"
+msgstr ""
+
+#: includes/Traits/ActionLinks.php:27
+msgid "Rate Us"
+msgstr ""
+
+#: includes/Traits/ActionLinks.php:28
+#: includes/Traits/Menu.php:117
+#: includes/Traits/Menu.php:118
+msgid "Support"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:23
+msgid "Please enter a valid API key"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:24
+msgid "Please select a language"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:25
+msgid "Please select a regional area"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:26
+msgid "Invalid license key"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:27
+msgid "Successfully installed."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:28
+msgid "Something went wrong, please reload and try again"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:33
+msgid "Help Manual"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:34
+msgid " Click here to see Help Manual on how to get API key"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:36
+msgid "Video Tutorial"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:38
+msgid "Get API Key"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:44
+msgid "What we collect?"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:45
+msgid "We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:49
+msgid "No map created yet, please click on Add New to create your map."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:50
+msgid "No marker created yet."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:53
+msgid "Opps..."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: includes/Traits/AssetHandler.php:55
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to create <b>Unlimited Maps</b>."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: includes/Traits/AssetHandler.php:57
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to create <b>Unlimited Markers</b>."
+msgstr ""
+
+#. translators: %s: Premium version URL.
+#: includes/Traits/AssetHandler.php:59
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to use <b>this feature</b>."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:106
+msgid "No file"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:107
+msgid "Please choose a file to import."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:108
+msgid "File type mismatch"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:109
+msgid "The selected file does not appear to match the chosen format. Please select the correct file or change the file type."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:110
+msgid "Large file"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:111
+msgid "The selected file is {file} which exceeds the server upload limit of {limit}. The upload will likely fail. Do you still want to continue?"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:112
+msgid "Destructive action"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:113
+msgid "You chose Replace and Create new map. This will delete existing maps and markers. This action cannot be undone. Do you want to continue?"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:114
+msgid "Preview error"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:115
+msgid "Preview failed"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:117
+msgid "Invalid CSV column mapping. Please review the mapping and try again."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:118
+msgid "Failed to create target map for marker import. Check site permissions and try again."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:119
+msgid "The uploaded CSV appears to be empty or malformed."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:120
+msgid "Unknown CSV import data type selected."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:121
+msgid "Insufficient permissions to create maps. You need the proper capability to import into a new map."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:123
+msgid "Continue"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:126
+msgid "Dry Run Result"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:127
+msgid "Dry run completed successfully. {count} items would be imported."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:128
+msgid "Dry run completed successfully. {maps} maps, {markers} markers and {categories} categories would be imported."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:129
+msgid "An error occurred while processing the request. Please try again."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:185
+msgid "CSV Preview"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:186
+#: includes/Traits/AssetHandler.php:189
+msgid "JSON Preview"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:187
+msgid "Column Mapping"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:188
+msgid "Map each CSV column to plugin fields before importing."
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:194
+msgid "Download sample JSON"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:198
+msgid "Download sample CSV (Markers)"
+msgstr ""
+
+#: includes/Traits/AssetHandler.php:202
+msgid "Download sample CSV (Categories)"
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:26
+msgid "Category name is required."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:42
+msgid "Category saved successfully."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:46
+msgid "Failed to save category."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:64
+msgid "Invalid data."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:80
+msgid "Category updated successfully."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:82
+msgid "Failed to update category."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:95
+msgid "Invalid ID."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:105
+msgid "Category deleted successfully."
+msgstr ""
+
+#: includes/Traits/CategoryCRUD.php:107
+msgid "Failed to delete category."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:30
+msgid "You do not have permission to export data."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:365
+msgid "Imported Map"
+msgstr ""
+
+#: includes/Traits/ImportExport.php:595
+msgid "Imported Map (CSV)"
+msgstr ""
+
+#: includes/Traits/ImportExport.php:642
+msgid "Invalid security nonce. Please reload the page."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:646
+msgid "You do not have permission to preview imports."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:654
+msgid "No content detected in the file."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:663
+msgid "Failed to parse CSV header."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:672
+msgid "Could not find valid columns in the CSV header."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:708
+msgid "The JSON file is too large to preview (truncated), but you can still attempt the import."
+msgstr ""
+
+#: includes/Traits/ImportExport.php:710
+msgid "Invalid JSON structure: "
+msgstr ""
+
+#: includes/Traits/ImportExport.php:721
+msgid "Unsupported preview format."
+msgstr ""
+
+#: includes/Traits/InitActions.php:86
+msgid "Google Maps"
+msgstr ""
+
+#: includes/Traits/InitActions.php:87
+msgid "Map"
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:28
+#: includes/Traits/MapCRUD.php:81
+#: includes/Traits/MapCRUD.php:218
+#: includes/Traits/MapCRUD.php:373
+msgid "Unauthorized access tried."
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:52
+msgid "Edit"
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:54
+msgid "Delete"
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:160
+#: includes/Traits/MarkerCRUD.php:77
+#: includes/Traits/MarkerCRUD.php:166
+msgid "Please input Latitude and Longitude"
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:201
+msgid "Map created Successfully."
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:203
+msgid "Map updated Successfully."
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:247
+msgid "Insert"
+msgstr ""
+
+#: includes/Traits/MapCRUD.php:422
+msgid "Deleted Successfully."
+msgstr ""
+
+#: includes/Traits/MarkerCRUD.php:95
+msgid "Please upgrade to premium version to create unlimited markers"
+msgstr ""
+
+#: includes/Traits/MarkerCRUD.php:133
+msgid "Marker Saved Successfully."
+msgstr ""
+
+#: includes/Traits/MarkerCRUD.php:212
+#: includes/Traits/MarkerCRUD.php:328
+msgid "Updated Successfully."
+msgstr ""
+
+#: includes/Traits/MarkerCRUD.php:378
+#: includes/Traits/MarkerCRUD.php:427
+msgid "Markers fetched successfully."
+msgstr ""
+
+#: includes/Traits/MarkerCRUD.php:397
+msgid "Invalid request. Please reload and try again."
+msgstr ""
+
+#: includes/Traits/MediaButtons.php:62
+msgid "Create New Map"
+msgstr ""
+
+#: includes/Traits/Menu.php:51
+msgid "Add new Map"
+msgstr ""
+
+#: includes/Traits/Menu.php:71
+#: includes/Traits/Notice.php:67
+#: includes/Traits/Notice.php:79
+msgid "Security check failed."
+msgstr ""
+
+#: includes/Traits/Menu.php:103
+#: includes/Traits/Menu.php:104
+msgid "Quick Setup"
+msgstr ""
+
+#: includes/Traits/Menu.php:145
+#: includes/Traits/Menu.php:147
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: includes/Traits/Menu.php:199
+msgid "Unauthorized access. You do not have permission to view this page."
+msgstr ""
+
+#. translators: %s: premium version link
+#: includes/Traits/Menu.php:211
+#, php-format
+msgid "You need to upgrade to the <a target=\"_blank\" href=\"%s\">Premium</a> Version to <b>Create Unlimited Maps</b>."
+msgstr ""
+
+#: includes/Traits/Menu.php:224
+msgid "Back to Plugin Home"
+msgstr ""
+
+#: includes/Traits/Menu.php:233
+msgid "Invalid map ID."
+msgstr ""
+
+#. translators: 1: Quick Setup URL, 2: Documentation URL
+#: includes/Traits/Notice.php:38
+#, php-format
+msgid "You must generate your own <b>API Key</b> to use Google Map, Now it's <b>Super Easy</b>, Please go to <span style=\"font-weight: bold;\">WP Google Map</span><i class=\"dashicons  dashicons-arrow-right-alt2\"></i><a href=\"%1$s\" style=\"text-decoration: none;font-weight: bold;\">Quick Setup</a> and follow easy steps, <i class=\"dashicons  dashicons-external\"></i><a href=\"%2$s\" target=\"_blank\" style=\"text-decoration: none;font-weight: bold;\">Documentation</a>"
+msgstr ""
+
+#. translators: %1$s: Plugin name
+#: includes/Traits/Notice.php:167
+#, php-format
+msgid "<span style='color:green;'>We hope you're enjoying using <b style='color:#007cba'>%1$s</b> plugin. Could you please give us a BIG favour and give it a 5-star rating on WordPress to help us spread the word and boost our motivation!</span>"
+msgstr ""
+
+#: includes/Traits/Notice.php:186
+msgid "Maybe Later"
+msgstr ""
+
+#: includes/Traits/Notice.php:190
+msgid "I need help"
+msgstr ""
+
+#: includes/Traits/Notice.php:193
+msgid "Never show again"
+msgstr ""
+
+#: includes/Traits/Settings.php:45
+msgid "Add your custom CSS code if needed."
+msgstr ""
+
+#: includes/Traits/Settings.php:59
+msgid "Add your custom JS code if needed."
+msgstr ""
+
+#: includes/Traits/Settings.php:74
+msgid "Where required"
+msgstr ""
+
+#: includes/Traits/Settings.php:77
+msgid "Always"
+msgstr ""
+
+#: includes/Traits/Settings.php:80
+msgid "Only Front End"
+msgstr ""
+
+#: includes/Traits/Settings.php:83
+msgid "Only Back End"
+msgstr ""
+
+#: includes/Traits/Settings.php:86
+msgid "Never"
+msgstr ""
+
+#: includes/Traits/Settings.php:121
+msgid "OR (Show if any category matches)"
+msgstr ""
+
+#: includes/Traits/Settings.php:124
+msgid "AND (Show if all categories match)"
+msgstr ""
+
+#: includes/Traits/Settings.php:128
+msgid "Choose how multiple selected categories should be filtered on the frontend."
+msgstr ""
+
+#: includes/Traits/Settings.php:143
+msgid "Administrator"
+msgstr ""
+
+#: includes/Traits/Settings.php:146
+msgid "Editor"
+msgstr ""
+
+#: includes/Traits/Settings.php:149
+msgid "Author"
+msgstr ""
+
+#: includes/Traits/Settings.php:152
+msgid "Contributor"
+msgstr ""
+
+#: includes/Traits/Settings.php:155
+msgid "Subscriber"
+msgstr ""
+
+#: includes/Traits/Settings.php:171
+msgid "Check this option if your want to prevent other plugin or theme loading map api, in case of you are getting api key error, included multiple api key error."
+msgstr ""
+
+#: includes/Traits/Settings.php:185
+msgid "Disable Full Screen Control"
+msgstr ""
+
+#: includes/Traits/Settings.php:187
+msgid "Disable StreetView"
+msgstr ""
+
+#: includes/Traits/Settings.php:190
+msgid "Disable Zoom Controls"
+msgstr ""
+
+#: includes/Traits/Settings.php:192
+msgid "Disable Pan Controls"
+msgstr ""
+
+#: includes/Traits/Settings.php:195
+msgid "Disable Map Type Controls"
+msgstr ""
+
+#: includes/Traits/Settings.php:198
+msgid "Disable Mouse Wheel Zoom"
+msgstr ""
+
+#: includes/Traits/Settings.php:201
+msgid "Disable Mouse Dragging"
+msgstr ""
+
+#: includes/Traits/Settings.php:205
+msgid "Disable Mouse Double Click Zooming"
+msgstr ""
+
+#: includes/Traits/Settings.php:210
+msgid "Enable direction From/To Auto Complete"
+msgstr ""
+
+#: includes/Traits/Settings.php:234
+msgid "Chose your desired map language"
+msgstr ""
+
+#: includes/Traits/Settings.php:258
+msgid "Chose your regional area"
+msgstr ""
+
+#: includes/Traits/Settings.php:271
+msgid "Map Language and Regional Settings<hr/>"
+msgstr ""
+
+#: includes/Traits/Settings.php:286
+msgid "Map Region:"
+msgstr ""
+
+#: includes/Traits/Settings.php:295
+msgid "Custom Scripts<hr/>"
+msgstr ""
+
+#: includes/Traits/Settings.php:302
+msgid "Custom CSS:"
+msgstr ""
+
+#: includes/Traits/Settings.php:310
+msgid "Custom JS:"
+msgstr ""
+
+#: includes/Traits/Settings.php:331
+msgid "Map Control Options:"
+msgstr ""
+
+#: includes/Traits/Settings.php:351
+msgid "Load Map API:"
+msgstr ""
+
+#: includes/Traits/Settings.php:359
+msgid "Prevent Map API loading for other plugin and themes:"
+msgstr ""
+
+#: includes/Traits/Settings.php:367
+msgid "Distance Unit:"
+msgstr ""
+
+#: includes/Traits/Settings.php:375
+msgid "Minimum Role for Map Editor:"
+msgstr ""
+
+#: includes/Traits/Settings.php:391
+msgid "Category Selection Logic:"
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:7
+#: public/includes/marker_listing_theme/basic_table.php:8
+#: templates/public/marker-listing/advanced_table.php:5
+#: templates/public/marker-listing/basic_table.php:6
+msgid "Map markers"
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:11
+#: templates/public/marker-listing/advanced_table.php:9
+#: templates/public/marker-listing/advanced_table.php:126
+msgid "Image"
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:15
+#: templates/public/marker-listing/advanced_table.php:13
+#: templates/public/marker-listing/advanced_table.php:130
+msgid "Actions"
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:83
+#: public/includes/marker_listing_theme/advanced_table.php:215
+#: public/includes/marker_listing_theme/basic_list.php:72
+#: public/includes/marker_listing_theme/basic_table.php:97
+#: public/includes/marker_listing_theme/carousel.php:88
+#: templates/public/marker-listing/advanced_table.php:91
+#: templates/public/marker-listing/advanced_table.php:266
+#: templates/public/marker-listing/basic_list.php:89
+#: templates/public/marker-listing/basic_table.php:116
+#: templates/public/marker-listing/carousel.php:106
+msgid "Show on Map"
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:84
+#: public/includes/marker_listing_theme/advanced_table.php:216
+#: public/includes/marker_listing_theme/basic_list.php:77
+#: public/includes/marker_listing_theme/basic_table.php:102
+#: public/includes/marker_listing_theme/carousel.php:91
+#: templates/public/marker-listing/advanced_table.php:92
+#: templates/public/marker-listing/advanced_table.php:267
+#: templates/public/marker-listing/basic_list.php:94
+#: templates/public/marker-listing/basic_table.php:121
+#: templates/public/marker-listing/carousel.php:109
+msgid "Directions"
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:106
+#: public/includes/marker_listing_theme/basic_list.php:26
+#: public/includes/marker_listing_theme/basic_table.php:44
+#: templates/public/marker-listing/advanced_table.php:120
+#: templates/public/marker-listing/basic_list.php:39
+#: templates/public/marker-listing/basic_table.php:57
+msgid "No markers found."
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:229
+#: public/includes/marker_listing_theme/basic_list.php:95
+#: public/includes/marker_listing_theme/basic_table.php:144
+#: templates/public/marker-listing/basic_list.php:112
+#: templates/public/marker-listing/basic_table.php:163
+msgid "Unable to load markers."
+msgstr ""
+
+#: public/includes/marker_listing_theme/advanced_table.php:233
+#: public/includes/marker_listing_theme/basic_list.php:98
+#: public/includes/marker_listing_theme/basic_table.php:147
+#: templates/public/marker-listing/basic_list.php:115
+#: templates/public/marker-listing/basic_table.php:166
+msgid "Failed to load markers."
+msgstr ""
+
+#: public/includes/marker_listing_theme/basic_table.php:20
+#: templates/public/marker-listing/basic_table.php:18
+msgid "Loading markers..."
+msgstr ""
+
+#: public/includes/marker_listing_theme/carousel.php:13
+#: templates/public/marker-listing/carousel.php:13
+msgid "Markers Carousel"
+msgstr ""
+
+#: public/includes/marker_listing_theme/carousel.php:48
+#: templates/public/marker-listing/carousel.php:64
+msgid "Untitled Marker"
+msgstr ""
+
+#: public/includes/marker_listing_theme/carousel.php:206
+#: templates/public/marker-listing/carousel.php:223
+msgid "No markers to display"
+msgstr ""
+
+#: public/includes/marker_listing_theme/carousel.php:240
+#: templates/public/marker-listing/carousel.php:279
+msgid "No markers found in this area"
+msgstr ""
+
+#: templates/public/directions-drawer.php:9
+msgid "Open Directions"
+msgstr ""
+
+#: templates/public/directions-drawer.php:39
+#: templates/public/legacy-directions.php:31
+msgid "Choose start point..."
+msgstr ""
+
+#: templates/public/directions-drawer.php:40
+#: templates/public/directions-drawer.php:51
+#: templates/public/legacy-directions.php:32
+#: templates/public/legacy-directions.php:43
+msgid "Use my location"
+msgstr ""
+
+#: templates/public/directions-drawer.php:50
+#: templates/public/legacy-directions.php:42
+msgid "Choose destination..."
+msgstr ""
+
+#: templates/public/directions-drawer.php:59
+msgid "Add Waypoint"
+msgstr ""
+
+#: templates/public/directions-drawer.php:66
+msgid "Route Options"
+msgstr ""
+
+#: templates/public/directions-drawer.php:69
+msgid "Go"
+msgstr ""
+
+#: templates/public/directions-drawer.php:76
+msgid "Avoid Tolls"
+msgstr ""
+
+#: templates/public/directions-drawer.php:79
+msgid "Avoid Highways"
+msgstr ""
+
+#: templates/public/directions-drawer.php:82
+msgid "Avoid Ferries"
+msgstr ""
+
+#: templates/public/legacy-directions.php:13
+#: templates/public/legacy-directions.php:51
+msgid "Driving"
+msgstr ""
+
+#: templates/public/legacy-directions.php:16
+#: templates/public/legacy-directions.php:52
+msgid "Walking"
+msgstr ""
+
+#: templates/public/legacy-directions.php:19
+#: templates/public/legacy-directions.php:53
+msgid "Bicycling"
+msgstr ""
+
+#: templates/public/legacy-directions.php:22
+#: templates/public/legacy-directions.php:54
+msgid "Transit"
+msgstr ""
+
+#: templates/public/legacy-directions.php:29
+msgid "From"
+msgstr ""
+
+#: templates/public/legacy-directions.php:40
+msgid "To"
+msgstr ""
+
+#: templates/public/legacy-directions.php:65
+msgid "Loading"
+msgstr ""
+
+#: templates/public/search-control.php:29
+msgid "Filter Categories"
+msgstr ""
+
+#: templates/public/search-control.php:42
+msgid "Radius"
+msgstr ""

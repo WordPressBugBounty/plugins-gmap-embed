@@ -1,830 +1,1068 @@
-"use strict";
-var wgm_map,
-  wgm_marker1,
-  wgm_infowindow,
-  wgm_icon =
-    "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png",
-  info_content,
-  current_map_markers = [],
-  current_map_infowindows = [],
-  // new marker
-  wgm_new_marker = null,
-  wgm_new_marker_infoindow = null,
-  wgm_new_marker_name = "",
-  wgm_new_marker_desc = "",
-  // existing marker
-  wgm_existing_marker,
-  wgm_existing_marker_infoindow = null,
-  wgm_existing_marker_name = "",
-  wgm_existing_marker_desc = "",
-  wgm_custom_marker,
-  custom_marker_infowindow,
-  is_marker_edit = false,
-  wgm_no_of_marker = 0;
+(function ($) {
+  "use strict";
 
-/**
- * Select element by ID
- *
- * @param id
- * @return html_element
- * @since 1.0.0
- */
-function _wgm_e(id) {
-  return document.getElementById(id);
-}
-
-// This function allows the script to run from both locations (visual and text)
-function wgm_generate_infowindow() {
-  if (is_marker_edit === true) {
-    // current_map_infowindows
-    var marker_id = parseInt(jQuery(".wpgmap_marker_update").attr("markerid"));
-    // info window object for New Marker creating if not initiated yet
-    wgm_existing_marker_infoindow = current_map_infowindows[marker_id];
-
-    // Info window contents generating from input and editor
-    wgm_existing_marker_name =
-      '<span class="info_content_title" style="font-size:18px;font-weight: bold;font-family: Arial;">' +
-      jQuery("#wpgmap_marker_name").val() +
-      "</span>";
-    wgm_existing_marker_desc = tmce_getContent(
-      "wpgmap_marker_desc",
-      "wpgmap_marker_desc"
-    );
-
-    // Set info window content if info window object initiated
-    if (wgm_existing_marker_infoindow !== null) {
-      wgm_existing_marker_infoindow.setContent(
-        wgm_existing_marker_name + wgm_existing_marker_desc
-      );
-    }
-
-    // existing marker, when editing
-    if (
-      typeof wgm_existing_marker !== "undefined" &&
-      jQuery("#wpgmap_marker_infowindow_show").val() === "1"
-    ) {
-      wgm_existing_marker_infoindow.open({
-        anchor: wgm_existing_marker,
-        shouldFocus: false,
-      });
-    }
-  } else {
-    // info window object for New Marker creating if not initiated yet
-    if (wgm_new_marker_infoindow === null) {
-      wgm_new_marker_infoindow = new google.maps.InfoWindow({
-        content: "",
-      });
-    }
-
-    // Info window contents generating from input and editor
-    wgm_new_marker_name =
-      '<span class="info_content_title" style="font-size:18px;font-weight: bold;font-family: Arial;">' +
-      jQuery("#wpgmap_marker_name").val() +
-      "</span>";
-    wgm_new_marker_desc = tmce_getContent(
-      "wpgmap_marker_desc",
-      "wpgmap_marker_desc"
-    );
-
-    // Set info window content if info window object initiated
-    if (wgm_new_marker_infoindow !== null) {
-      wgm_new_marker_infoindow.setContent(
-        wgm_new_marker_name + wgm_new_marker_desc
-      );
-    }
-
-    // mew marker, when creating new one
-    if (
-      typeof wgm_new_marker !== "undefined" &&
-      jQuery("#wpgmap_marker_infowindow_show").val() === "1"
-    ) {
-      wgm_new_marker_infoindow.open({
-        anchor: wgm_new_marker,
-        shouldFocus: false,
-      });
-    }
-  }
-}
-
-/**
- * Defining Map event listeners
- *
- * @param wgm_map object
- * @since 1.0.0
- */
-function wgm_addMapListeners(wgm_map) {
-  // On map center changed
-  wgm_map.addListener("center_changed", function () {
-    jQuery("#wpgmap_center_lat_lng").val(
-      wgm_map.center.lat() + "," + wgm_map.center.lng()
-    );
-  });
-
-  // On map zoom level changed
-  wgm_map.addListener("zoom_changed", function () {
-    jQuery("#wpgmap_map_zoom").val(wgm_map.zoom);
-  });
-}
-
-/**
- * In case of already initialized map
- *
- * @param map_type
- * @param center_lat
- * @param center_lng
- * @since 1.0.0
- */
-function wgm_generateAlreadyInitializedMap(map_type, center_lat, center_lng) {
-  if (map_type == "ROADMAP") {
-    wgm_map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-  } else if (map_type == "SATELLITE") {
-    wgm_map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-  } else if (map_type == "HYBRID") {
-    wgm_map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-  } else if (map_type == "TERRAIN") {
-    wgm_map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
-  }
-
-  wgm_map.setCenter({ lat: center_lat, lng: center_lng });
-
-  // Add Map listeners
-  wgm_addMapListeners(wgm_map);
-
-  // Adding dragend Event Listener
-  // wgm_addMarkerDragendListener(wgm_marker1);
-}
-
-/**
- * Update map settings
- *
- * @param map_type
- * @param center_lat
- * @param center_lng
- * @param zoom
- * @returns {{mapTypeId: *, center: {lng, lat}, zoom}}
- * @since 1.0.0
- */
-function wgm_setMapSettingsByMapType(map_type, center_lat, center_lng, zoom) {
-  var wgm_gmap_settings = {
-    center: { lat: center_lat, lng: center_lng },
-    zoom: zoom,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-  };
-  if (map_type == "ROADMAP") {
-    wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.ROADMAP;
-  } else if (map_type == "SATELLITE") {
-    wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.SATELLITE;
-  } else if (map_type == "HYBRID") {
-    wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.HYBRID;
-  } else if (map_type == "TERRAIN") {
-    wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.TERRAIN;
-  }
-  return wgm_gmap_settings;
-}
-
-/**
- * Defining Marker listener
- *
- * @param marker
- * @since 1.0.0
- */
-function wgm_addMarkerDragendListener(marker) {
-  marker.addListener("dragend", function (markerLocation) {
-    _wgm_e("wpgmap_marker_lat_lng").value =
-      markerLocation.latLng.lat() + "," + markerLocation.latLng.lng();
-  });
-}
-
-/**
- * Map autocomplete implementation
- *
- * @param id
- * @param input
- * @param center_lat
- * @param center_lng
- * @param map_type
- * @param zoom
- * @since 1.0.0
- */
-function wgm_initAutocomplete(
-  id,
-  input,
-  center_lat,
-  center_lng,
-  map_type,
-  zoom
-) {
-  // In case of already initiated map
-  if (typeof wgm_map === "object") {
-    wgm_generateAlreadyInitializedMap(map_type, center_lat, center_lng);
-    return false;
-  }
-
-  // Set Map Settings by Map Type
-  var wgm_gmap_settings = wgm_setMapSettingsByMapType(
-    map_type,
-    center_lat,
-    center_lng,
-    zoom
-  );
-
-  wgm_map = new google.maps.Map(_wgm_e(id), wgm_gmap_settings);
-  if (wgm_theme_json.length > 0) {
-    wgm_map.setOptions({ styles: JSON.parse(wgm_theme_json) });
-  }
-
-  google.maps.event.addListener(wgm_map, "rightclick", function (event) {
-    generateMarkerInfoByRightClick(event);
-  });
-
-  // // Create the search box and link it to the UI element.
-  var wgm_input = document.getElementById(input);
-  var wgm_searchBox = new google.maps.places.SearchBox(wgm_input);
-
-  // Place input search box
-  wgm_map.controls[google.maps.ControlPosition.TOP_LEFT].push(wgm_input);
-  // =====================showing multiple marker=============
-  var data = {
-    action: "wpgmapembed_get_markers_by_map_id",
-    data: {
-      map_id: wgm_l.wgm_object.map_id,
-      ajax_nonce: wgm_l.ajax_nonce,
-    },
+  /**
+   * Internal State Management
+   */
+  var state = {
+    map: null,
+    infowindow: null,
+    icon: "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png",
+    current_markers: {},
+    current_infowindows: {},
+    new_marker: null,
+    new_marker_infowindow: null,
+    existing_marker: null,
+    existing_marker_infowindow: null,
+    is_marker_edit: false,
+    no_of_markers: 0,
   };
 
-  jQuery.post(ajaxurl, data, function (response) {
-    response = JSON.parse(response);
-    wgm_no_of_marker = response.markers.length;
+  // Expose necessary functions to window for other scripts (e.g., TinyMCE, Icon Selector)
+  window.wgm_admin_map = state;
 
-    // Show hints for Marker creation
-    if (wgm_no_of_marker === 0) {
-      jQuery(document.body).find(".wgm_marker_create_hints").show();
-    }
+  /**
+   * Select element by ID helper
+   *
+   * @param {string} id - The ID of the element to select
+   * @return {HTMLElement|null} The DOM element or null
+   * @since 1.0.0
+   */
+  function _wgm_e(id) {
+    return document.getElementById(id);
+  }
 
-    if (wgm_no_of_marker >= 1 && wgm_l.is_premium_user !== "1") {
-      jQuery(".add_new_marker_btn_area").find(".add_new_marker").css({
-        opacity: 0.5,
-      });
-      jQuery(".add_new_marker_btn_area").find(".wgm-pro-label").show();
-    }
-    if (response.markers.length > 0) {
-      response.markers.forEach(function (marker) {
-        var marker_lat_lng = marker.lat_lng.split(",");
+  /**
+   * Attach click handler to marker
+   *
+   * @param {google.maps.Marker} marker - The marker object
+   * @param {Function} handler - The event handler function
+   * @since 1.0.0
+   */
+  function wgm_attachClickHandler(marker, handler) {
+    marker.addListener("click", handler);
+  }
 
-        var wgm_custom_marker_options = {
-          position: new google.maps.LatLng(
-            marker_lat_lng[0],
-            marker_lat_lng[1]
-          ),
-          title: marker.marker_name,
-          animation: google.maps.Animation.DROP,
-        };
+  /**
+   * Generates and updates infowindow content for new or existing markers.
+   * Handles both visual and text editor modes for description.
+   */
+  window.wgm_generate_infowindow = function () {
+    var markerNameVal = $("#wpgmap_marker_name").val();
+    var safeMarkerName = markerNameVal
+      ? $("<div>").text(markerNameVal).html()
+      : "";
+    var titleHtml =
+      '<p class="info_content_title" style="font-size:16px;font-weight:bold;margin:0 0 5px 0;">' +
+      safeMarkerName +
+      "</p>";
+    var descHtml = tmce_getContent("wpgmap_marker_desc", "wpgmap_marker_desc");
 
-        // Set Icon
-        if (marker.icon !== "") {
-          wgm_custom_marker_options.icon = marker.icon;
-        }
+    if (state.is_marker_edit) {
+      var marker_id = parseInt($(".wpgmap_marker_update").attr("markerid"), 10);
+      state.existing_marker_infowindow = state.current_infowindows[marker_id];
 
-        // Set marker URL
-        if (marker.have_marker_link === "1") {
-          wgm_custom_marker_options.url = marker.marker_link;
-        }
-        wgm_custom_marker = new google.maps.Marker(wgm_custom_marker_options);
-        if (marker.have_marker_link === "1") {
-          google.maps.event.addListener(
-            wgm_custom_marker,
-            "click",
-            function () {
-              var wgm_target = "_self";
-              if (marker.marker_link_new_tab === "1") {
-                wgm_target = "_blank";
-              }
-              window.open(this.url, wgm_target);
-            }
-          );
-        }
+      if (!state.existing_marker_infowindow) {
+        state.existing_marker_infowindow = new google.maps.InfoWindow();
+        state.current_infowindows[marker_id] = state.existing_marker_infowindow;
+      }
 
-        wgm_custom_marker.setMap(wgm_map);
-        //marker.marker_desc = marker.marker_desc.replace(/&gt;/g, '>').replace(/&lt;/g, '<');
-        var marker_name =
-          marker.marker_name !== null
-            ? '<span class="info_content_title" style="font-size:18px;font-weight: bold;font-family: Arial;">' +
-              marker.marker_name +
-              "</span><br/>"
-            : "";
-        custom_marker_infowindow = new google.maps.InfoWindow({
-          content: marker_name + marker.marker_desc,
+      var editIcon =
+        '<span class="wgm_marker_edit_iw" data-markerid="' +
+        marker_id +
+        '" style="float:right; cursor:pointer;" title="Edit Marker"><i class="dashicons dashicons-edit"></i></span>';
+      state.existing_marker_infowindow.setContent(
+        editIcon + titleHtml + descHtml
+      );
+
+      if (
+        state.existing_marker &&
+        $("#wpgmap_marker_infowindow_show").val() === "1"
+      ) {
+        state.existing_marker_infowindow.open({
+          anchor: state.existing_marker,
+          shouldFocus: false,
         });
-        if (marker.show_desc_by_default === "1") {
-          custom_marker_infowindow.open({
-            anchor: wgm_custom_marker,
+      }
+    } else {
+      if (!state.new_marker_infowindow) {
+        state.new_marker_infowindow = new google.maps.InfoWindow();
+      }
+
+      state.new_marker_infowindow.setContent(titleHtml + descHtml);
+
+      if (
+        state.new_marker &&
+        $("#wpgmap_marker_infowindow_show").val() === "1"
+      ) {
+        state.new_marker_infowindow.open({
+          anchor: state.new_marker,
+          shouldFocus: false,
+        });
+      }
+    }
+  };
+
+  /**
+   * Wrapper for generating infowindow
+   */
+  function wgm_openInfoWindow() {
+    wgm_generate_infowindow();
+  }
+
+  /**
+   * Defining Map event listeners
+   *
+   * @param {google.maps.Map} map - The map object
+   */
+  function wgm_addMapListeners(map) {
+    map.addListener("center_changed", function () {
+      $("#wpgmap_center_lat_lng").val(
+        map.center.lat() + "," + map.center.lng()
+      );
+    });
+
+    map.addListener("zoom_changed", function () {
+      $("#wpgmap_map_zoom").val(map.zoom);
+    });
+  }
+
+  /**
+   * Initializes listeners for an already existing map instance
+   */
+  function wgm_generateAlreadyInitializedMap(map_type, center_lat, center_lng) {
+    if (state.map && typeof state.map.setMapTypeId === "function") {
+      state.map.setMapTypeId(
+        google.maps.MapTypeId[map_type] || google.maps.MapTypeId.ROADMAP
+      );
+      state.map.setCenter({ lat: center_lat, lng: center_lng });
+      wgm_addMapListeners(state.map);
+    }
+  }
+
+  /**
+   * Generate map settings object based on map type
+   *
+   * @param {string} map_type
+   * @param {number} center_lat
+   * @param {number} center_lng
+   * @param {number} zoom
+   * @returns {object} Google Maps options object
+   * @since 1.0.0
+   */
+  function wgm_setMapSettingsByMapType(map_type, center_lat, center_lng, zoom) {
+    var wgm_gmap_settings = {
+      center: { lat: center_lat, lng: center_lng },
+      zoom: zoom,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+    };
+    if (map_type == "ROADMAP") {
+      wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.ROADMAP;
+    } else if (map_type == "SATELLITE") {
+      wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.SATELLITE;
+    } else if (map_type == "HYBRID") {
+      wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.HYBRID;
+    } else if (map_type == "TERRAIN") {
+      wgm_gmap_settings.mapTypeId = google.maps.MapTypeId.TERRAIN;
+    }
+    return wgm_gmap_settings;
+  }
+
+  /**
+   * Reverse geocoding to update address field from coordinates
+   */
+  function wgm_reverse_geocode(latLng) {
+    if (typeof google === "undefined" || !google.maps.Geocoder) return;
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ location: latLng }, function (results, status) {
+      if (status === "OK") {
+        if (results[0]) {
+          $("#wpgmap_marker_address").val(results[0].formatted_address);
+        }
+      } else {
+        console.warn("WGM: Geocoder failed due to: " + status);
+      }
+    });
+  }
+
+  /**
+   * Close all open infowindows on the map
+   */
+  function wgm_close_all_infowindows() {
+    Object.values(state.current_infowindows).forEach(function (iw) {
+      if (iw) iw.close();
+    });
+    if (state.new_marker_infowindow) state.new_marker_infowindow.close();
+    if (state.existing_marker_infowindow)
+      state.existing_marker_infowindow.close();
+  }
+
+  /**
+   * Create a new marker at a specific location
+   */
+  function wgm_createMarkerAt(latLng) {
+    if (!state.map) return;
+    var baseOptions = {
+      position: latLng,
+      draggable: true,
+      map: state.map,
+      animation: google.maps.Animation ? google.maps.Animation.DROP : undefined,
+    };
+
+    state.new_marker = new google.maps.Marker(baseOptions);
+    window.wgm_generate_infowindow();
+
+    state.new_marker.addListener("click", function () {
+      if (state.new_marker_infowindow) {
+        var isOpen = !!state.new_marker_infowindow.getMap();
+        wgm_close_all_infowindows();
+        if (!isOpen) {
+          state.new_marker_infowindow.open({
+            anchor: state.new_marker,
             shouldFocus: false,
           });
         }
-        current_map_markers[parseInt(marker.id)] = wgm_custom_marker;
-        current_map_infowindows[parseInt(marker.id)] = custom_marker_infowindow;
+      }
+    });
+
+    if (state.new_marker_infowindow) {
+      wgm_close_all_infowindows();
+      state.new_marker_infowindow.open({
+        anchor: state.new_marker,
+        shouldFocus: false,
       });
     }
-  });
+    wgm_addMarkerDragendListener(state.new_marker);
+  }
 
-  // multiple marker showing end
-
-  // Invoking Map listeners
-  wgm_addMapListeners(wgm_map);
-
-  // Bias the SearchBox results towards current map's viewport.
-  wgm_map.addListener("bounds_changed", function () {
-    wgm_searchBox.setBounds(wgm_map.getBounds());
-  });
-
-  var wgm_markers = [];
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  wgm_searchBox.addListener("places_changed", function () {
-    // wgm_marker1.setMap(null);
-    var wgm_places = wgm_searchBox.getPlaces();
-
-    if (wgm_places.length === 0) {
-      return;
-    }
-    // wgm_marker1.setMap(null);
-    // Clear out the old markers.
-    wgm_markers.forEach(function (marker) {
-      marker.setMap(null);
+  /**
+   * Attach dragend listener to a marker to update coordinates and address
+   *
+   * @param {google.maps.Marker} marker
+   * @since 1.0.0
+   */
+  function wgm_addMarkerDragendListener(marker) {
+    marker.addListener("dragend", function (markerLocation) {
+      var lat = markerLocation.latLng.lat();
+      var lng = markerLocation.latLng.lng();
+      _wgm_e("wpgmap_marker_lat_lng").value = lat + "," + lng;
+      wgm_reverse_geocode(markerLocation.latLng);
     });
-    wgm_markers = [];
+  }
 
-    // For each place, get the icon, name and location.
-    var wgm_bounds = new google.maps.LatLngBounds();
-    wgm_places.forEach(function (place) {
-      if (!place.geometry) {
-        console.log("Returned place contains no geometry");
+  /**
+   * Initialize Map and Autocomplete functionality
+   */
+  window.wgm_initAutocomplete = function (
+    id,
+    input,
+    center_lat,
+    center_lng,
+    map_type,
+    zoom
+  ) {
+    if (state.map) {
+      wgm_generateAlreadyInitializedMap(map_type, center_lat, center_lng);
+      return false;
+    }
+
+    var mapDiv = _wgm_e(id);
+    if (!mapDiv) return;
+
+    var gmapSettings = wgm_setMapSettingsByMapType(
+      map_type,
+      center_lat,
+      center_lng,
+      zoom
+    );
+
+    state.map = new google.maps.Map(mapDiv, gmapSettings);
+
+    if (typeof wgm_theme_json !== "undefined" && wgm_theme_json.length > 0) {
+      try {
+        state.map.setOptions({ styles: JSON.parse(wgm_theme_json) });
+      } catch (e) {
+        console.error("WGM: Failed to parse theme JSON", e);
+      }
+    }
+
+    // Address Autocomplete for Marker Form
+    var markerAddressInput = document.getElementById("wpgmap_marker_address");
+    if (markerAddressInput) {
+      var markerAutocomplete = new google.maps.places.Autocomplete(
+        markerAddressInput
+      );
+      markerAutocomplete.bindTo("bounds", state.map);
+      markerAutocomplete.addListener("place_changed", function () {
+        var place = markerAutocomplete.getPlace();
+        if (!place.geometry) return;
+
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+        $("#wpgmap_marker_lat_lng").val(lat + "," + lng);
+
+        var latLng = new google.maps.LatLng(lat, lng);
+        if (state.is_marker_edit) {
+          if (state.existing_marker) state.existing_marker.setPosition(latLng);
+        } else {
+          if (state.new_marker) {
+            state.new_marker.setPosition(latLng);
+          } else {
+            wgm_createMarkerAt(latLng);
+          }
+        }
+        state.map.panTo(latLng);
+      });
+    }
+
+    google.maps.event.addListener(state.map, "rightclick", function (event) {
+      generateMarkerInfoByRightClick(event);
+    });
+
+    var wgm_input = document.getElementById(input);
+    if (wgm_input) {
+      var wgm_searchBox = new google.maps.places.SearchBox(wgm_input);
+      state.map.controls[google.maps.ControlPosition.TOP_LEFT].push(wgm_input);
+
+      state.map.addListener("bounds_changed", function () {
+        wgm_searchBox.setBounds(state.map.getBounds());
+      });
+
+      wgm_searchBox.addListener("places_changed", function () {
+        var wgm_places = wgm_searchBox.getPlaces();
+        if (wgm_places.length === 0) return;
+
+        var wgm_bounds = new google.maps.LatLngBounds();
+        wgm_places.forEach(function (place) {
+          if (!place.geometry) return;
+
+          $("#wpgmap_latlng").val(
+            place.geometry.location.lat() + "," + place.geometry.location.lng()
+          );
+
+          if (place.geometry.viewport) {
+            wgm_bounds.union(place.geometry.viewport);
+          } else {
+            wgm_bounds.extend(place.geometry.location);
+          }
+        });
+        state.map.fitBounds(wgm_bounds);
+      });
+    }
+
+    // Load Markers from Server
+    var ajaxData = {
+      action: "wpgmapembed_get_markers_by_map_id",
+      _wpnonce: wgm_l.nonces.wpgmapembed_get_markers_by_map_id,
+      data: {
+        map_id: wgm_l.wgm_object.map_id,
+      },
+    };
+
+    $.post(ajaxurl, ajaxData, function (response) {
+      try {
+        if (typeof response === "string") response = JSON.parse(response);
+      } catch (e) {
+        console.error("WGM: Failed to parse markers response", e);
         return;
       }
 
-      _wgm_e("wpgmap_latlng").value =
-        place.geometry.location.lat() + "," + place.geometry.location.lng();
+      if (!response || !response.markers) return;
 
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        wgm_bounds.union(place.geometry.viewport);
-      } else {
-        wgm_bounds.extend(place.geometry.location);
+      state.no_of_markers = response.markers.length;
+
+      if (state.no_of_markers === 0) {
+        $(".wgm_marker_create_hints").show();
       }
-    });
-    wgm_map.fitBounds(wgm_bounds);
-    // Add Marker event listener
-    // wgm_addMarkerDragendListener(wgm_markers[0]);
-  });
-}
 
-/**
- * Initialize Google Map
- *
- * @param lat
- * @param lng
- * @param map_type
- * @since 1.0.0
- */
-function wgm_initWpGmap(lat, lng, map_type) {
-  wgm_initAutocomplete(
-    "wgm_map",
-    "wgm_pac_input",
-    lat,
-    lng,
-    map_type,
-    parseInt(_wgm_e("wpgmap_map_zoom").value)
-  );
-}
+      if (state.no_of_markers >= 1 && wgm_l.is_premium_user !== "1") {
+        $(".add_new_marker_btn_area .add_new_marker").css({ opacity: 0.5 });
+        $(".add_new_marker_btn_area .wgm-pro-label").show();
+      }
 
-/**
- * On zoom level change, render map with new zoom level LIVE
- *
- * @since 1.0.0
- */
-jQuery(document.body)
-  .find("#wpgmap_map_zoom")
-  .on("keyup", function (element) {
-    // var point = wgm_marker1.getPosition(); // Get marker position
-    wgm_map.panTo(wgm_map.center); // Pan map to that position
-    var current_zoom = parseInt(
-      document.getElementById("wpgmap_map_zoom").value
-    );
-    if (!isNaN(current_zoom)) {
-      setTimeout("wgm_map.setZoom(" + current_zoom + ")", 900); // Zoom in after 900 m second
-    }
-  });
+      response.markers.forEach(function (marker) {
+        var coords = marker.lat_lng.split(",");
+        var markerOptions = {
+          position: new google.maps.LatLng(coords[0], coords[1]),
+          title: marker.marker_name,
+          map: state.map,
+          animation: google.maps.Animation
+            ? google.maps.Animation.DROP
+            : undefined,
+          icon: marker.icon || undefined,
+        };
 
-/**
- * On title field text change, update map title LIVE
- *
- * @since 1.0.0
- */
-jQuery(document.body)
-  .find("#wpgmap_title")
-  .on("keyup", function (element) {
-    var _wpgmap_title = jQuery(this).val();
-    jQuery("#wpgmap_heading_preview")
-      .css({ display: "block" })
-      .html(
-        _wpgmap_title
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;")
-      );
-  });
+        var customMarker = new google.maps.Marker(markerOptions);
 
-/**
- * On map type change, render different types of map LIVE
- *
- * @since 1.0.0
- */
-jQuery(document.body)
-  .find("#wpgmap_map_type")
-  .on("change", function (element) {
-    // wgm_marker1.setMap(null);
-    var map_type = jQuery(this).val();
-    wgm_map.setMapTypeId(map_type.toLowerCase());
-  });
+        if (marker.have_marker_link === "1") {
+          wgm_attachClickHandler(customMarker, function () {
+            var target =
+              marker.marker_link_new_tab === "1" ? "_blank" : "_self";
+            window.open(marker.marker_link, target);
+          });
+        }
 
-/**
- * On map theme presets change, render different types of map based on theme
- *
- * @since 1.8.6
- */
-jQuery(document.body)
-  .find("#wpgmap_map_theme")
-  .on("change", function (element) {
-    var wgm_theme_json = JSON.parse(jQuery(this).val());
-    wgm_map.setOptions({ styles: wgm_theme_json });
-    jQuery(document.body).find("#wgm_theme_json").val(jQuery(this).val());
-  });
+        customMarker.addListener("click", function () {
+          var iw = state.current_infowindows[parseInt(marker.id, 10)];
+          if (iw) {
+            var isOpen = !!iw.getMap();
+            wgm_close_all_infowindows();
+            if (!isOpen) {
+              iw.open({
+                anchor: state.current_markers[parseInt(marker.id, 10)],
+                shouldFocus: false,
+              });
+            }
+          }
+        });
 
-/**
- * On map theme presets change, render different types of map based on theme
- *
- * @since 1.8.6
- */
-jQuery(document.body)
-  .find("#wgm_theme_json")
-  .on("blur", function (element) {
-    var wgm_theme_json = JSON.parse(jQuery(this).val());
-    wgm_map.setOptions({ styles: wgm_theme_json });
-  });
+        // Infowindow Content
+        var safeName = marker.marker_name
+          ? $("<div>").text(marker.marker_name).html()
+          : "";
+        var titleHtml =
+          '<p class="info_content_title" style="font-size:16px;font-weight:bold;margin:0 0 5px 0;">' +
+          safeName +
+          "</p>";
+        var editIcon =
+          '<span class="wgm_marker_edit_iw" data-markerid="' +
+          marker.id +
+          '" style="float:right; cursor:pointer;" title="Edit Marker"><i class="dashicons dashicons-edit"></i></span>';
 
-/**
- * Rendering tab contents
- *
- * @since 1.0.0
- */
-jQuery(document.body)
-  .find(".wgm_wpgmap_tab li")
-  .on("click", function (e) {
-    e.preventDefault();
-    jQuery(".wgm_wpgmap_tab li").removeClass("active");
-    jQuery(this).addClass("active");
+        var iw = new google.maps.InfoWindow({
+          content: editIcon + titleHtml + marker.marker_desc,
+        });
 
-    jQuery(".wp-gmap-tab-contents").addClass("hidden");
-    var wpgmap_id = jQuery(this).attr("id");
-    jQuery("." + wpgmap_id).removeClass("hidden");
-    if (wpgmap_id === "wgm_gmap_markers") {
-      jQuery(".wgm_gmap_marker_list").css("display", "block");
-      jQuery(".add_new_marker_form").css("display", "none");
-    } else {
-      jQuery(".wgm_gmap_marker_list").css("display", "none");
-    }
-  });
+        if (marker.show_desc_by_default === "1") {
+          iw.open({ anchor: customMarker, shouldFocus: false });
+        }
 
-// ========================================For Media Upload in Marker===================================
-jQuery(document).ready(function ($) {
-  $("#wpgmap_upload_marker_icon").click(function () {
-    var custom_uploader;
-    if (custom_uploader) {
-      custom_uploader.open();
-      return;
-    }
-
-    custom_uploader = wp.media.frames.file_frame = wp.media({
-      title: "Choose Image",
-      button: {
-        text: "Choose Image",
-      },
-      multiple: false,
-    });
-
-    custom_uploader.on("select", function () {
-      var attachment = custom_uploader
-        .state()
-        .get("selection")
-        .first()
-        .toJSON();
-
-      var data = {
-        action: "wpgmapembed_save_marker_icon",
-        data: {
-          icon_url: attachment.url,
-          ajax_nonce: wgm_l.ajax_nonce,
-        },
-      };
-      jQuery.post(ajaxurl, data, function (response) {
-        response = JSON.parse(response);
-        $(document.body).find("#wpgmap_marker_icon").val(response.icon_url);
-        $(document.body)
-          .find("#wpgmap_marker_icon_preview")
-          .attr("src", response.icon_url);
-        var elm = {};
-        elm.src = response.icon_url;
-        wpgmapChangeCurrentMarkerIcon(elm);
+        state.current_markers[parseInt(marker.id, 10)] = customMarker;
+        state.current_infowindows[parseInt(marker.id, 10)] = iw;
       });
+    }).fail(function (xhr, status, error) {
+      console.error("WGM: Failed to load markers", error);
     });
 
-    // Open the uploader dialog
-    custom_uploader.open();
-  });
-});
+    wgm_addMapListeners(state.map);
+  };
 
-function generateMarkerInfoByRightClick(event) {
-  // Is markers tab active
-  if (!jQuery(".add_new_marker_form").hasClass("wgm_active")) {
-    return false;
-  }
+  /**
+   * Handle Right Click on Map to Create/Edit Marker
+   */
+  function generateMarkerInfoByRightClick(event) {
+    if (!$(".add_new_marker_form").hasClass("wgm_active")) return false;
 
-  if (wgm_new_marker != null) {
-    alert("Please save current marker at first!");
-    return false;
-  }
-  var lat = event.latLng.lat();
-  var lng = event.latLng.lng();
-  wgm_new_marker = new google.maps.Marker({
-    title: "",
-    animation: google.maps.Animation.DROP,
-    position: event.latLng,
-    draggable: true,
-    map: wgm_map,
-  });
+    if (state.new_marker) {
+      alert("Please save current marker first!");
+      return false;
+    }
 
-  if (is_marker_edit) {
-    wgm_existing_marker.setMap(null);
-    wgm_existing_marker = new google.maps.Marker({
-      title: "",
-      animation: google.maps.Animation.DROP,
+    var lat = event.latLng.lat();
+    var lng = event.latLng.lng();
+
+    var baseOptions = {
       position: event.latLng,
       draggable: true,
-      map: wgm_map,
-    });
-
-    wgm_generate_infowindow();
-
-    wgm_existing_marker_infoindow.open({
-      anchor: wgm_existing_marker,
-      shouldFocus: false,
-    });
-    wgm_addMarkerDragendListener(wgm_existing_marker);
-  } else {
-    wgm_generate_infowindow();
-    wgm_new_marker_infoindow.open({
-      anchor: wgm_new_marker,
-      shouldFocus: false,
-    });
-    wgm_addMarkerDragendListener(wgm_new_marker);
-  }
-
-  // populate yor box/field with lat, lng
-  jQuery("#wpgmap_marker_lat_lng").val(lat + "," + lng);
-}
-
-function tmce_setContent(content, editor_id, textarea_id) {
-  if (typeof editor_id == "undefined") {
-    editor_id = wpActiveEditor;
-  }
-  if (typeof textarea_id == "undefined") {
-    textarea_id = editor_id;
-  }
-
-  if (
-    jQuery("#wp-" + editor_id + "-wrap").hasClass("tmce-active") &&
-    tinyMCE.get(editor_id)
-  ) {
-    content = content.replace(/&gt;/g, ">").replace(/&lt;/g, "<");
-    return tinyMCE.get(editor_id).setContent(content);
-  } else {
-    return jQuery("#" + textarea_id).val(content);
-  }
-}
-
-function tmce_getContent(editor_id, textarea_id) {
-  if (typeof editor_id == "undefined") {
-    editor_id = wpActiveEditor;
-  }
-  if (typeof textarea_id == "undefined") {
-    textarea_id = editor_id;
-  }
-
-  if (
-    jQuery("#wp-" + editor_id + "-wrap").hasClass("tmce-active") &&
-    tinyMCE.get(editor_id)
-  ) {
-    return tinyMCE.get(editor_id).getContent();
-  } else {
-    return jQuery("#" + textarea_id).val();
-  }
-}
-
-var marker_name_info_content = "",
-  marker_desc_info_content = "";
-
-function populateMarkerInfowindow() {
-  var final_content = marker_name_info_content + marker_desc_info_content;
-  if (wgm_existing_marker_infoindow !== null) {
-    wgm_existing_marker_infoindow.setContent(final_content);
-  }
-}
-
-jQuery(document).ready(function ($) {
-  // ==============================
-  // Create 'keyup_event' tinymce plugin
-  tinymce.PluginManager.add("keyup_event", function (editor, url) {
-    if (editor.id === "wpgmap_marker_desc") {
-      // Create keyup event
-      editor.on("keyup", function (e) {
-        wgm_generate_infowindow();
-      });
-    }
-  });
-
-  jQuery("#wpgmap_marker_name,#wpgmap_marker_desc").on(
-    "keyup",
-    function (element) {
-      wgm_generate_infowindow();
-    }
-  );
-
-  jQuery(document.body)
-    .find("#wpgmap_marker_link")
-    .on("blur", function (event) {
-      var wgm_marker_url = jQuery(this).val();
-      if (is_marker_edit === true) {
-        wgm_existing_marker.url = wgm_marker_url;
-        google.maps.event.addListener(
-          wgm_existing_marker,
-          "click",
-          function () {
-            var wgm_target = "_self";
-            if ($("#wpgmap_marker_link_new_tab").is(":checked")) {
-              wgm_target = "_blank";
-            }
-            window.open(this.url, wgm_target);
-          }
-        );
-      } else {
-        if (wgm_new_marker !== null) {
-          wgm_new_marker.url = wgm_marker_url;
-          google.maps.event.addListener(wgm_new_marker, "click", function () {
-            var wgm_target = "_self";
-            if (jQuery("#wpgmap_marker_link_new_tab").is(":checked")) {
-              wgm_target = "_blank";
-            }
-            window.open(this.url, wgm_target);
-          });
-        }
-      }
-    });
-
-  function generateMarkersListView() {
-    $("#wgm_gmap_marker_list").DataTable().ajax.reload();
-  }
-
-  // Marker delete
-  jQuery(document.body).on("click", ".wpgmap_marker_trash", function (event) {
-    event.preventDefault();
-    var parent = $(this).parents().eq(4);
-    parent.find(".spinner").css("visibility", "visible");
-    if (confirm("Are you sure to delete?")) {
-      var marker_id = jQuery(this).attr("map_marker_id");
-      var data = {
-        action: "wpgmapembed_delete_marker",
-        data: {
-          marker_id: marker_id,
-          ajax_nonce: wgm_l.ajax_nonce,
-        },
-      };
-      jQuery.post(ajaxurl, data, function (response) {
-        response = JSON.parse(response);
-        generateMarkersListView();
-        parent.find(".spinner").css("visibility", "hidden");
-        current_map_markers[parseInt(marker_id)].setMap(null);
-        $(document.body)
-          .find("#marker_success")
-          .html("Marker removed successfully.");
-        wgm_no_of_marker--;
-        if (wgm_no_of_marker === 0 && wgm_l.is_premium_user !== "1") {
-          jQuery(".add_new_marker_btn_area").find(".add_new_marker").css({
-            opacity: 1,
-          });
-          jQuery(".add_new_marker_btn_area").find(".wgm-pro-label").hide();
-        }
-      });
-    }
-  });
-
-  // Marker delete
-  jQuery(document.body).on("click", ".wpgmap_marker_view", function (event) {
-    event.preventDefault();
-    var parent = $(this).parents().eq(4);
-    parent.find(".spinner").css("visibility", "visible");
-    var marker_id = jQuery(this).attr("map_marker_id");
-    wgm_existing_marker = current_map_markers[marker_id];
-    wgm_map.panTo(wgm_existing_marker.getPosition());
-  });
-
-  // Marker Edit
-  jQuery(document.body).on("click", ".wpgmap_marker_edit", function (event) {
-    event.preventDefault();
-    is_marker_edit = true;
-    var parent = $(this).parents().eq(4);
-    parent.find(".spinner").css("visibility", "visible");
-    var marker_id = jQuery(this).attr("map_marker_id");
-    wgm_existing_marker = current_map_markers[marker_id];
-    var data = {
-      action: "wpgmapembed_get_marker_data_by_marker_id",
-      data: {
-        marker_id: marker_id,
-        ajax_nonce: wgm_l.ajax_nonce,
-      },
+      map: state.map,
+      animation: google.maps.Animation ? google.maps.Animation.DROP : undefined,
     };
-    jQuery.post(ajaxurl, data, function (response) {
-      response = JSON.parse(response);
-      $("#wpgmap_marker_name").val(response.marker_name);
-      $("#wpgmap_marker_address").val(response.address);
-      var wgm_marker_lat_lng = response.lat_lng.split(",");
-      $("#wpgmap_marker_lat_lng").val(
-        wgm_marker_lat_lng[0] + "," + wgm_marker_lat_lng[1]
-      );
-      $("#wpgmap_marker_link").val(response.marker_link);
-      $("#wpgmap_marker_icon").val(response.icon);
-      if (response.have_marker_link === "1") {
-        $("#wpgmap_marker_link_area").show();
-      } else {
-        $("#wpgmap_marker_link_area").hide();
+
+    if (state.is_marker_edit) {
+      if (
+        state.existing_marker &&
+        typeof state.existing_marker.setMap === "function"
+      ) {
+        state.existing_marker.setMap(null);
       }
-      $("#wpgmap_marker_link_new_tab").prop(
-        "checked",
-        response.marker_link_new_tab === "1"
-      );
-      $("#wpgmap_marker_infowindow_show")
-        .val(response.show_desc_by_default)
-        .change();
-      $("#wpgmap_have_marker_link").val(response.have_marker_link).change();
-      $(".wpgmap_marker_add,.wpgmap_marker_update").attr("markerid", marker_id);
-      $(".wpgmap_marker_add")
-        .removeClass("wpgmap_marker_add")
-        .addClass("wpgmap_marker_update")
-        .css("background-color", "#00a2f3")
-        .html(
-          '<i class="dashicons dashicons-location" style="line-height: 1.6;"></i><b>Update Marker</b>'
-        );
-      // Reset wp editor content
-      tmce_setContent(
-        response.marker_desc,
-        "wpgmap_marker_desc",
-        "wpgmap_marker_desc"
-      );
-      parent.find(".spinner").css("visibility", "hidden");
 
-      $(document.body).find(".add_new_marker_form").show();
-      $(document.body).find(".wgm_gmap_marker_list").hide();
-      $(document.body).find("#marker_errors,#marker_success").html("");
-      $(document.body)
-        .find("#wpgmap_marker_icon_preview")
-        .attr("src", response.icon);
-      wgm_map.panTo(wgm_existing_marker.getPosition());
-      current_map_markers[marker_id].setDraggable(true);
-      wgm_addMarkerDragendListener(current_map_markers[marker_id]);
-      wgm_existing_marker_infoindow = new google.maps.InfoWindow({
-        content:
-          '<span class="info_content_title" style="font-size:18px;font-weight: bold;font-family: Arial;">' +
-          response.marker_name +
-          "</span>" +
-          response.address,
+      state.existing_marker = new google.maps.Marker(baseOptions);
+      window.wgm_generate_infowindow();
+
+      state.existing_marker.addListener("click", function () {
+        if (state.existing_marker_infowindow) {
+          var isOpen = !!state.existing_marker_infowindow.getMap();
+          wgm_close_all_infowindows();
+          if (!isOpen) {
+            state.existing_marker_infowindow.open({
+              anchor: state.existing_marker,
+              shouldFocus: false,
+            });
+          }
+        }
       });
-    });
-  });
-});
 
-function wpgmapChangeCurrentMarkerIcon(elem) {
-  var icon_url = elem.src;
-  document.getElementById("wpgmap_marker_icon").value = icon_url;
-  document.getElementById("wpgmap_marker_icon_preview").src = icon_url;
-  jQuery("#TB_closeWindowButton").click();
-  if (is_marker_edit) {
-    if (wgm_existing_marker !== null) {
-      wgm_existing_marker.setIcon(icon_url);
+      if (state.existing_marker_infowindow) {
+        wgm_close_all_infowindows();
+        state.existing_marker_infowindow.open({
+          anchor: state.existing_marker,
+          shouldFocus: false,
+        });
+      }
+      wgm_addMarkerDragendListener(state.existing_marker);
+    } else {
+      wgm_createMarkerAt(event.latLng);
     }
-  } else {
-    if (wgm_new_marker !== null) {
-      wgm_new_marker.setIcon(icon_url);
+
+    $("#wpgmap_marker_lat_lng").val(lat + "," + lng);
+    wgm_reverse_geocode(event.latLng);
+  }
+
+  /**
+   * Set content for TinyMCE editor or Textarea
+   *
+   * @param {string} content
+   * @param {string} editor_id
+   * @param {string} textarea_id
+   */
+  /**
+   * Set content for TinyMCE editor or Textarea
+   *
+   * @param {string} content
+   * @param {string} editor_id
+   * @param {string} textarea_id
+   */
+  function tmce_setContent(content, editor_id, textarea_id) {
+    if (typeof editor_id == "undefined") {
+      editor_id = wpActiveEditor;
+    }
+    if (typeof textarea_id == "undefined") {
+      textarea_id = editor_id;
+    }
+
+    if (
+      jQuery("#wp-" + editor_id + "-wrap").hasClass("tmce-active") &&
+      tinyMCE.get(editor_id)
+    ) {
+      content = content.replace(/&gt;/g, ">").replace(/&lt;/g, "<");
+      return tinyMCE.get(editor_id).setContent(content);
+    } else {
+      return jQuery("#" + textarea_id).val(content);
     }
   }
-}
+  window.tmce_setContent = tmce_setContent;
+
+  /**
+   * Get content from TinyMCE editor or Textarea
+   *
+   * @param {string} editor_id
+   * @param {string} textarea_id
+   */
+  function tmce_getContent(editor_id, textarea_id) {
+    if (typeof editor_id == "undefined") {
+      editor_id = wpActiveEditor;
+    }
+    if (typeof textarea_id == "undefined") {
+      textarea_id = editor_id;
+    }
+
+    if (
+      jQuery("#wp-" + editor_id + "-wrap").hasClass("tmce-active") &&
+      tinyMCE.get(editor_id)
+    ) {
+      return tinyMCE.get(editor_id).getContent();
+    } else {
+      return jQuery("#" + textarea_id).val();
+    }
+  }
+  window.tmce_getContent = tmce_getContent;
+
+  /**
+   * Change current marker icon
+   */
+  window.wpgmapChangeCurrentMarkerIcon = function (elem) {
+    if (!elem || !elem.src) return;
+    var icon_url = elem.src;
+    $("#wpgmap_marker_icon").val(icon_url);
+    $("#wpgmap_marker_icon_preview").attr("src", icon_url);
+    $("#TB_closeWindowButton").click();
+
+    if (state.is_marker_edit) {
+      if (state.existing_marker) state.existing_marker.setIcon(icon_url);
+    } else {
+      if (state.new_marker) state.new_marker.setIcon(icon_url);
+    }
+  };
+
+  /**
+   * Document Ready Handler
+   */
+  jQuery(document).ready(function ($) {
+    // Initialize Select2
+    if ($.fn.select2) {
+      $(".wgm-select2").select2({
+        placeholder: "Select categories",
+        allowClear: true,
+        width: "100%",
+      });
+    }
+    /**
+     * On zoom level change, render map with new zoom level LIVE
+     *
+     * @since 1.0.0
+     */
+    $(document.body)
+      .find("#wpgmap_map_zoom")
+      .on("keyup", function (element) {
+        // var point = wgm_marker1.getPosition(); // Get marker position
+        if (state.map) {
+          state.map.panTo(state.map.center); // Pan map to that position
+          var current_zoom = parseInt(
+            document.getElementById("wpgmap_map_zoom").value
+          );
+          if (!isNaN(current_zoom)) {
+            setTimeout(function () {
+              state.map.setZoom(current_zoom);
+            }, 900); // Zoom in after 900 ms
+          }
+        }
+      });
+
+    /**
+     * On title field text change, update map title LIVE
+     *
+     * @since 1.0.0
+     */
+    $(document.body)
+      .find("#wpgmap_title")
+      .on("keyup", function (element) {
+        var _wpgmap_title = $(this).val();
+        $("#wpgmap_heading_preview")
+          .css({ display: "block" })
+          .html(
+            _wpgmap_title
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#039;")
+          );
+      });
+
+    /**
+     * On map type change, render different types of map LIVE
+     *
+     * @since 1.0.0
+     */
+    $(document.body)
+      .find("#wpgmap_map_type")
+      .on("change", function (element) {
+        // wgm_marker1.setMap(null);
+        var map_type = $(this).val();
+        if (state.map) {
+          state.map.setMapTypeId(map_type.toLowerCase());
+        }
+      });
+
+    /**
+     * On map theme presets change, render different types of map based on theme
+     *
+     * @since 1.8.6
+     */
+    $(document.body)
+      .find("#wpgmap_map_theme")
+      .on("change", function (element) {
+        if (state.map) {
+          var val = $(this).val();
+          if (val) {
+            try {
+              var wgm_theme_json = JSON.parse(val);
+              state.map.setOptions({ styles: wgm_theme_json });
+              $(document.body).find("#wgm_theme_json").val(val);
+            } catch (e) {
+              console.error("Invalid theme JSON");
+            }
+          }
+        }
+      });
+
+    /**
+     * On map theme presets JSON blur, render different types of map based on theme
+     *
+     * @since 1.8.6
+     */
+    $(document.body)
+      .find("#wgm_theme_json")
+      .on("blur", function (element) {
+        if (state.map) {
+          var val = $(this).val();
+          if (val) {
+            try {
+              var wgm_theme_json = JSON.parse(val);
+              state.map.setOptions({ styles: wgm_theme_json });
+            } catch (e) {
+              console.error("Invalid theme JSON");
+            }
+          }
+        }
+      });
+
+    /**
+     * Rendering tab contents
+     *
+     * @since 1.0.0
+     */
+    $(document.body)
+      .find(".wgm_wpgmap_tab li")
+      .on("click", function (e) {
+        e.preventDefault();
+        $(".wgm_wpgmap_tab li").removeClass("active");
+        $(this).addClass("active");
+
+        $(".wp-gmap-tab-contents").addClass("hidden");
+        var wpgmap_id = $(this).attr("id");
+        $("." + wpgmap_id).removeClass("hidden");
+        if (wpgmap_id === "wgm_gmap_markers") {
+          $(".wgm_gmap_marker_list").css("display", "block");
+          $(".add_new_marker_form").css("display", "none");
+        } else {
+          $(".wgm_gmap_marker_list").css("display", "none");
+        }
+      });
+
+    // ========================================For Media Upload in Marker===================================
+    $("#wpgmap_upload_marker_icon").click(function () {
+      var custom_uploader;
+      if (custom_uploader) {
+        custom_uploader.open();
+        return;
+      }
+
+      custom_uploader = wp.media.frames.file_frame = wp.media({
+        title: "Choose Image",
+        button: {
+          text: "Choose Image",
+        },
+        multiple: false,
+      });
+
+      custom_uploader.on("select", function () {
+        var attachment = custom_uploader
+          .state()
+          .get("selection")
+          .first()
+          .toJSON();
+
+        var data = {
+          action: "wpgmapembed_save_marker_icon",
+          _wpnonce: wgm_l.nonces.wpgmapembed_save_marker_icon,
+          data: {
+            icon_url: attachment.url,
+          },
+        };
+
+        $.post(ajaxurl, data, function (response) {
+          try {
+            if (typeof response === "string") {
+              response = JSON.parse(response);
+            }
+          } catch (e) {
+            console.error("Failed to parse response", e);
+            return;
+          }
+
+          $(document.body).find("#wpgmap_marker_icon").val(response.icon_url);
+          $(document.body)
+            .find("#wpgmap_marker_icon_preview")
+            .attr("src", response.icon_url);
+          var elm = {};
+          elm.src = response.icon_url;
+          wpgmapChangeCurrentMarkerIcon(elm);
+        }).fail(function (xhr, status, error) {
+          alert("Failed to save marker icon: " + error);
+        });
+      });
+
+      // Open the uploader dialog
+      custom_uploader.open();
+    });
+
+    // ========================================For Media Upload in Marker Image===================================
+    $("#wpgmap_upload_marker_image").click(function (e) {
+      e.preventDefault();
+
+      // Check if this is a premium feature
+      if ($(this).hasClass("wgm_enable_premium")) {
+        return; // Let the common.js handler show the premium notice
+      }
+
+      var custom_uploader;
+      if (custom_uploader) {
+        custom_uploader.open();
+        return;
+      }
+
+      custom_uploader = wp.media.frames.file_frame = wp.media({
+        title: "Choose Marker Image",
+        button: {
+          text: "Choose Image",
+        },
+        multiple: false,
+      });
+
+      custom_uploader.on("select", function () {
+        var attachment = custom_uploader
+          .state()
+          .get("selection")
+          .first()
+          .toJSON();
+
+        $(document.body).find("#wpgmap_marker_image").val(attachment.url);
+        $(document.body)
+          .find("#wpgmap_marker_image_preview")
+          .attr("src", attachment.url)
+          .show();
+        $(document.body).find("#wpgmap_remove_marker_image").show();
+      });
+
+      // Open the uploader dialog
+      custom_uploader.open();
+    });
+
+    // ==============================
+    // Create 'keyup_event' tinymce plugin
+    if (
+      typeof tinymce !== "undefined" &&
+      tinymce.PluginManager &&
+      typeof tinymce.PluginManager.add === "function"
+    ) {
+      tinymce.PluginManager.add("keyup_event", function (editor, _url) {
+        if (editor.id === "wpgmap_marker_desc") {
+          // Create keyup event
+          editor.on("keyup", function () {
+            wgm_generate_infowindow();
+          });
+        }
+      });
+    }
+
+    $("#wpgmap_marker_name,#wpgmap_marker_desc").on(
+      "keyup",
+      function (element) {
+        wgm_generate_infowindow();
+      }
+    );
+
+    $("#wpgmap_marker_link").on("blur", function () {
+      var url = $(this).val();
+      if (state.is_marker_edit) {
+        if (state.existing_marker) {
+          state.existing_marker.url = url;
+          google.maps.event.clearListeners(state.existing_marker, "click");
+          state.existing_marker.addListener("click", function () {
+            var target = $("#wpgmap_marker_link_new_tab").is(":checked")
+              ? "_blank"
+              : "_self";
+            window.open(this.url, target);
+          });
+        }
+      } else {
+        if (state.new_marker) {
+          state.new_marker.url = url;
+          google.maps.event.clearListeners(state.new_marker, "click");
+          state.new_marker.addListener("click", function () {
+            var target = $("#wpgmap_marker_link_new_tab").is(":checked")
+              ? "_blank"
+              : "_self";
+            window.open(this.url, target);
+          });
+        }
+      }
+    });
+
+    function generateMarkersListView() {
+      $("#wgm_gmap_marker_list").DataTable().ajax.reload();
+    }
+
+    // Marker delete
+    $(document.body).on("click", ".wpgmap_marker_trash", function (e) {
+      e.preventDefault();
+      var $parent = $(this).closest("tr");
+      $parent.find(".spinner").css("visibility", "visible");
+
+      if (confirm("Are you sure to delete?")) {
+        var marker_id = $(this).attr("map_marker_id");
+        var ajaxData = {
+          action: "wpgmapembed_delete_marker",
+          _wpnonce: wgm_l.nonces.wpgmapembed_delete_marker,
+          data: { marker_id: marker_id },
+        };
+
+        $.post(ajaxurl, ajaxData, function (response) {
+          try {
+            if (typeof response === "string") response = JSON.parse(response);
+          } catch (err) {
+            console.error("WGM: Invalid delete response", err);
+            $parent.find(".spinner").css("visibility", "hidden");
+            return;
+          }
+
+          generateMarkersListView();
+          $parent.find(".spinner").css("visibility", "hidden");
+          if (state.current_markers[parseInt(marker_id, 10)]) {
+            state.current_markers[parseInt(marker_id, 10)].setMap(null);
+          }
+          $("#marker_success").html("Marker removed successfully.");
+          state.no_of_markers--;
+
+          if (state.no_of_markers === 0 && wgm_l.is_premium_user !== "1") {
+            $(".add_new_marker_btn_area .add_new_marker").css({ opacity: 1 });
+            $(".add_new_marker_btn_area .wgm-pro-label").hide();
+          }
+        }).fail(function (xhr, status, error) {
+          $parent.find(".spinner").css("visibility", "hidden");
+          alert("Failed to delete marker: " + error);
+        });
+      } else {
+        $parent.find(".spinner").css("visibility", "hidden");
+      }
+    });
+
+    // Marker view
+    $(document.body).on("click", ".wpgmap_marker_view", function (e) {
+      e.preventDefault();
+      var id = $(this).attr("map_marker_id");
+      var marker = state.current_markers[id];
+      if (marker && state.map) {
+        state.map.panTo(marker.getPosition());
+      }
+    });
+
+    // Generic Marker Data Loader
+    function wgm_load_marker_data(marker_id, $spinner_context) {
+      if ($spinner_context) {
+        $spinner_context.css("visibility", "visible");
+      }
+
+      state.is_marker_edit = true;
+      state.existing_marker = state.current_markers[marker_id];
+
+      var ajaxData = {
+        action: "wpgmapembed_get_marker_data_by_marker_id",
+        _wpnonce: wgm_l.nonces.wpgmapembed_get_marker_data_by_marker_id,
+        data: { marker_id: marker_id },
+      };
+
+      $.post(ajaxurl, ajaxData, function (response) {
+        try {
+          if (typeof response === "string") response = JSON.parse(response);
+        } catch (err) {
+          console.error("WGM: Invalid marker data response", err);
+          if ($spinner_context) {
+            $spinner_context.css("visibility", "hidden");
+          }
+          return;
+        }
+
+        $("#wpgmap_marker_name").val(response.marker_name);
+        $("#wpgmap_marker_address").val(response.address);
+        $("#wpgmap_marker_lat_lng").val(response.lat_lng);
+        $("#wpgmap_marker_link").val(response.marker_link);
+        $("#wpgmap_marker_icon").val(response.icon);
+        $("#wpgmap_marker_image").val(response.marker_image);
+
+        if (response.marker_image) {
+          $("#wpgmap_marker_image_preview")
+            .attr("src", response.marker_image)
+            .show();
+          $("#wpgmap_remove_marker_image").show();
+        } else {
+          $("#wpgmap_marker_image_preview").hide();
+          $("#wpgmap_remove_marker_image").hide();
+        }
+
+        if (response.have_marker_link === "1") {
+          $("#wpgmap_marker_link_area").show();
+        } else {
+          $("#wpgmap_marker_link_area").hide();
+        }
+
+        $("#wpgmap_marker_link_new_tab").prop(
+          "checked",
+          response.marker_link_new_tab === "1"
+        );
+        $("#wpgmap_marker_animation").val(response.animation);
+
+        if (response.category_id) {
+          var selectedCats = response.category_id.toString().split(",");
+          $("#wpgmap_marker_category").val(selectedCats).trigger("change");
+        } else {
+          $("#wpgmap_marker_category").val([]).trigger("change");
+        }
+
+        $("#wpgmap_marker_infowindow_show")
+          .val(response.show_desc_by_default)
+          .change();
+        $("#wpgmap_have_marker_link").val(response.have_marker_link).change();
+
+        $(".wpgmap_marker_add,.wpgmap_marker_update").attr(
+          "markerid",
+          marker_id
+        );
+        $(".wpgmap_marker_add")
+          .removeClass("wpgmap_marker_add")
+          .addClass("wpgmap_marker_update")
+          .css("background-color", "#00a2f3")
+          .html(
+            '<i class="dashicons dashicons-location" style="line-height: 1.6;"></i><b>Update Marker</b>'
+          );
+
+        tmce_setContent(
+          response.marker_desc,
+          "wpgmap_marker_desc",
+          "wpgmap_marker_desc"
+        );
+
+        if ($spinner_context) {
+          $spinner_context.css("visibility", "hidden");
+        }
+
+        // Switch to General tab or show form based on context
+        $(".wgm_wpgmap_tab li").removeClass("active");
+        $("#wgm_gmap_markers").addClass("active");
+
+        $(".wp-gmap-tab-contents").addClass("hidden");
+        $(".wgm_gmap_markers").removeClass("hidden");
+
+        $(".add_new_marker_form").show();
+        $(".wgm_gmap_marker_list").hide();
+        $("#marker_errors,#marker_success").html("");
+        $("#wpgmap_marker_icon_preview").attr("src", response.icon);
+
+        if (state.existing_marker) {
+          state.map.panTo(state.existing_marker.getPosition());
+          state.existing_marker.setDraggable(true);
+          wgm_addMarkerDragendListener(state.existing_marker);
+        }
+
+        state.existing_marker_infowindow = new google.maps.InfoWindow({
+          content:
+            '<p class="info_content_title" style="font-size:16px;font-weight:bold;">' +
+            response.marker_name +
+            "</p>" +
+            response.address,
+        });
+      }).fail(function (xhr, status, error) {
+        if ($spinner_context) {
+          $spinner_context.css("visibility", "hidden");
+        }
+        alert("Failed to load marker data: " + error);
+      });
+    }
+
+    // Marker Edit via List
+    $(document.body).on("click", ".wpgmap_marker_edit", function (e) {
+      e.preventDefault();
+      var $parent = $(this).closest("tr");
+      var marker_id = $(this).attr("map_marker_id");
+      wgm_load_marker_data(marker_id, $parent.find(".spinner"));
+    });
+
+    // Marker Edit via InfoWindow
+    $(document.body).on("click", ".wgm_marker_edit_iw", function (e) {
+      e.preventDefault();
+      var marker_id = $(this).data("markerid");
+      wgm_load_marker_data(marker_id, null);
+    });
+  });
+})(jQuery);
