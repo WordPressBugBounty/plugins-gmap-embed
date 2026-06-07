@@ -3,7 +3,7 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA
 Tags: Google Maps, map, Maps, map markers, store locator
 Requires at least: 2.9
-Tested up to: 6.9
+Tested up to: 7.0
 Version: 1.9.6
 Stable tag: 1.9.6
 Requires PHP: 5.3
