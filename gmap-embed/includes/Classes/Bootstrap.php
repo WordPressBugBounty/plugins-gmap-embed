@@ -144,6 +144,8 @@ class Bootstrap
 			'wpgmapembed_p_get_markers_by_map_id' => 'p_get_markers_by_map_id',
 			'wgm_get_markers_by_map_id' => 'wgm_get_markers_by_map_id_for_dt',
 			'wpgmapembed_delete_marker' => 'delete_marker',
+			'wpgmapembed_clone_map' => 'clone_wpgmapembed_data',
+			'wpgmapembed_clone_marker' => 'clone_map_marker',
 			'wpgmapembed_get_marker_data_by_marker_id' => 'get_marker_data_by_marker_id',
 			'wgm_save_category' => 'save_category',
 			'wgm_update_category' => 'update_category',

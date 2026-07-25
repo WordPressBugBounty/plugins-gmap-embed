@@ -251,6 +251,119 @@
   }
 
   /**
+   * Fetch this map's markers from the server and (re)draw them as pins.
+   * Clears any previously-plotted pins/infowindows first so it is safe to
+   * call again after the initial load (e.g. after cloning a marker).
+   *
+   * @since 1.9.7
+   */
+  function loadMarkersOnMap() {
+    var ajaxData = {
+      action: "wpgmapembed_get_markers_by_map_id",
+      _wpnonce: wgm_l.nonces.wpgmapembed_get_markers_by_map_id,
+      data: {
+        map_id: wgm_l.wgm_object.map_id,
+      },
+    };
+
+    $.post(ajaxurl, ajaxData, function (response) {
+      try {
+        if (typeof response === "string") response = JSON.parse(response);
+      } catch (e) {
+        console.error("WGM: Failed to parse markers response", e);
+        return;
+      }
+
+      if (!response || !response.markers) return;
+
+      // Clear any previously plotted pins/infowindows before re-rendering.
+      Object.keys(state.current_markers).forEach(function (markerId) {
+        var existingMarker = state.current_markers[markerId];
+        if (existingMarker && typeof existingMarker.setMap === "function") {
+          existingMarker.setMap(null);
+        }
+      });
+      state.current_markers = {};
+      state.current_infowindows = {};
+
+      state.no_of_markers = response.markers.length;
+
+      if (state.no_of_markers === 0) {
+        $(".wgm_marker_create_hints").show();
+      }
+
+      if (state.no_of_markers >= 1 && wgm_l.is_premium_user !== "1") {
+        $(".add_new_marker_btn_area .add_new_marker").css({ opacity: 0.5 });
+        $(".add_new_marker_btn_area .wgm-pro-label").show();
+      }
+
+      response.markers.forEach(function (marker) {
+        var coords = marker.lat_lng.split(",");
+        var markerOptions = {
+          position: new google.maps.LatLng(coords[0], coords[1]),
+          title: marker.marker_name,
+          map: state.map,
+          animation: google.maps.Animation
+            ? google.maps.Animation.DROP
+            : undefined,
+          icon: marker.icon || undefined,
+        };
+
+        var customMarker = new google.maps.Marker(markerOptions);
+
+        if (marker.have_marker_link === "1") {
+          wgm_attachClickHandler(customMarker, function () {
+            var target =
+              marker.marker_link_new_tab === "1" ? "_blank" : "_self";
+            window.open(marker.marker_link, target);
+          });
+        }
+
+        customMarker.addListener("click", function () {
+          var iw = state.current_infowindows[parseInt(marker.id, 10)];
+          if (iw) {
+            var isOpen = !!iw.getMap();
+            wgm_close_all_infowindows();
+            if (!isOpen) {
+              iw.open({
+                anchor: state.current_markers[parseInt(marker.id, 10)],
+                shouldFocus: false,
+              });
+            }
+          }
+        });
+
+        // Infowindow Content
+        var safeName = marker.marker_name
+          ? $("<div>").text(marker.marker_name).html()
+          : "";
+        var titleHtml =
+          '<p class="info_content_title" style="font-size:16px;font-weight:bold;margin:0 0 5px 0;">' +
+          safeName +
+          "</p>";
+        var editIcon =
+          '<span class="wgm_marker_edit_iw" data-markerid="' +
+          marker.id +
+          '" style="float:right; cursor:pointer;" title="Edit Marker"><i class="dashicons dashicons-edit"></i></span>';
+
+        var iw = new google.maps.InfoWindow({
+          content: editIcon + titleHtml + marker.marker_desc,
+        });
+
+        if (marker.show_desc_by_default === "1") {
+          iw.open({ anchor: customMarker, shouldFocus: false });
+        }
+
+        state.current_markers[parseInt(marker.id, 10)] = customMarker;
+        state.current_infowindows[parseInt(marker.id, 10)] = iw;
+      });
+    }).fail(function (xhr, status, error) {
+      console.error("WGM: Failed to load markers", error);
+    });
+  }
+  window.loadMarkersOnMap = loadMarkersOnMap;
+
+  /**
    * Initialize Map and Autocomplete functionality
    */
   window.wgm_initAutocomplete = function (
@@ -351,98 +464,7 @@
     }
 
     // Load Markers from Server
-    var ajaxData = {
-      action: "wpgmapembed_get_markers_by_map_id",
-      _wpnonce: wgm_l.nonces.wpgmapembed_get_markers_by_map_id,
-      data: {
-        map_id: wgm_l.wgm_object.map_id,
-      },
-    };
-
-    $.post(ajaxurl, ajaxData, function (response) {
-      try {
-        if (typeof response === "string") response = JSON.parse(response);
-      } catch (e) {
-        console.error("WGM: Failed to parse markers response", e);
-        return;
-      }
-
-      if (!response || !response.markers) return;
-
-      state.no_of_markers = response.markers.length;
-
-      if (state.no_of_markers === 0) {
-        $(".wgm_marker_create_hints").show();
-      }
-
-      if (state.no_of_markers >= 1 && wgm_l.is_premium_user !== "1") {
-        $(".add_new_marker_btn_area .add_new_marker").css({ opacity: 0.5 });
-        $(".add_new_marker_btn_area .wgm-pro-label").show();
-      }
-
-      response.markers.forEach(function (marker) {
-        var coords = marker.lat_lng.split(",");
-        var markerOptions = {
-          position: new google.maps.LatLng(coords[0], coords[1]),
-          title: marker.marker_name,
-          map: state.map,
-          animation: google.maps.Animation
-            ? google.maps.Animation.DROP
-            : undefined,
-          icon: marker.icon || undefined,
-        };
-
-        var customMarker = new google.maps.Marker(markerOptions);
-
-        if (marker.have_marker_link === "1") {
-          wgm_attachClickHandler(customMarker, function () {
-            var target =
-              marker.marker_link_new_tab === "1" ? "_blank" : "_self";
-            window.open(marker.marker_link, target);
-          });
-        }
-
-        customMarker.addListener("click", function () {
-          var iw = state.current_infowindows[parseInt(marker.id, 10)];
-          if (iw) {
-            var isOpen = !!iw.getMap();
-            wgm_close_all_infowindows();
-            if (!isOpen) {
-              iw.open({
-                anchor: state.current_markers[parseInt(marker.id, 10)],
-                shouldFocus: false,
-              });
-            }
-          }
-        });
-
-        // Infowindow Content
-        var safeName = marker.marker_name
-          ? $("<div>").text(marker.marker_name).html()
-          : "";
-        var titleHtml =
-          '<p class="info_content_title" style="font-size:16px;font-weight:bold;margin:0 0 5px 0;">' +
-          safeName +
-          "</p>";
-        var editIcon =
-          '<span class="wgm_marker_edit_iw" data-markerid="' +
-          marker.id +
-          '" style="float:right; cursor:pointer;" title="Edit Marker"><i class="dashicons dashicons-edit"></i></span>';
-
-        var iw = new google.maps.InfoWindow({
-          content: editIcon + titleHtml + marker.marker_desc,
-        });
-
-        if (marker.show_desc_by_default === "1") {
-          iw.open({ anchor: customMarker, shouldFocus: false });
-        }
-
-        state.current_markers[parseInt(marker.id, 10)] = customMarker;
-        state.current_infowindows[parseInt(marker.id, 10)] = iw;
-      });
-    }).fail(function (xhr, status, error) {
-      console.error("WGM: Failed to load markers", error);
-    });
+    loadMarkersOnMap();
 
     wgm_addMapListeners(state.map);
   };
@@ -528,6 +550,9 @@
     }
     if (typeof textarea_id == "undefined") {
       textarea_id = editor_id;
+    }
+    if (content === null || typeof content === "undefined") {
+      content = "";
     }
 
     if (

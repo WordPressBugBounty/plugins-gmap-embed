@@ -284,5 +284,73 @@
       $("#wpgmap_marker_image_preview").attr("src", "").hide();
       $(this).hide();
     });
+
+    /**
+     * Clone Marker
+     * Confirms and duplicates a marker via AJAX, then refreshes the marker
+     * list and re-draws the pins on the map canvas.
+     *
+     * @since 1.9.7
+     */
+    $(document.body).on("click", ".wpgmap_marker_clone", function (e) {
+      e.preventDefault();
+      var $btn = $(this);
+      var marker_id = $btn.attr("map_marker_id");
+      if (!marker_id) return;
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "This will create a duplicate of this marker.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, clone it!",
+      }).then((result) => {
+        if (!result.isConfirmed) return;
+
+        $btn.prop("disabled", true).find("i").addClass("fa-spin");
+
+        $.post(ajaxurl, {
+          action: "wpgmapembed_clone_marker",
+          marker_id: marker_id,
+          _wpnonce: wgm_l.nonces.wpgmapembed_clone_marker,
+        })
+          .done(function (response) {
+            try {
+              if (typeof response === "string") {
+                response = JSON.parse(response);
+              }
+
+              if (response.success) {
+                Swal.fire("Cloned!", response.data.message, "success");
+                generateMarkersListView();
+                if (typeof window.loadMarkersOnMap === "function") {
+                  window.loadMarkersOnMap();
+                }
+              } else {
+                Swal.fire("Error", response.data.message, "error");
+              }
+            } catch (err) {
+              console.error("WGM: Error parsing marker clone response", err);
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Invalid server response.",
+              });
+            }
+          })
+          .fail(function (xhr, status, error) {
+            Swal.fire({
+              icon: "error",
+              title: "Network Error",
+              text: "Failed to clone marker: " + error,
+            });
+          })
+          .always(function () {
+            $btn.prop("disabled", false).find("i").removeClass("fa-spin");
+          });
+      });
+    });
   });
 })(jQuery);

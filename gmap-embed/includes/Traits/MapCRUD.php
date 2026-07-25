@@ -49,11 +49,15 @@ trait MapCRUD
 			$height = esc_html(get_post_meta(get_the_ID(), 'wpgmap_map_height', true));
 			$shortcode = '<input class="wpgmap-shortcode regular-text" style="width:100%!important;" type="text" value="' . esc_attr('[gmap-embed id=&quot;' . get_the_ID() . '&quot;]') . '"
                                                        onclick="this.select()"/>';
-			$action = '<button class="button media-button button-primary button-small wpgmap-copy-to-clipboard" data-id="' . esc_attr(get_the_ID()) . '" style="margin-right: 5px;"><i class="fas fa-copy"></i></button>'
-				. '<a href="?page=wpgmapembed&tag=edit&id=' . esc_attr(get_the_ID()) . '&wgm_map_create_nonce=' . wp_create_nonce('wgm_create_map') . '" class="button media-button button-primary button-small wpgmap-edit" data-id="' . esc_attr(get_the_ID()) . '"><i class="fas fa-edit"></i>
+			$clone_btn = _wgm_is_premium()
+				? '<button class="button media-button button-primary button-small wpgmap-clone" data-id="' . esc_attr(get_the_ID()) . '" title="' . esc_attr__('Clone Map', 'gmap-embed') . '" style="margin-right: 5px;"><i class="fas fa-copy"></i></button>'
+				: '<button class="button media-button button-primary button-small wgm_enable_premium" style="margin-right: 5px; opacity: 0.5;" title="' . esc_attr__('Clone Map (Premium)', 'gmap-embed') . '" data-notice="' . esc_attr(sprintf(__('You need to upgrade to the <a target="_blank" href="%s">Premium</a> Version to <b>Clone Maps</b>.', 'gmap-embed'), esc_url('https://wpgooglemap.com/pricing?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=upgrade-to-pro&utm_content=map-list-clone-lock'))) . '"><i class="fas fa-copy"></i></button>';
+			$action = '<button class="button media-button button-primary button-small wpgmap-copy-to-clipboard" data-id="' . esc_attr(get_the_ID()) . '" title="' . esc_attr__('Copy Shortcode', 'gmap-embed') . '" style="margin-right: 5px;"><i class="fas fa-code"></i></button>'
+				. '<a href="?page=wpgmapembed&tag=edit&id=' . esc_attr(get_the_ID()) . '&wgm_map_create_nonce=' . wp_create_nonce('wgm_create_map') . '" class="button media-button button-primary button-small wpgmap-edit" data-id="' . esc_attr(get_the_ID()) . '" title="' . esc_attr__('Edit Map', 'gmap-embed') . '" style="margin-right: 5px;"><i class="fas fa-edit"></i>
                                                 ' . esc_html__('Edit', 'gmap-embed') . '
-                                            </a>&nbsp;<span type="button"
-                                                    class="button media-button button-small  wgm_wpgmap_delete" data-id="' . esc_attr(get_the_ID()) . '" style="background-color: #aa2828;color: white;opacity:0.7;"><i class="fas fa-trash"></i> ' . esc_html__('Delete', 'gmap-embed') . '
+                                            </a>'
+				. $clone_btn . '<span type="button"
+                                                    class="button media-button button-small  wgm_wpgmap_delete" data-id="' . esc_attr(get_the_ID()) . '" title="' . esc_attr__('Delete Map', 'gmap-embed') . '" style="background-color: #aa2828;color: white;opacity:0.7;"><i class="fas fa-trash"></i> ' . esc_html__('Delete', 'gmap-embed') . '
                                             </span>';
 			$row = array(
 				'id' => get_the_ID(),
@@ -581,6 +585,89 @@ trait MapCRUD
 		}
 
 		return $map;
+	}
+
+	/**
+	 * Clone an existing map (all its settings and markers) into a new draft map.
+	 * Pro feature — availability is also enforced server-side here in addition
+	 * to the client-side lock, since this is invoked directly over AJAX.
+	 *
+	 * @since 1.9.7
+	 */
+	public function clone_wpgmapembed_data()
+	{
+		if (!_wgm_is_premium()) {
+			wp_send_json_error(array('message' => esc_html__('Cloning maps is a Premium feature. Please upgrade to unlock it.', 'gmap-embed')), 403);
+		}
+
+		$source_map_id = isset($_POST['map_id']) ? intval(sanitize_text_field(wp_unslash($_POST['map_id']))) : 0;
+		if ($source_map_id <= 0) {
+			wp_send_json_error(array('message' => esc_html__('Invalid map ID.', 'gmap-embed')));
+		}
+
+		$source_map = $this->get_map_by_id($source_map_id);
+		if (!$source_map) {
+			wp_send_json_error(array('message' => esc_html__('Source map not found.', 'gmap-embed')));
+		}
+
+		$original_title = isset($source_map['wpgmap_title']) ? $source_map['wpgmap_title'] : '';
+		// translators: %s: original map title.
+		$new_title = sprintf(__('%s (Copy)', 'gmap-embed'), $original_title);
+
+		$new_map_id = wp_insert_post(
+			array(
+				'post_type' => 'wpgmapembed',
+			)
+		);
+
+		if (is_wp_error($new_map_id) || !$new_map_id) {
+			wp_send_json_error(array('message' => esc_html__('Failed to create the cloned map.', 'gmap-embed')));
+		}
+
+		// Copy all map settings (post meta) from the source map.
+		foreach ($source_map as $key => $value) {
+			if ($key === 'id') {
+				continue;
+			}
+			$value = ($key === 'wpgmap_title') ? $new_title : $value;
+			$this->wgm_update_post_meta($new_map_id, $key, $value);
+		}
+
+		// Copy this map's markers to the new map.
+		global $wpdb;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$source_markers = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE map_id = %d", $source_map_id), ARRAY_A);
+		$marker_defaults = $this->get_marker_default_values();
+
+		if (!empty($source_markers) && is_array($source_markers)) {
+			foreach ($source_markers as $marker) {
+				unset($marker['id']);
+				// A NULL text field (e.g. from a legacy/imported row) would otherwise be
+				// carried into the clone and break the marker-edit form (which expects
+				// strings, not null, for these inputs).
+				foreach (array('marker_desc', 'marker_image', 'address', 'marker_link', 'animation') as $text_field) {
+					if (!isset($marker[$text_field]) || is_null($marker[$text_field])) {
+						$marker[$text_field] = '';
+					}
+				}
+				$marker['map_id'] = $new_map_id;
+				$marker['created_at'] = current_time('mysql');
+				$marker['updated_at'] = current_time('mysql');
+				$marker['created_by'] = get_current_user_id();
+				$marker['updated_by'] = get_current_user_id();
+
+				$new_marker_data = wp_parse_args($marker, $marker_defaults);
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$wpdb->insert("{$wpdb->prefix}wgm_markers", $new_marker_data);
+			}
+		}
+
+		wp_send_json_success(
+			array(
+				'new_id' => intval($new_map_id),
+				'message' => esc_html__('Map cloned successfully.', 'gmap-embed'),
+			)
+		);
 	}
 
 }

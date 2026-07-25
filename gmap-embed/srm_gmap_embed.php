@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: https://www.wpgooglemap.com?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=branding&utm_content=author-uri
-  Version: 1.9.6
+  Version: 1.9.7
   License: GPLv2 or later
   License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -18,8 +18,8 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('WGM_PLUGIN_VERSION', '1.9.6');
-define('WGM_PLUGIN_DEV_VERSION', '20260126');
+define('WGM_PLUGIN_VERSION', '1.9.7');
+define('WGM_PLUGIN_DEV_VERSION', '20260725');
 define('WGM_PLUGIN_PATH', trailingslashit(plugin_dir_path(__FILE__)));
 define('WGM_PLUGIN_URL', trailingslashit(plugins_url('/', __FILE__)));
 define('WGM_ICONS_DIR', WGM_PLUGIN_PATH . 'admin/assets/images/markers/icons/');

@@ -94,6 +94,8 @@ trait AssetHandler
 				'wpgmapembed_p_get_markers_by_map_id' => wp_create_nonce('wpgmapembed_p_get_markers_by_map_id'),
 				'wgm_get_markers_by_map_id' => wp_create_nonce('wgm_get_markers_by_map_id'),
 				'wpgmapembed_delete_marker' => wp_create_nonce('wpgmapembed_delete_marker'),
+				'wpgmapembed_clone_map' => wp_create_nonce('wpgmapembed_clone_map'),
+				'wpgmapembed_clone_marker' => wp_create_nonce('wpgmapembed_clone_marker'),
 				'wpgmapembed_get_marker_data_by_marker_id' => wp_create_nonce('wpgmapembed_get_marker_data_by_marker_id'),
 				'wgm_save_category' => wp_create_nonce('wgm_save_category'),
 				'wgm_update_category' => wp_create_nonce('wgm_update_category'),

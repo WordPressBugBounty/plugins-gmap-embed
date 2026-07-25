@@ -2,10 +2,10 @@
 Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA
 Tags: Google Maps, map, Maps, map markers, store locator
-Requires at least: 2.9
+Requires at least: 5.0.0
 Tested up to: 7.0
-Version: 1.9.6
-Stable tag: 1.9.6
+Version: 1.9.7
+Stable tag: 1.9.7
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -155,6 +155,10 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 13. **General Settings**: Plugin-wide configuration options.
 
 == Changelog ==
+
+= 1.9.7 =
+* Clone Map including Markers and related settings
+* Clone Marker including related settings
 
 = 1.9.6 =
 * **Quick Fix** Classic widget shortcode preview issue fixed.

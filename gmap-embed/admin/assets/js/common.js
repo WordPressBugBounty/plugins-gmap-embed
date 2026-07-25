@@ -400,23 +400,23 @@
      *
      * @since 1.7.5
      */
-    $(document.body)
-      .find(".wgm_enable_premium")
-      .on("click", function () {
-        var wgm_notice_text = $(this).attr("data-notice");
-        Swal.fire({
-          icon: "info",
-          showCloseButton: true,
-          title: wgm_l.locales.sweet_alert.oops,
-          html:
-            wgm_notice_text +
-            '<br><br><span style="font-size:25px;font-weight:bold;">Starting from $19 only</span><br><br><a target="_blank" href="' +
-            wgm_l.get_p_v_url +
-            '">Upgrade to Pro</a>',
-          confirmButtonText: "Close",
-        });
-        return false;
+    // Delegated so it also fires for .wgm_enable_premium buttons rendered
+    // later by DataTables (e.g. the locked Clone icon on map/marker rows).
+    $(document.body).on("click", ".wgm_enable_premium", function () {
+      var wgm_notice_text = $(this).attr("data-notice");
+      Swal.fire({
+        icon: "info",
+        showCloseButton: true,
+        title: wgm_l.locales.sweet_alert.oops,
+        html:
+          wgm_notice_text +
+          '<br><br><span style="font-size:25px;font-weight:bold;">Starting from $19 only</span><br><br><a target="_blank" href="' +
+          wgm_l.get_p_v_url +
+          '">Upgrade to Pro</a>',
+        confirmButtonText: "Close",
       });
+      return false;
+    });
 
     /**
      * Map Controls Customization Toggle

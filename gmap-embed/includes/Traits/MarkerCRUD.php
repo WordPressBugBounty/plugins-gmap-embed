@@ -468,12 +468,16 @@ trait MarkerCRUD
 		$wpgmap_markers = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE map_id=%d", $map_id)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 		if (count($wpgmap_markers) > 0) {
 			foreach ($wpgmap_markers as $marker_key => $wpgmap_marker) {
+				$clone_btn = _wgm_is_premium()
+					? '<a href="" class="wpgmap_marker_clone button button-small" map_marker_id="' . esc_attr($wpgmap_marker->id) . '" title="' . esc_attr__('Clone Marker', 'gmap-embed') . '"><i class="fas fa-copy"></i></a>'
+					: '<a href="" class="wgm_enable_premium button button-small" style="opacity: 0.5;" title="' . esc_attr__('Clone Marker (Premium)', 'gmap-embed') . '" data-notice="' . esc_attr(sprintf(__('You need to upgrade to the <a target="_blank" href="%s">Premium</a> Version to <b>Clone Markers</b>.', 'gmap-embed'), esc_url('https://wpgooglemap.com/pricing?utm_source=gmap-embed&utm_medium=wordpress-plugin&utm_campaign=upgrade-to-pro&utm_content=marker-list-clone-lock'))) . '"><i class="fas fa-copy"></i></a>';
 				$action = '<a href="" class="wpgmap_marker_edit button button-small"
-                           map_marker_id="' . esc_attr($wpgmap_marker->id) . '"><i class="fas fa-edit"></i></a>
+                           map_marker_id="' . esc_attr($wpgmap_marker->id) . '" title="' . esc_attr__('Edit Marker', 'gmap-embed') . '"><i class="fas fa-edit"></i></a>
                         <a href="" class="wpgmap_marker_view button button-small"
-                           map_marker_id="' . esc_attr($wpgmap_marker->id) . '"><i class="fas fa-eye"></i></a>
+                           map_marker_id="' . esc_attr($wpgmap_marker->id) . '" title="' . esc_attr__('View on Map', 'gmap-embed') . '"><i class="fas fa-eye"></i></a>
+                        ' . $clone_btn . '
                         <a href="" class="wpgmap_marker_trash button button-small"
-                           map_marker_id="' . esc_attr($wpgmap_marker->id) . '"><i class="fas fa-trash"></i></a>';
+                           map_marker_id="' . esc_attr($wpgmap_marker->id) . '" title="' . esc_attr__('Delete Marker', 'gmap-embed') . '"><i class="fas fa-trash"></i></a>';
 				$row = array(
 					'id' => intval($wpgmap_marker->id),
 					'marker_name' => esc_html($wpgmap_marker->marker_name),
@@ -546,5 +550,69 @@ trait MarkerCRUD
 			ARRAY_A
 		);
 		return $markers;
+	}
+
+	/**
+	 * Clone a single marker. Pro feature — availability is also enforced
+	 * server-side here in addition to the client-side lock, since this is
+	 * invoked directly over AJAX.
+	 *
+	 * @since 1.9.7
+	 */
+	public function clone_map_marker()
+	{
+		if (!_wgm_is_premium()) {
+			wp_send_json_error(array('message' => esc_html__('Cloning markers is a Premium feature. Please upgrade to unlock it.', 'gmap-embed')), 403);
+		}
+
+		$marker_id = isset($_POST['marker_id']) ? intval(sanitize_text_field(wp_unslash($_POST['marker_id']))) : 0;
+		if ($marker_id <= 0) {
+			wp_send_json_error(array('message' => esc_html__('Invalid marker ID.', 'gmap-embed')));
+		}
+
+		global $wpdb;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$marker = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE id = %d", $marker_id), ARRAY_A);
+		if (!$marker) {
+			wp_send_json_error(array('message' => esc_html__('Marker not found.', 'gmap-embed')));
+		}
+
+		unset($marker['id']);
+		// A NULL text field (e.g. from a legacy/imported row) would otherwise be
+		// carried into the clone and break the marker-edit form (which expects
+		// strings, not null, for these inputs).
+		foreach (array('marker_desc', 'marker_image', 'address', 'marker_link', 'animation') as $text_field) {
+			if (!isset($marker[$text_field]) || is_null($marker[$text_field])) {
+				$marker[$text_field] = '';
+			}
+		}
+		$marker['marker_name'] = !empty($marker['marker_name'])
+			// translators: %s: original marker name.
+			? sprintf(__('%s (Copy)', 'gmap-embed'), $marker['marker_name'])
+			: esc_html__('Marker (Copy)', 'gmap-embed');
+		$marker['created_at'] = current_time('mysql');
+		$marker['updated_at'] = current_time('mysql');
+		$marker['created_by'] = get_current_user_id();
+		$marker['updated_by'] = get_current_user_id();
+
+		$new_marker_data = wp_parse_args($marker, $this->get_marker_default_values());
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$inserted = $wpdb->insert("{$wpdb->prefix}wgm_markers", $new_marker_data);
+
+		if (!$inserted) {
+			wp_send_json_error(array('message' => esc_html__('Failed to clone marker.', 'gmap-embed')));
+		}
+
+		$new_marker_id = intval($wpdb->insert_id);
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$new_marker = $wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wgm_markers WHERE id = %d", $new_marker_id));
+
+		wp_send_json_success(
+			array(
+				'marker_id' => $new_marker_id,
+				'marker' => $new_marker,
+				'message' => esc_html__('Marker cloned successfully.', 'gmap-embed'),
+			)
+		);
 	}
 }
