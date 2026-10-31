@@ -1,5 +1,115 @@
-(function ($) {
+﻿(function ($) {
   "use strict";
+
+  /**
+   * Convert YouTube <iframe> embeds in description HTML to a clickable thumbnail card.
+   * Google Maps InfoWindow strips <iframe> tags silently, so we replace them with
+   * a thumbnail + play-button image that opens a proper modal on click.
+   *
+   * @param  {string} html  Raw description HTML from TinyMCE / DB
+   * @return {string}       HTML with iframes replaced by thumbnail cards
+   */
+  function wgm_process_youtube_in_desc(html) {
+    if (!html) return html;
+
+    /**
+     * Build thumbnail card HTML for a given YouTube video ID.
+     */
+    function ytThumb(videoId) {
+      return (
+        '<div class="wgm-yt-embed" data-yt-id="' +
+        videoId +
+        '" role="button" tabindex="0" aria-label="Play YouTube video">' +
+        '<img class="wgm-yt-thumb" src="https://img.youtube.com/vi/' +
+        videoId +
+        '/hqdefault.jpg" alt="YouTube video thumbnail" />' +
+        '<span class="wgm-yt-play-btn" aria-hidden="true">&#9658;</span>' +
+        "</div>"
+      );
+    }
+
+    // Step 1: Replace YouTube <iframe> embed codes
+    html = html.replace(
+      /<iframe[^>]+src=["']https?:\/\/(?:www\.)?(?:youtube(?:-nocookie)?\.com\/embed)\/([a-zA-Z0-9_-]{11})[^"']*["'][^>]*>[\s\S]*?<\/iframe>/gi,
+      function (match, videoId) {
+        return ytThumb(videoId);
+      },
+    );
+
+    // Step 2: Replace <a href="youtube-url">...</a> anchor tags
+    html = html.replace(
+      /<a\b[^>]+href=["']https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^"']*[?&])?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})[^"']*["'][^>]*>[\s\S]*?<\/a>/gi,
+      function (match, videoId) {
+        return ytThumb(videoId);
+      },
+    );
+
+    // Step 3: Replace bare YouTube URLs inside text nodes only
+    // Split into alternating [text, tag, text, tag, ...] segments so we never
+    // accidentally replace a URL that is already inside an HTML attribute.
+    var segments = html.split(/(<[^>]*>)/);
+    for (var i = 0; i < segments.length; i++) {
+      if (segments[i].charAt(0) === "<") continue; // HTML tag — skip
+      segments[i] = segments[i].replace(
+        /https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^\s<"']*[?&])?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})[^\s<"']*/gi,
+        function (match, videoId) {
+          return ytThumb(videoId);
+        },
+      );
+    }
+    return segments.join("");
+  }
+
+  /**
+   * Open a full-screen YouTube modal with an autoplay iframe.
+   * The modal is appended to <body> — outside the InfoWindow DOM — so the
+   * browser does not apply Maps sandbox restrictions to the iframe.
+   *
+   * @param {string} videoId  11-character YouTube video ID
+   */
+  function wgm_open_youtube_modal(videoId) {
+    var existing = document.getElementById("wgm-yt-modal");
+    if (existing) existing.remove();
+
+    var modal = document.createElement("div");
+    modal.id = "wgm-yt-modal";
+    modal.innerHTML =
+      '<div class="wgm-yt-modal-overlay">' +
+      '<div class="wgm-yt-modal-inner">' +
+      '<button class="wgm-yt-modal-close" title="Close">&times;</button>' +
+      '<div class="wgm-yt-modal-frame-wrap">' +
+      '<iframe src="https://www.youtube.com/embed/' +
+      videoId +
+      '?autoplay=1" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>' +
+      "</div></div></div>";
+
+    document.body.appendChild(modal);
+
+    // Close handlers
+    modal
+      .querySelector(".wgm-yt-modal-close")
+      .addEventListener("click", function () {
+        modal.remove();
+      });
+    modal
+      .querySelector(".wgm-yt-modal-overlay")
+      .addEventListener("click", function (e) {
+        if (e.target === this) modal.remove();
+      });
+    document.addEventListener("keydown", function escHandler(e) {
+      if (e.key === "Escape") {
+        modal.remove();
+        document.removeEventListener("keydown", escHandler);
+      }
+    });
+  }
+
+  // Delegated click/keypress handler for YouTube thumbnails inside admin InfoWindows
+  $(document).on("click keypress", ".wgm-yt-embed", function (e) {
+    if (e.type === "keypress" && e.which !== 13 && e.which !== 32) return;
+    var videoId = $(this).data("yt-id");
+    if (videoId) wgm_open_youtube_modal(videoId);
+  });
 
   /**
    * Internal State Management
@@ -56,7 +166,9 @@
       '<p class="info_content_title" style="font-size:16px;font-weight:bold;margin:0 0 5px 0;">' +
       safeMarkerName +
       "</p>";
-    var descHtml = tmce_getContent("wpgmap_marker_desc", "wpgmap_marker_desc");
+    var descHtml = wgm_process_youtube_in_desc(
+      tmce_getContent("wpgmap_marker_desc", "wpgmap_marker_desc"),
+    );
 
     if (state.is_marker_edit) {
       var marker_id = parseInt($(".wpgmap_marker_update").attr("markerid"), 10);
@@ -72,7 +184,7 @@
         marker_id +
         '" style="float:right; cursor:pointer;" title="Edit Marker"><i class="dashicons dashicons-edit"></i></span>';
       state.existing_marker_infowindow.setContent(
-        editIcon + titleHtml + descHtml
+        editIcon + titleHtml + descHtml,
       );
 
       if (
@@ -118,7 +230,7 @@
   function wgm_addMapListeners(map) {
     map.addListener("center_changed", function () {
       $("#wpgmap_center_lat_lng").val(
-        map.center.lat() + "," + map.center.lng()
+        map.center.lat() + "," + map.center.lng(),
       );
     });
 
@@ -133,7 +245,7 @@
   function wgm_generateAlreadyInitializedMap(map_type, center_lat, center_lng) {
     if (state.map && typeof state.map.setMapTypeId === "function") {
       state.map.setMapTypeId(
-        google.maps.MapTypeId[map_type] || google.maps.MapTypeId.ROADMAP
+        google.maps.MapTypeId[map_type] || google.maps.MapTypeId.ROADMAP,
       );
       state.map.setCenter({ lat: center_lat, lng: center_lng });
       wgm_addMapListeners(state.map);
@@ -347,7 +459,10 @@
           '" style="float:right; cursor:pointer;" title="Edit Marker"><i class="dashicons dashicons-edit"></i></span>';
 
         var iw = new google.maps.InfoWindow({
-          content: editIcon + titleHtml + marker.marker_desc,
+          content:
+            editIcon +
+            titleHtml +
+            wgm_process_youtube_in_desc(marker.marker_desc),
         });
 
         if (marker.show_desc_by_default === "1") {
@@ -372,7 +487,7 @@
     center_lat,
     center_lng,
     map_type,
-    zoom
+    zoom,
   ) {
     if (state.map) {
       wgm_generateAlreadyInitializedMap(map_type, center_lat, center_lng);
@@ -386,7 +501,7 @@
       map_type,
       center_lat,
       center_lng,
-      zoom
+      zoom,
     );
 
     state.map = new google.maps.Map(mapDiv, gmapSettings);
@@ -403,7 +518,7 @@
     var markerAddressInput = document.getElementById("wpgmap_marker_address");
     if (markerAddressInput) {
       var markerAutocomplete = new google.maps.places.Autocomplete(
-        markerAddressInput
+        markerAddressInput,
       );
       markerAutocomplete.bindTo("bounds", state.map);
       markerAutocomplete.addListener("place_changed", function () {
@@ -450,7 +565,7 @@
           if (!place.geometry) return;
 
           $("#wpgmap_latlng").val(
-            place.geometry.location.lat() + "," + place.geometry.location.lng()
+            place.geometry.location.lat() + "," + place.geometry.location.lng(),
           );
 
           if (place.geometry.viewport) {
@@ -633,7 +748,7 @@
         if (state.map) {
           state.map.panTo(state.map.center); // Pan map to that position
           var current_zoom = parseInt(
-            document.getElementById("wpgmap_map_zoom").value
+            document.getElementById("wpgmap_map_zoom").value,
           );
           if (!isNaN(current_zoom)) {
             setTimeout(function () {
@@ -660,7 +775,7 @@
               .replace(/</g, "&lt;")
               .replace(/>/g, "&gt;")
               .replace(/"/g, "&quot;")
-              .replace(/'/g, "&#039;")
+              .replace(/'/g, "&#039;"),
           );
       });
 
@@ -865,7 +980,7 @@
       "keyup",
       function (element) {
         wgm_generate_infowindow();
-      }
+      },
     );
 
     $("#wpgmap_marker_link").on("blur", function () {
@@ -1004,7 +1119,7 @@
 
         $("#wpgmap_marker_link_new_tab").prop(
           "checked",
-          response.marker_link_new_tab === "1"
+          response.marker_link_new_tab === "1",
         );
         $("#wpgmap_marker_animation").val(response.animation);
 
@@ -1022,20 +1137,20 @@
 
         $(".wpgmap_marker_add,.wpgmap_marker_update").attr(
           "markerid",
-          marker_id
+          marker_id,
         );
         $(".wpgmap_marker_add")
           .removeClass("wpgmap_marker_add")
           .addClass("wpgmap_marker_update")
           .css("background-color", "#00a2f3")
           .html(
-            '<i class="dashicons dashicons-location" style="line-height: 1.6;"></i><b>Update Marker</b>'
+            '<i class="dashicons dashicons-location" style="line-height: 1.6;"></i><b>Update Marker</b>',
           );
 
         tmce_setContent(
           response.marker_desc,
           "wpgmap_marker_desc",
-          "wpgmap_marker_desc"
+          "wpgmap_marker_desc",
         );
 
         if ($spinner_context) {

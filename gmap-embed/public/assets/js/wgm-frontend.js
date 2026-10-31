@@ -1,4 +1,4 @@
-/**
+﻿/**
  * WP Google Map Frontend Logic
  * Centralized script to handle map initialization, search, and directions.
  * @since 1.9.1
@@ -22,6 +22,7 @@
         self.initMap(id);
         self.initLightbox(id);
         self.initSelect2();
+        self.initYoutube(id);
       });
     },
 
@@ -30,6 +31,88 @@
      * @param {string} str
      * @returns {string}
      */
+  /**
+   * Convert YouTube <iframe> embeds in description HTML to a clickable thumbnail card.
+   * Google Maps InfoWindow strips <iframe> tags silently, so we replace them with
+   * a thumbnail + play-button image that opens a proper modal on click.
+   *
+   * @param  {string} html  Raw description HTML from TinyMCE / DB
+   * @return {string}       HTML with iframes replaced by thumbnail cards
+   */
+  wgm_process_youtube_in_desc: function (html) {
+    if (!html) return html;
+
+    function ytThumb(videoId) {
+      return (
+        '<div class="wgm-yt-embed" data-yt-id="' + videoId + '" role="button" tabindex="0" aria-label="Play YouTube video">' +
+        '<img class="wgm-yt-thumb" src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" alt="YouTube video thumbnail" />' +
+        '<span class="wgm-yt-play-btn" aria-hidden="true">&#9658;</span>' +
+        '</div>'
+      );
+    }
+
+    // Step 1: Replace YouTube <iframe> embed codes
+    html = html.replace(
+      /<iframe[^>]+src=["']https?:\/\/(?:www\.)?(?:youtube(?:-nocookie)?\.com\/embed)\/([a-zA-Z0-9_-]{11})[^"']*["'][^>]*>[\s\S]*?<\/iframe>/gi,
+      function (match, videoId) { return ytThumb(videoId); }
+    );
+
+    // Step 2: Replace <a href="youtube-url">...</a> anchor tags
+    html = html.replace(
+      /<a\b[^>]+href=["']https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^"']*[?&])?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})[^"']*["'][^>]*>[\s\S]*?<\/a>/gi,
+      function (match, videoId) { return ytThumb(videoId); }
+    );
+
+    // Step 3: Replace bare YouTube URLs in text nodes only (skip HTML attributes)
+    var segments = html.split(/(<[^>]*>)/);
+    for (var i = 0; i < segments.length; i++) {
+      if (segments[i].charAt(0) === '<') continue;
+      segments[i] = segments[i].replace(
+        /https?:\/\/(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^\s<"']*[?&])?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})[^\s<"']*/gi,
+        function (match, videoId) { return ytThumb(videoId); }
+      );
+    }
+    return segments.join('');
+  },
+
+  /**
+   * Open a full-screen YouTube modal with an autoplay iframe.
+   * The modal is appended to <body> — outside the InfoWindow DOM — so the
+   * browser does not apply Maps sandbox restrictions to the iframe.
+   *
+   * @param {string} videoId  11-character YouTube video ID
+   */
+  wgm_open_youtube_modal: function (videoId) {
+    var existing = document.getElementById("wgm-yt-modal");
+    if (existing) existing.remove();
+
+    var modal = document.createElement("div");
+    modal.id = "wgm-yt-modal";
+    modal.innerHTML =
+      '<div class="wgm-yt-modal-overlay">' +
+      '<div class="wgm-yt-modal-inner">' +
+      '<button class="wgm-yt-modal-close" title="Close">&times;</button>' +
+      '<div class="wgm-yt-modal-frame-wrap">' +
+      '<iframe src="https://www.youtube.com/embed/' +
+      videoId +
+      '?autoplay=1" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>' +
+      "</div></div></div>";
+
+    document.body.appendChild(modal);
+
+    modal.querySelector(".wgm-yt-modal-close").addEventListener("click", function () {
+      modal.remove();
+    });
+    modal.querySelector(".wgm-yt-modal-overlay").addEventListener("click", function (e) {
+      if (e.target === this) modal.remove();
+    });
+    document.addEventListener("keydown", function escHandler(e) {
+      if (e.key === "Escape") {
+        modal.remove();
+        document.removeEventListener("keydown", escHandler);
+      }
+    });
+  },
     escapeHTML: function (str) {
       if (!str) return "";
       return String(str)
@@ -338,7 +421,7 @@
         '<div class="wgm-infowindow-content">' +
         titleHtml +
         '<div class="wgm-iw-desc">' +
-        markerData.marker_desc +
+        self.wgm_process_youtube_in_desc(markerData.marker_desc) +
         "</div>" +
         dirLink +
         "</div>" +
@@ -1242,6 +1325,24 @@
       });
       $(document).on("keydown", function (e) {
         if (e.key === "Escape") overlay.removeClass("show");
+      });
+    },
+
+    /**
+     * Initialize YouTube thumbnail click handler for this map instance.
+     * Uses event delegation on the document so it works when InfoWindows
+     * are opened/closed dynamically.
+     *
+     * @param {string|number} id  Map instance ID
+     */
+    initYoutube: function (id) {
+      var self = this;
+      // Use a namespaced event to avoid duplicate bindings across multiple map instances
+      $(document).off("click.wgm_yt_" + id + " keypress.wgm_yt_" + id, ".wgm-yt-embed");
+      $(document).on("click.wgm_yt_" + id + " keypress.wgm_yt_" + id, ".wgm-yt-embed", function (e) {
+        if (e.type === "keypress" && e.which !== 13 && e.which !== 32) return;
+        var videoId = $(this).data("yt-id");
+        if (videoId) self.wgm_open_youtube_modal(videoId);
       });
     },
   };

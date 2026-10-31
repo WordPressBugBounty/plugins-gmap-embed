@@ -3,9 +3,9 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA
 Tags: Google Maps, map, Maps, map markers, store locator
 Requires at least: 5.0.0
-Tested up to: 7.0
-Version: 1.9.7
-Stable tag: 1.9.7
+Tested up to: 7.1
+Version: 1.9.8
+Stable tag: 1.9.8
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -156,10 +156,14 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 == Changelog ==
 
+= 1.9.8 =
+* **Feature:** Enhanced YouTube video embedding support in Marker InfoWindows (Admin preview and Frontend).
+* **Feature:** Automatic conversion of raw YouTube URLs (watch links, youtu.be, and iframe embeds) into responsive thumbnail cards with play overlay.
+* **Feature:** Built-in responsive modal player opening outside Maps InfoWindow sandbox for seamless video playback.
+* **Compatibility:** Theme-isolated styling for video preview cards and modal overlay across all WordPress themes.
 = 1.9.7 =
 * Clone Map including Markers and related settings
 * Clone Marker including related settings
-
 = 1.9.6 =
 * **Quick Fix** Classic widget shortcode preview issue fixed.
 
