@@ -1,4 +1,4 @@
-﻿/**
+/**
  * WP Google Map Frontend Logic
  * Centralized script to handle map initialization, search, and directions.
  * @since 1.9.1
@@ -186,44 +186,46 @@
             zoom: parseInt(data.map_zoom),
             mapTypeId: google.maps.MapTypeId[data.map_type],
             scrollwheel: data.options.disable_mouse_wheel_zoom !== "Y",
-            zoomControl: data.options.zoom_control,
-            zoomControlOptions: {
-              position:
-                google.maps.ControlPosition[data.options.zoom_control_pos],
-            },
-            mapTypeControl: data.options.map_type_control,
-            mapTypeControlOptions: {
-              position:
-                google.maps.ControlPosition[data.options.map_type_control_pos],
-            },
-            streetViewControl: data.options.street_view_control,
-            streetViewControlOptions: {
-              position:
-                google.maps.ControlPosition[
-                  data.options.street_view_control_pos
-                ],
-            },
-            fullscreenControl: data.options.fullscreen_control,
-            fullscreenControlOptions: {
-              position:
-                google.maps.ControlPosition[
-                  data.options.fullscreen_control_pos
-                ],
-            },
-            rotateControl: data.options.rotate_control,
-            rotateControlOptions: {
-              position:
-                google.maps.ControlPosition[data.options.rotate_control_pos],
-            },
-            scaleControl: data.options.scale_control,
-            scaleControlOptions: {
-              position:
-                google.maps.ControlPosition[data.options.scale_control_pos],
-            },
+            zoomControl: !!data.options.zoom_control,
+            mapTypeControl: !!data.options.map_type_control,
+            streetViewControl: !!data.options.street_view_control,
+            fullscreenControl: !!data.options.fullscreen_control,
+            rotateControl: !!data.options.rotate_control,
+            scaleControl: !!data.options.scale_control,
             draggable: data.options.disable_mouse_dragging !== "Y",
             disableDoubleClickZoom:
               data.options.disable_mouse_double_click_zooming === "Y",
           };
+          if (data.options.zoom_control_pos && google.maps.ControlPosition[data.options.zoom_control_pos]) {
+            mapOptions.zoomControlOptions = {
+              position: google.maps.ControlPosition[data.options.zoom_control_pos],
+            };
+          }
+          if (data.options.map_type_control_pos && google.maps.ControlPosition[data.options.map_type_control_pos]) {
+            mapOptions.mapTypeControlOptions = {
+              position: google.maps.ControlPosition[data.options.map_type_control_pos],
+            };
+          }
+          if (data.options.street_view_control_pos && google.maps.ControlPosition[data.options.street_view_control_pos]) {
+            mapOptions.streetViewControlOptions = {
+              position: google.maps.ControlPosition[data.options.street_view_control_pos],
+            };
+          }
+          if (data.options.fullscreen_control_pos && google.maps.ControlPosition[data.options.fullscreen_control_pos]) {
+            mapOptions.fullscreenControlOptions = {
+              position: google.maps.ControlPosition[data.options.fullscreen_control_pos],
+            };
+          }
+          if (data.options.rotate_control_pos && google.maps.ControlPosition[data.options.rotate_control_pos]) {
+            mapOptions.rotateControlOptions = {
+              position: google.maps.ControlPosition[data.options.rotate_control_pos],
+            };
+          }
+          if (data.options.scale_control_pos && google.maps.ControlPosition[data.options.scale_control_pos]) {
+            mapOptions.scaleControlOptions = {
+              position: google.maps.ControlPosition[data.options.scale_control_pos],
+            };
+          }
 
           var map = new google.maps.Map(mapDiv, mapOptions);
           data.map = map;

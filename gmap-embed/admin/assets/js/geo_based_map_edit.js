@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
   "use strict";
 
   /**
@@ -279,6 +279,82 @@
     }
     return wgm_gmap_settings;
   }
+  /**
+   * Resolve and apply map control options and custom positions in Admin Map Preview
+   */
+  function wgm_getAdminControlOptions() {
+    var globalDefaults = typeof wgm_l !== "undefined" ? wgm_l : {};
+
+    function isControlEnabled(elementId, globalDisableFlag) {
+      var val = $("#" + elementId).val();
+      if (val === "1") return true;
+      if (val === "0") return false;
+      return globalDisableFlag !== "Y";
+    }
+
+    function getControlPosition(posElementId, defaultPos) {
+      var posVal = $("#" + posElementId).val();
+      if (posVal && google.maps.ControlPosition && google.maps.ControlPosition[posVal]) {
+        return google.maps.ControlPosition[posVal];
+      }
+      if (defaultPos && google.maps.ControlPosition && google.maps.ControlPosition[defaultPos]) {
+        return google.maps.ControlPosition[defaultPos];
+      }
+      return undefined;
+    }
+
+    var options = {
+      zoomControl: isControlEnabled("wpgmap_zoom_control", globalDefaults.d_z_c),
+      mapTypeControl: isControlEnabled("wpgmap_map_type_control", globalDefaults.d_m_t_c),
+      streetViewControl: isControlEnabled("wpgmap_street_view_control", globalDefaults.d_s_v),
+      fullscreenControl: isControlEnabled("wpgmap_fullscreen_control", globalDefaults.d_f_s_c),
+      rotateControl: isControlEnabled("wpgmap_rotate_control", "N"),
+      scaleControl: isControlEnabled("wpgmap_scale_control", "N"),
+    };
+
+    var zoomPos = getControlPosition("wpgmap_zoom_control_pos", "RIGHT_BOTTOM");
+    if (zoomPos !== undefined) {
+      options.zoomControlOptions = { position: zoomPos };
+    }
+
+    var mapTypePos = getControlPosition("wpgmap_map_type_control_pos", "TOP_LEFT");
+    if (mapTypePos !== undefined) {
+      options.mapTypeControlOptions = { position: mapTypePos };
+    }
+
+    var streetViewPos = getControlPosition("wpgmap_street_view_control_pos", "RIGHT_BOTTOM");
+    if (streetViewPos !== undefined) {
+      options.streetViewControlOptions = { position: streetViewPos };
+    }
+
+    var fullscreenPos = getControlPosition("wpgmap_fullscreen_control_pos", "RIGHT_TOP");
+    if (fullscreenPos !== undefined) {
+      options.fullscreenControlOptions = { position: fullscreenPos };
+    }
+
+    var rotatePos = getControlPosition("wpgmap_rotate_control_pos", "RIGHT_TOP");
+    if (rotatePos !== undefined) {
+      options.rotateControlOptions = { position: rotatePos };
+    }
+
+    var scalePos = getControlPosition("wpgmap_scale_control_pos", "BOTTOM_LEFT");
+    if (scalePos !== undefined) {
+      options.scaleControlOptions = { position: scalePos };
+    }
+
+    return options;
+  }
+
+  function wgm_applyAdminControlOptions(map) {
+    if (!map || typeof map.setOptions !== "function") return;
+    try {
+      var controlOptions = wgm_getAdminControlOptions();
+      map.setOptions(controlOptions);
+    } catch (e) {
+      console.error("WGM: Failed to apply admin map control options", e);
+    }
+  }
+  window.wgm_applyAdminControlOptions = wgm_applyAdminControlOptions;
 
   /**
    * Reverse geocoding to update address field from coordinates
@@ -505,6 +581,8 @@
     );
 
     state.map = new google.maps.Map(mapDiv, gmapSettings);
+    // Apply Admin Map Controls & Custom Positions
+    wgm_applyAdminControlOptions(state.map);
 
     if (typeof wgm_theme_json !== "undefined" && wgm_theme_json.length > 0) {
       try {
@@ -834,6 +912,15 @@
               console.error("Invalid theme JSON");
             }
           }
+        }
+      });
+
+    /**
+     * On Advanced Map Controls change (enable/disable or position), update admin preview map LIVE
+     */
+    $(document.body).on("change", "#wgm-map-controls-container select", function () {
+      if (state.map) {
+        wgm_applyAdminControlOptions(state.map);
         }
       });
 

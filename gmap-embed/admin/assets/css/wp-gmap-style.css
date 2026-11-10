@@ -263,6 +263,15 @@ ul.wgm_wpgmap_tab {
   float: left;
 }
 
+/* Safeguard admin map preview tiles, controls, and Street View Pegman */
+#wgm_map img,
+#wgm_map .gm-style img,
+#wgm_map .gm-style .gm-svpc img,
+#wgm_map .gm-style .gm-control-active img {
+  max-width: none !important;
+  max-height: none !important;
+  background: transparent !important;
+}
 .wp-gmap-preview .wgm_controls {
   margin-top: 10px;
   border: 1px solid transparent;

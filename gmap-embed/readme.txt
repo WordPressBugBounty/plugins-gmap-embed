@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Google Maps, map, Maps, map markers, store locator
 Requires at least: 5.0.0
 Tested up to: 7.1
-Version: 1.9.8
-Stable tag: 1.9.8
+Version: 1.9.9
+Stable tag: 1.9.9
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -155,6 +155,11 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 13. **General Settings**: Plugin-wide configuration options.
 
 == Changelog ==
+= 1.9.9 =
+* **Fix:** Street View Pegman control not displaying on frontend map preview fixed.
+* **Feature:** Added live preview for map controls and custom positions in Admin Map Editor.
+* **Improvement:** Preserved default control positions when Global/Default is selected.
+* **Compatibility:** Fixed theme style conflicts with map controls and tiles across different themes.
 
 = 1.9.8 =
 * **Feature:** Enhanced YouTube video embedding support in Marker InfoWindows (Admin preview and Frontend).

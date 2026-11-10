@@ -1,18 +1,28 @@
 /* WP Google Map - Front-end Custom Styles */
 
 /* Cross-Theme Safeguards: Isolate plugin elements from theme styles */
-.wgm-map-listing-container input,
-.wgm-map-listing-container select,
-.wgm-map-listing-container button {
+.wgm-map-listing-container input:not(.gm-style *),
+.wgm-map-listing-container select:not(.gm-style *),
+.wgm-map-listing-container button:not(.gm-style *):not(.gm-control-active) {
   all: revert; /* Reset to browser defaults first */
   box-sizing: border-box;
   font-family: var(--wgm-font-family);
 }
 
-.wgm-map-listing-container img {
+.wgm-map-listing-container img:not(.gm-style img):not(.wgm-map-canvas img) {
   max-width: 100% !important;
   height: auto !important;
   box-shadow: none !important; /* Some themes add shadows to all imgs */
+}
+
+/* Safeguard Google Maps tiles, controls, and Street View Pegman sprites across all themes */
+.wgm-map-canvas img,
+.wgm-map-canvas .gm-style img,
+.gm-style .gm-svpc img,
+.gm-style .gm-control-active img {
+  max-width: none !important;
+  max-height: none !important;
+  background: transparent !important;
 }
 
 .wgm-admin-error {
